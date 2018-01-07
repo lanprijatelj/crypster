@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link href="/styles" rel="stylesheet">
+    <title>Crypster Calc</title>
+</head>
+
+<body>
+    <h1>Crypster calc</h1>
+
+    <form id='calcMain'>
+        <label>
+            Select cryptocurrency:
+            <select id='currency' name='currency'>
+                <option value='BTC'>BTC</option>
+                <option value='ETH'>ETH</option>
+                <option value='LTC'>LTC</option>
+            </select>
+        </label>
+        <br/>
+        <label>
+            <select id='hashRateUnit' name='hashrateUnit'>
+                <option value='TH/s'>TH/s</option>
+                <option value='GH/s'>GH/s</option>
+                <option value='MH/s'>MH/s</option>
+            </select>
+            Hashrate:
+            <input name='hashrate' type='number' />
+        </label>
+        <br/>
+        <label>
+            Coin value:
+            <input name='value' type='number' />
+        </label>
+        <br/>
+        <label>
+            Difficulty:
+            <input name='diff' type='number' />
+        </label>
+        <br/>
+        <label>
+            Block reward:
+            <input name='reward' type='number' />
+        </label>
+        <br/>
+        <label>
+            Power consumption(in W):
+            <input name='power' type='number' />
+        </label>
+        <br/>
+        <label>
+            Power cost(in $/kWh):
+            <input name='powerCost' type='number' />
+        </label>
+        <br/>
+        <label>
+            Pool fee:
+            <input name='fee' type='number' />
+        </label>
+        <br/>
+        <label>
+            Reject rate:
+            <input name='reject' type='number' />
+        </label>
+        <br/>
+        <label>
+            Difficulty change:
+            <input name='diffChange' type='number' />
+        </label>
+        <br/>
+        <label>
+            Investment:
+            <input name='invest' type='number' />
+        </label>
+    </form>
+    <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="/script"></script>
+</body>
+
+</html>
