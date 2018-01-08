@@ -28,7 +28,7 @@
                 <option value='MH/s'>MH/s</option>
             </select>
             Hashrate:
-            <input name='hashrate' type='number' />
+            <input name='hashrate' type='number' placeholder="Enter hashrate" />
         </label>
         <br/>
         <label>
@@ -43,39 +43,90 @@
         <br/>
         <label>
             Block reward:
-            <input name='reward' type='number' />
+            <input name='reward' type='number' value="12.5" />
         </label>
         <br/>
         <label>
-            Power consumption(in W):
-            <input name='power' type='number' />
+            Power consumption (in W):
+            <input name='power' type='number' value="0" />
         </label>
         <br/>
         <label>
-            Power cost(in $/kWh):
-            <input name='powerCost' type='number' />
+            Power cost (in $ / kWh):
+            <input name='powerCost' type='number' value="0.1" />
         </label>
         <br/>
         <label>
             Pool fee:
-            <input name='fee' type='number' />
+            <input name='fee' type='number' value="1" />
         </label>
         <br/>
         <label>
             Reject rate:
-            <input name='reject' type='number' />
+            <input name='reject' type='number' value="1" />
         </label>
         <br/>
         <label>
-            Difficulty change:
-            <input name='diffChange' type='number' />
+            Difficulty change (in % / month):
+            <input name='diffChange' type='number' value="20"/>
         </label>
         <br/>
         <label>
             Investment:
-            <input name='invest' type='number' />
+            <input name='invest' type='number' value="0"/>
         </label>
     </form>
+
+    <table class="tabelaRezultatov">
+        <thead>
+            <tr>
+                <th>Period</th>
+                <th>BTC Mined</th>
+                <th>USD</th>
+                <th>Costs (in USD)</th>
+                <th>Profit (in USD)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="h">
+                <td>Hourly</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="d">
+                <td>Daily</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="w">
+                <td>Weekly</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="m">
+                <td>Monthly</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="y">
+                <td>Yearly</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+        </tr>
+    </table>
+
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script src="/script"></script>
 </body>
