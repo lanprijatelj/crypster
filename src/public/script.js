@@ -3,7 +3,7 @@ var difficulty = {};
 var userInput = {};
 var results = {};
 
-function calculateMiningProfit(input) {
+function calculateCoinsMined(input) {
     if (input.hashrateUnit == "TH/s") {
         var hashrate = input.hashrate * Math.pow(10, 12);
     } else if (input.hashrateUnit == "GH/s") {
@@ -11,10 +11,64 @@ function calculateMiningProfit(input) {
     } else {
         var hashrate = input.hashrate * Math.pow(10, 6);
     }
-    return (hashrate * (1 - (input.fee / 100)) * (1 - (input.reject / 100)) * input.reward / (Math.pow(2, 32) * input.diff)) * input.value;
+    return (hashrate * (1 - (input.fee / 100)) * (1 - (input.reject / 100)) * input.reward / (Math.pow(2, 32) * input.diff));
 }
 
-$(window).on("load", function () {    
+function calculateProfitPerTimeFrame(miningProfit, diffChange, timeFrame){
+    var profit = {};
+    profit.miningProfitH = (miningProfit * 3600);
+    profit.miningProfitD = (miningProfit * 86400);
+    profit.miningProfitW = (miningProfit * 604800);
+    profit.miningProfitM = (miningProfit * 2628000);
+    profit.year = 0;
+    profit.miningProfitY = [];    
+    for(var i = 0; i < timeFrame; i++){
+        if(i == 0){
+            profit.miningProfitY[i] = profit.miningProfitM;
+            profit.year += profit.miningProfitY[i];
+        }else{
+            profit.miningProfitY[i] = profit.miningProfitY[i - 1] * (1 - (diffChange / 100));
+            profit.year += profit.miningProfitY[i];
+        }
+        
+    }
+    return profit;
+}
+function calculateCosts(hourlyCost){
+    var cost = {};
+    cost.H = hourlyCost;
+    cost.D = hourlyCost * 24;
+    cost.W = hourlyCost * 168;
+    cost.M = hourlyCost * 730;
+    cost.Y = hourlyCost * 8760;    
+    return cost;
+}
+
+function calculateNetProfit(costs, profits, timeFrame, value){
+    var net = {};
+    net.h = (profits.miningProfitH * value) - costs.H;
+    net.d = (profits.miningProfitD * value) - costs.D;
+    net.w = (profits.miningProfitW * value) - costs.W;
+    net.m = (profits.miningProfitM * value) - costs.M;
+    net.y = [];
+    net.year = 0;
+    for(var i = 0; i < timeFrame; i++){
+        net.y[i] = (profits.miningProfitY[i] * value) - costs.M;  
+        net.year += net.y[i];      
+    }
+    return net;
+}
+
+function calculateROI(net, investment, timeFrame){
+    var roi = [];
+    for(var i = 0; i < timeFrame; i++){
+        roi[i] = net.y[i] - investment;
+    }
+    return roi;
+}
+
+$(window).on("load", function () {   
+    addListeners(); 
     userInput.selectedCurrency = $("select[name=currency]").val();
 
     $.post("/diffBTC").done(function (response) {
@@ -68,8 +122,20 @@ $("select[name=currency]").change(function () {
     }
 });
 
-$("#calcMain").change(sendParameters);
-$("input[name=hashrate]").keyup(sendParameters);
+function addListeners(){
+    $("input[name=hashrate]").keyup(sendParameters);
+    $("input[name=fee]").keyup(sendParameters);
+    $("input[name=reject]").keyup(sendParameters);
+    $("input[name=reward]").keyup(sendParameters);
+    $("input[name=diff]").keyup(sendParameters);
+    $("input[name=value]").keyup(sendParameters);
+    $("select[name=hashrateUnit]").keyup(sendParameters);
+    $("input[name=power]").keyup(sendParameters);
+    $("input[name=powerCost]").keyup(sendParameters);
+    $("input[name=diffChange]").keyup(sendParameters);
+    $("input[name=invest]").keyup(sendParameters);
+    $("input[name=time]").keyup(sendParameters);
+}
 
 function sendParameters() {
     userInput.hashrate = $("input[name=hashrate]").val();
@@ -81,35 +147,36 @@ function sendParameters() {
     userInput.hashrateUnit = $("select[name=hashrateUnit]").val();
     userInput.power = $("input[name=power]").val();
     userInput.powerCost = $("input[name=powerCost]").val();
+    userInput.diffChange = $("input[name=diffChange]").val();
+    userInput.invest = $("input[name=invest]").val();
+    userInput.timeFrame = $("input[name=time]").val();
     var hourlyCost = userInput.power * userInput.powerCost / 1000;
 
-    results.miningProfitS = calculateMiningProfit(userInput);
-    //results.btcMined = results.miningProfitS / userInput.value;
-    results.miningProfitH = results.miningProfitS * 3600;
-    results.miningProfitD = results.miningProfitS * 86400;
-    results.miningProfitW = results.miningProfitD * 7;
-    results.miningProfitM = results.miningProfitD * 30;
-    results.miningProfitY = results.miningProfitM * 12;
+    results.miningProfitS = calculateCoinsMined(userInput);
+    var res = calculateProfitPerTimeFrame(results.miningProfitS, userInput.diffChange, userInput.timeFrame);    
+    var costs = calculateCosts(hourlyCost);
+    var net = calculateNetProfit(costs, res, userInput.timeFrame, userInput.value);
+    var roi = calculateROI(net, userInput.invest);
 
-    $(".h :nth-child(2)").html((results.miningProfitH / userInput.value).toFixed(7));
-    $(".h :nth-child(3)").html((results.miningProfitH).toFixed(2));
-    $(".h :nth-child(4)").html((hourlyCost).toFixed(2));
-    $(".h :nth-child(5)").html((results.miningProfitH - hourlyCost).toFixed(2));
-    $(".d :nth-child(2)").html((results.miningProfitD / userInput.value).toFixed(2));
-    $(".d :nth-child(3)").html((results.miningProfitD).toFixed(2));
-    $(".d :nth-child(4)").html((hourlyCost * 24).toFixed(2));
-    $(".d :nth-child(5)").html((results.miningProfitD - (hourlyCost * 24)).toFixed(2));
-    $(".w :nth-child(2)").html((results.miningProfitW / userInput.value).toFixed(2));
-    $(".w :nth-child(3)").html((results.miningProfitW).toFixed(2));
-    $(".w :nth-child(4)").html((hourlyCost * 168).toFixed(2));
-    $(".w :nth-child(5)").html((results.miningProfitW - (hourlyCost * 168)).toFixed(2));
-    $(".m :nth-child(2)").html((results.miningProfitM / userInput.value).toFixed(2));
-    $(".m :nth-child(3)").html((results.miningProfitM).toFixed(2));
-    $(".m :nth-child(4)").html((hourlyCost * 720).toFixed(2));
-    $(".m :nth-child(5)").html((results.miningProfitM - (hourlyCost * 720)).toFixed(2));
-    $(".y :nth-child(2)").html((results.miningProfitY / userInput.value).toFixed(2));
-    $(".y :nth-child(3)").html((results.miningProfitY).toFixed(2));
-    $(".y :nth-child(4)").html((hourlyCost * 8760).toFixed(2));
-    $(".y :nth-child(5)").html((results.miningProfitY - (hourlyCost * 8760)).toFixed(2));
+    $(".h :nth-child(2)").html((res.miningProfitH).toFixed(7));
+    $(".h :nth-child(3)").html((net.h + costs.H).toFixed(2));
+    $(".h :nth-child(4)").html((costs.H).toFixed(2));
+    $(".h :nth-child(5)").html((net.h).toFixed(2));
+    $(".d :nth-child(2)").html((res.miningProfitD).toFixed(2));
+    $(".d :nth-child(3)").html((net.d + costs.D).toFixed(2));
+    $(".d :nth-child(4)").html((costs.D).toFixed(2));
+    $(".d :nth-child(5)").html((net.d).toFixed(2));
+    $(".w :nth-child(2)").html((res.miningProfitW).toFixed(2));
+    $(".w :nth-child(3)").html((net.w + costs.W).toFixed(2));
+    $(".w :nth-child(4)").html((costs.W).toFixed(2));
+    $(".w :nth-child(5)").html((net.w).toFixed(2));
+    $(".m :nth-child(2)").html((res.miningProfitM).toFixed(2));
+    $(".m :nth-child(3)").html((net.m + costs.M).toFixed(2));
+    $(".m :nth-child(4)").html((costs.M).toFixed(2));
+    $(".m :nth-child(5)").html((net.m).toFixed(2));
+    $(".y :nth-child(2)").html((res.year).toFixed(2));
+    $(".y :nth-child(3)").html((net.year + costs.Y).toFixed(2));
+    $(".y :nth-child(4)").html((costs.Y).toFixed(2));
+    $(".y :nth-child(5)").html((net.year).toFixed(2));
     //console.log(results.miningProfitS);
 }
