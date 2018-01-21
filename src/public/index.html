@@ -11,6 +11,8 @@
 <body>
     <h1>Crypster calc</h1>
 
+    <canvas id="chart"></canvas>
+
     <form id='calcMain'>
         <label>
             Select cryptocurrency:
@@ -127,12 +129,13 @@
         </tr>
     </table>
 
-    <label>        
+    <label id="tFrame">        
         Time Frame:
         <input name='time' type='number' value="12" /> Months.
-    </label>
+    </label>          
 
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
     <script src="/script"></script>
 </body>
 

@@ -14,37 +14,39 @@ function calculateCoinsMined(input) {
     return (hashrate * (1 - (input.fee / 100)) * (1 - (input.reject / 100)) * input.reward / (Math.pow(2, 32) * input.diff));
 }
 
-function calculateProfitPerTimeFrame(miningProfit, diffChange, timeFrame){
+function calculateProfitPerTimeFrame(miningProfit, diffChange, timeFrame) {
     var profit = {};
     profit.miningProfitH = (miningProfit * 3600);
     profit.miningProfitD = (miningProfit * 86400);
     profit.miningProfitW = (miningProfit * 604800);
     profit.miningProfitM = (miningProfit * 2628000);
     profit.year = 0;
-    profit.miningProfitY = [];    
-    for(var i = 0; i < timeFrame; i++){
-        if(i == 0){
+    profit.miningProfitY = [];
+    for (var i = 0; i < timeFrame; i++) {
+        if (i == 0) {
             profit.miningProfitY[i] = profit.miningProfitM;
             profit.year += profit.miningProfitY[i];
-        }else{
+        } else {
             profit.miningProfitY[i] = profit.miningProfitY[i - 1] * (1 - (diffChange / 100));
-            profit.year += profit.miningProfitY[i];
+            if (i < 12) {
+                profit.year += profit.miningProfitY[i];
+            }
         }
-        
+
     }
     return profit;
 }
-function calculateCosts(hourlyCost){
+function calculateCosts(hourlyCost) {
     var cost = {};
     cost.H = hourlyCost;
     cost.D = hourlyCost * 24;
     cost.W = hourlyCost * 168;
     cost.M = hourlyCost * 730;
-    cost.Y = hourlyCost * 8760;    
+    cost.Y = hourlyCost * 8760;
     return cost;
 }
 
-function calculateNetProfit(costs, profits, timeFrame, value){
+function calculateNetProfit(costs, profits, timeFrame, value) {
     var net = {};
     net.h = (profits.miningProfitH * value) - costs.H;
     net.d = (profits.miningProfitD * value) - costs.D;
@@ -52,23 +54,67 @@ function calculateNetProfit(costs, profits, timeFrame, value){
     net.m = (profits.miningProfitM * value) - costs.M;
     net.y = [];
     net.year = 0;
-    for(var i = 0; i < timeFrame; i++){
-        net.y[i] = (profits.miningProfitY[i] * value) - costs.M;  
-        net.year += net.y[i];      
+    for (var i = 0; i < timeFrame; i++) {
+        net.y[i] = (profits.miningProfitY[i] * value) - costs.M;
+        if (i < 12) {
+            net.year += net.y[i];
+        }
     }
     return net;
 }
 
-function calculateROI(net, investment, timeFrame){
+function calculateROI(net, investment, timeFrame) {
     var roi = [];
-    for(var i = 0; i < timeFrame; i++){
-        roi[i] = net.y[i] - investment;
+    for (var i = 0; i < timeFrame; i++) {
+        if(i == 0){
+            roi[i] = -1 * investment + net.y[i];
+        }else{
+            roi[i] = roi[i-1] + net.y[i];
+        }        
     }
+    console.log(roi);
     return roi;
 }
 
-$(window).on("load", function () {   
-    addListeners(); 
+function drawChart(timeFrame, dataMined, dataROI) {
+    var labels = [];
+    for(var i = 1; i <= timeFrame; i++){
+        labels[i - 1] = i;
+    }
+    var ctx = document.getElementById("chart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            datasets: [{
+                label: 'Net mining profits per month',
+                data: dataMined,
+                borderColor: "rgba(45, 118, 237, 1)",
+                backgroundColor: "rgba(45, 118, 237, 0.5)"
+            },{
+                label: 'ROI',
+                data: dataROI,
+                borderColor: "rgb(255, 239, 22)",
+                backgroundColor: "rgba(255, 239, 22, 0.5)"
+            }],
+            labels: labels
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        suggestedMin: dataROI[0],
+                        suggestedMax: dataMined[11]
+                    }
+                }]
+            },
+            responsive: false,
+            events: ["click"]
+        }
+    });
+}
+
+$(window).on("load", function () {
+    addListeners();
     userInput.selectedCurrency = $("select[name=currency]").val();
 
     $.post("/diffBTC").done(function (response) {
@@ -122,7 +168,7 @@ $("select[name=currency]").change(function () {
     }
 });
 
-function addListeners(){
+function addListeners() {
     $("input[name=hashrate]").keyup(sendParameters);
     $("input[name=fee]").keyup(sendParameters);
     $("input[name=reject]").keyup(sendParameters);
@@ -153,28 +199,30 @@ function sendParameters() {
     var hourlyCost = userInput.power * userInput.powerCost / 1000;
 
     results.miningProfitS = calculateCoinsMined(userInput);
-    var res = calculateProfitPerTimeFrame(results.miningProfitS, userInput.diffChange, userInput.timeFrame);    
+    var res = calculateProfitPerTimeFrame(results.miningProfitS, userInput.diffChange, userInput.timeFrame);
     var costs = calculateCosts(hourlyCost);
     var net = calculateNetProfit(costs, res, userInput.timeFrame, userInput.value);
-    var roi = calculateROI(net, userInput.invest);
+    var roi = calculateROI(net, userInput.invest, userInput.timeFrame);
+
+    drawChart(userInput.timeFrame, net.y, roi);
 
     $(".h :nth-child(2)").html((res.miningProfitH).toFixed(7));
     $(".h :nth-child(3)").html((net.h + costs.H).toFixed(2));
     $(".h :nth-child(4)").html((costs.H).toFixed(2));
     $(".h :nth-child(5)").html((net.h).toFixed(2));
-    $(".d :nth-child(2)").html((res.miningProfitD).toFixed(2));
+    $(".d :nth-child(2)").html((res.miningProfitD).toFixed(4));
     $(".d :nth-child(3)").html((net.d + costs.D).toFixed(2));
     $(".d :nth-child(4)").html((costs.D).toFixed(2));
     $(".d :nth-child(5)").html((net.d).toFixed(2));
-    $(".w :nth-child(2)").html((res.miningProfitW).toFixed(2));
+    $(".w :nth-child(2)").html((res.miningProfitW).toFixed(4));
     $(".w :nth-child(3)").html((net.w + costs.W).toFixed(2));
     $(".w :nth-child(4)").html((costs.W).toFixed(2));
     $(".w :nth-child(5)").html((net.w).toFixed(2));
-    $(".m :nth-child(2)").html((res.miningProfitM).toFixed(2));
+    $(".m :nth-child(2)").html((res.miningProfitM).toFixed(4));
     $(".m :nth-child(3)").html((net.m + costs.M).toFixed(2));
     $(".m :nth-child(4)").html((costs.M).toFixed(2));
     $(".m :nth-child(5)").html((net.m).toFixed(2));
-    $(".y :nth-child(2)").html((res.year).toFixed(2));
+    $(".y :nth-child(2)").html((res.year).toFixed(4));
     $(".y :nth-child(3)").html((net.year + costs.Y).toFixed(2));
     $(".y :nth-child(4)").html((costs.Y).toFixed(2));
     $(".y :nth-child(5)").html((net.year).toFixed(2));

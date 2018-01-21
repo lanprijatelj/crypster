@@ -1,5 +1,12 @@
-/* stili za formatiranje tabele razultatov*/
+body{
+  height: 100%;
+  background: #1D976C;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #93F9B9, #1D976C);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #93F9B9, #1D976C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+}
+
+/* stili za formatiranje tabele razultatov*/
 table.tabelaRezultatov {
     border: 1px solid #1C6EA4;
     background-color: #EEEEEE;
@@ -48,3 +55,17 @@ table.tabelaRezultatov {
     padding: 2px 8px;
     border-radius: 5px;
   }
+
+#chart{
+  float: right;
+  margin: 5%;
+  width: 30%;
+  height: 30%;
+}
+
+#calcMain{
+  width: 50%;
+}
+/*#tFrame{
+  float: left;
+}*/
