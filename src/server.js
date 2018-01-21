@@ -15,6 +15,9 @@ app.get('/script', function (request, response) {
   response.sendFile(__dirname + '/public/script.js');
 });
 
+app.get('/favicon.ico', function (request, response) {
+  response.sendFile(__dirname + '/favicon.ico');
+});
 
 app.listen(PORT, error => (
   error

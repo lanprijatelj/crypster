@@ -1,9 +1,17 @@
-body{
+@import url('https://fonts.googleapis.com/css?family=Lateef');
+
+html, body{
   height: 100%;
   background: #1D976C;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #93F9B9, #1D976C);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #93F9B9, #1D976C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, #93F9B9, #1D976C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+}
 
+h1{
+  font-size: 4em;
+  text-align: center;
+  font-family: 'Lateef', cursive; 
+  margin-top: 0;
 }
 
 /* stili za formatiranje tabele razultatov*/
@@ -64,8 +72,18 @@ table.tabelaRezultatov {
 }
 
 #calcMain{
-  width: 50%;
+  width: 30%;
+  text-align: right;
 }
-/*#tFrame{
-  float: left;
-}*/
+#calcMain label, #calcMain label input, #calcMain label select{
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}

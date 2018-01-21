@@ -4,8 +4,12 @@
 <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="/favicon.ico">
     <link href="/styles" rel="stylesheet">
-    <title>Crypster Calc</title>
+    <title>Crypster Calc - Cryptocurrency Mining Calculator</title>
+    <meta name="description" content="An easy to use crypto-currency calculator used to calculate a Bitcoin, Ethereum or Litecoin miner's potential profits in USD. The calculator fetches price and network data from the internet and only requires the hash rate (speed of mining) from the user. A chart projecting future profits, coins mined or return of investment is created dynamically and displayed instantly.">
+    <meta name="keywords" content="Crypstercalc,Mining,Profitability,Calculator,Currency,Cryptocurrency,Money,Bitcoin,Ethereum,Litecoin,Altcoins">
+    <meta name="author" content="Aljaž Klaneček, Lan Prijatelj">
 </head>
 
 <body>
@@ -77,6 +81,12 @@
             Investment:
             <input name='invest' type='number' value="0"/>
         </label>
+        <br/>
+        <label id="tFrame">        
+            Time Frame (months):
+            <input name='time' type='number' value="12" align="right" />
+        </label>
+        <br/> 
     </form>
 
     <table class="tabelaRezultatov">
@@ -127,12 +137,7 @@
             </tr>
         </tbody>
         </tr>
-    </table>
-
-    <label id="tFrame">        
-        Time Frame:
-        <input name='time' type='number' value="12" /> Months.
-    </label>          
+    </table>             
 
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>

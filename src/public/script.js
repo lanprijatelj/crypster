@@ -72,7 +72,7 @@ function calculateROI(net, investment, timeFrame) {
             roi[i] = roi[i-1] + net.y[i];
         }        
     }
-    console.log(roi);
+    //console.log(roi);
     return roi;
 }
 
