@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lateef');
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px');
 
 html, body{
   height: 100%;
@@ -10,7 +10,7 @@ html, body{
 h1{
   font-size: 4em;
   text-align: center;
-  font-family: 'Lateef', cursive; 
+  font-family: 'Slabo 27px', serif;
   margin-top: 0;
 }
 
