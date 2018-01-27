@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="/styles" rel="stylesheet">
+
     <title>Crypster Calc - Cryptocurrency Mining Calculator</title>
     <meta name="description"
           content="An easy to use crypto-currency calculator used to calculate a Bitcoin, Ethereum or Litecoin miner's potential profits in USD. The calculator fetches price and network data from the internet and only requires the hash rate (speed of mining) from the user. A chart projecting future profits, coins mined or return of investment is created dynamically and displayed instantly.">
@@ -17,11 +18,14 @@
 </head>
 
 <body>
-<h1>Crypster calc</h1>
-<div class="container">
+<h1>Crypster Calc</h1>
 
+<div class="container">
+    <div class="d-none d-sm-block">
+        <h3 id="welcomeMessage">The World's most comprehensive mining calculator.</h3>
+    </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 ">
             <form id='calcMain'>
                 <label>
                     Select cryptocurrency:
@@ -152,9 +156,6 @@
         </div>
 
     </div>
-
-
-
 
 
 </div>

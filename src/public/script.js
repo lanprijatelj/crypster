@@ -178,6 +178,15 @@ $(window).on("load", function () {
         }
     });
     drawChart(12, 0, 0);
+
+
+    setTimeout(function(){
+        $('#welcomeMessage').css({
+            "border-style": 'hidden'
+        });
+    }, 4400);
+
+
 });
 
 $("select[name=currency]").change(function () {

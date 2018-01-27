@@ -18,6 +18,9 @@ app.get('/script', function (request, response) {
 app.get('/favicon', function (request, response) {
   response.sendFile(__dirname + '/public/favicon.ico');
 });
+app.get('/other/dust_scratches.png', function (request, response) {
+    response.sendFile(__dirname + '/public/other/dust_scratches.png');
+});
 
 app.listen(PORT, error => (
   error
