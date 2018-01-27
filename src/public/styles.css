@@ -15,69 +15,17 @@ h1{
 }
 
 /* stili za formatiranje tabele razultatov*/
-table.tabelaRezultatov {
-    border: 1px solid #1C6EA4;
-    background-color: #EEEEEE;
-    width: 30%;
-    text-align: right;
-    border-collapse: collapse;
-  }
-  table.tabelaRezultatov td, table.tabelaRezultatov th {
-    border: 1px solid #AAAAAA;
-    padding: 3px 2px;
-  }
-  table.tabelaRezultatov tbody td {
-    font-size: 14px;
-  }
-  table.tabelaRezultatov tr:nth-child(even) {
-    background: #D0E4F5;
-  }
-  table.tabelaRezultatov thead {
-    background: #1C6EA4;
-    background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-    background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-    background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-    border-bottom: 2px solid #444444;
-  }
-  table.tabelaRezultatov thead th {
-    font-size: 16px;
-    font-weight: bold;
-    color: #FFFFFF;
-    text-align: center;
-    border-left: 2px solid #D0E4F5;
-  }
-  table.tabelaRezultatov thead th:first-child {
-    border-left: none;
-  }
-  
-  table.tabelaRezultatov tfoot td {
-    font-size: 14px;
-  }
-  table.tabelaRezultatov tfoot .links {
-    text-align: right;
-  }
-  table.tabelaRezultatov tfoot .links a{
-    display: inline-block;
-    background: #1C6EA4;
-    color: #FFFFFF;
-    padding: 2px 8px;
-    border-radius: 5px;
-  }
+
 
 #chart{
-  float: right;
-  margin: 5%;
-  width: 30%;
-  height: 30%;
+
 }
 
 #calcMain{
-  width: 30%;
   text-align: right;
 }
 #calcMain label, #calcMain label input, #calcMain label select{
-  margin-bottom: 5px;
-  padding: 5px;
+  padding-left: 5px;
 }
 
 input[type=number]::-webkit-inner-spin-button, 

@@ -35,12 +35,12 @@ function calculateProfitPerTimeFrame(miningProfit, diffChange, timeFrame) {
     profit.miningProfitM = (miningProfit * 2628000);
     profit.year = 0;
     profit.miningProfitY = [];
-    for (var i = 0; i < timeFrame; i++) {
-        if (i == 0) {
+    for (var i = 0; i <= timeFrame; i++) {
+            if (i == 0) {
             profit.miningProfitY[i] = profit.miningProfitM;
             profit.year += profit.miningProfitY[i];
         } else {
-            profit.miningProfitY[i] = profit.miningProfitY[i - 1] * (1 - (diffChange / 100));
+            profit.miningProfitY[i] = profit.miningProfitY[i] * (1 - (diffChange / 100));
             if (i < 12) {
                 profit.year += profit.miningProfitY[i];
             }
@@ -67,22 +67,27 @@ function calculateNetProfit(costs, profits, timeFrame, value) {
     net.m = (profits.miningProfitM * value) - costs.M;
     net.y = [];
     net.year = 0;
-    for (var i = 0; i < timeFrame; i++) {
-        net.y[i] = (profits.miningProfitY[i] * value) - costs.M;
-        if (i < 12) {
-            net.year += net.y[i];
+    for (var i = 0; i <= timeFrame; i++) {
+        if(i==0){
+            net.y[i] = 0;
+        }else{
+            net.y[i] = (profits.miningProfitY[i] * value) - costs.M;
+            if (i < 12) {
+                net.year += net.y[i];
+            }
         }
+
     }
     return net;
 }
 
 function calculateROI(net, investment, timeFrame) {
     var roi = [];
-    for (var i = 0; i < timeFrame; i++) {
+    for (var i = 0; i <= timeFrame; i++) {
         if(i == 0){
             roi[i] = -1 * investment + net.y[i];
         }else{
-            roi[i] = roi[i-1] + net.y[i];
+            roi[i] = roi[i] + net.y[i];
         }        
     }
     //console.log(roi);
@@ -91,8 +96,8 @@ function calculateROI(net, investment, timeFrame) {
 
 function drawChart(timeFrame, dataMined, dataROI) {
     var labels = [];
-    for(var i = 1; i <= timeFrame; i++){
-        labels[i - 1] = i;
+    for(var i = 0; i <= timeFrame; i++){
+        labels[i] = i;
     }
     var ctx = document.getElementById("chart").getContext('2d');
     var myChart = new Chart(ctx, {
@@ -104,7 +109,7 @@ function drawChart(timeFrame, dataMined, dataROI) {
                 borderColor: "rgba(45, 118, 237, 1)",
                 backgroundColor: "rgba(45, 118, 237, 0.5)"
             },{
-                label: 'ROI',
+                label: '$$$ earned',
                 data: dataROI,
                 borderColor: "rgb(255, 239, 22)",
                 backgroundColor: "rgba(255, 239, 22, 0.5)"
@@ -114,13 +119,23 @@ function drawChart(timeFrame, dataMined, dataROI) {
         options: {
             scales: {
                 yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: '$'
+                    },
                     ticks: {
                         suggestedMin: dataROI[0],
                         suggestedMax: dataMined[11]
                     }
-                }]
+                }],
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'months'
+                    }
+                    }]
             },
-            responsive: false,
+            responsive: true,
             events: ["click"]
         }
     });

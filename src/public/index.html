@@ -5,143 +5,168 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <link rel="shortcut icon" href="/favicon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="/styles" rel="stylesheet">
     <title>Crypster Calc - Cryptocurrency Mining Calculator</title>
-    <meta name="description" content="An easy to use crypto-currency calculator used to calculate a Bitcoin, Ethereum or Litecoin miner's potential profits in USD. The calculator fetches price and network data from the internet and only requires the hash rate (speed of mining) from the user. A chart projecting future profits, coins mined or return of investment is created dynamically and displayed instantly.">
-    <meta name="keywords" content="Crypstercalc,Mining,Profitability,Calculator,Currency,Cryptocurrency,Money,Bitcoin,Ethereum,Litecoin,Altcoins">
+    <meta name="description"
+          content="An easy to use crypto-currency calculator used to calculate a Bitcoin, Ethereum or Litecoin miner's potential profits in USD. The calculator fetches price and network data from the internet and only requires the hash rate (speed of mining) from the user. A chart projecting future profits, coins mined or return of investment is created dynamically and displayed instantly.">
+    <meta name="keywords"
+          content="Crypstercalc,Mining,Profitability,Calculator,Currency,Cryptocurrency,Money,Bitcoin,Ethereum,Litecoin,Altcoins">
     <meta name="author" content="Aljaž Klaneček, Lan Prijatelj">
 </head>
 
 <body>
-    <h1>Crypster calc</h1>
+<h1>Crypster calc</h1>
+<div class="container">
 
-    <canvas id="chart"></canvas>
+    <div class="row">
+        <div class="col-md-6">
+            <form id='calcMain'>
+                <label>
+                    Select cryptocurrency:
+                    <select id='currency' name='currency'>
+                        <option value='BTC'>BTC</option>
+                        <option value='ETH'>ETH</option>
+                        <option value='LTC'>LTC</option>
+                    </select>
+                </label>
+                <br/>
+                <label>
+                    <select id='hashRateUnit' name='hashrateUnit'>
+                        <option value='TH/s'>TH/s</option>
+                        <option value='GH/s'>GH/s</option>
+                        <option value='MH/s'>MH/s</option>
+                    </select>
+                    Hashrate:
+                    <input name='hashrate' type='number' placeholder="Enter hashrate"/>
+                </label>
+                <br/>
+                <label>
+                    Coin value:
+                    <input id="value" name='value' type='number'/>
+                </label>
+                <br/>
+                <label>
+                    Difficulty:
+                    <input id="diff" name='diff' type='number'/>
+                </label>
+                <br/>
+                <label>
+                    Block reward:
+                    <input name='reward' type='number' value="12.5"/>
+                </label>
+                <br/>
+                <label>
+                    Power consumption (in W):
+                    <input name='power' type='number' value="0"/>
+                </label>
+                <br/>
+                <label>
+                    Power cost (in $ / kWh):
+                    <input name='powerCost' type='number' value="0.1"/>
+                </label>
+                <br/>
+                <label>
+                    Pool fee:
+                    <input name='fee' type='number' value="1"/>
+                </label>
+                <br/>
+                <label>
+                    Reject rate:
+                    <input name='reject' type='number' value="1"/>
+                </label>
+                <br/>
+                <label>
+                    Difficulty change (in % / month):
+                    <input name='diffChange' type='number' value="20"/>
+                </label>
+                <br/>
+                <label>
+                    Investment:
+                    <input name='invest' type='number' value="0"/>
+                </label>
+                <br/>
+                <label id="tFrame">
+                    Time Frame (months):
+                    <input name='time' type='number' value="12" align="right"/>
+                </label>
+                <br/>
+            </form>
+        </div>
 
-    <form id='calcMain'>
-        <label>
-            Select cryptocurrency:
-            <select id='currency' name='currency'>
-                <option value='BTC'>BTC</option>
-                <option value='ETH'>ETH</option>
-                <option value='LTC'>LTC</option>
-            </select>
-        </label>
-        <br/>
-        <label>
-            <select id='hashRateUnit' name='hashrateUnit'>
-                <option value='TH/s'>TH/s</option>
-                <option value='GH/s'>GH/s</option>
-                <option value='MH/s'>MH/s</option>
-            </select>
-            Hashrate:
-            <input name='hashrate' type='number' placeholder="Enter hashrate" />
-        </label>
-        <br/>
-        <label>
-            Coin value:
-            <input id="value" name='value' type='number' />
-        </label>
-        <br/>
-        <label>
-            Difficulty:
-            <input id="diff" name='diff' type='number' />
-        </label>
-        <br/>
-        <label>
-            Block reward:
-            <input name='reward' type='number' value="12.5" />
-        </label>
-        <br/>
-        <label>
-            Power consumption (in W):
-            <input name='power' type='number' value="0" />
-        </label>
-        <br/>
-        <label>
-            Power cost (in $ / kWh):
-            <input name='powerCost' type='number' value="0.1" />
-        </label>
-        <br/>
-        <label>
-            Pool fee:
-            <input name='fee' type='number' value="1" />
-        </label>
-        <br/>
-        <label>
-            Reject rate:
-            <input name='reject' type='number' value="1" />
-        </label>
-        <br/>
-        <label>
-            Difficulty change (in % / month):
-            <input name='diffChange' type='number' value="20"/>
-        </label>
-        <br/>
-        <label>
-            Investment:
-            <input name='invest' type='number' value="0"/>
-        </label>
-        <br/>
-        <label id="tFrame">        
-            Time Frame (months):
-            <input name='time' type='number' value="12" align="right" />
-        </label>
-        <br/> 
-    </form>
+        <div class="col-md-6">
+            <canvas id="chart"></canvas>
+        </div>
 
-    <table class="tabelaRezultatov">
-        <thead>
-            <tr>
-                <th>Period</th>
-                <th><span id="valuta">BTC</span> Mined</th>
-                <th>USD</th>
-                <th>Costs (in USD)</th>
-                <th>Profit (in USD)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="h">
-                <td>Hourly</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr class="d">
-                <td>Daily</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr class="w">
-                <td>Weekly</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr class="m">
-                <td>Monthly</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr class="y">
-                <td>Yearly</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-        </tr>
-    </table>             
+        <div class="col-md-6">
+            <table class="tabelaRezultatov table table-striped table-bordered ">
+                <thead>
+                <tr>
+                    <th>Period</th>
+                    <th><span id="valuta">BTC</span> Mined</th>
+                    <th>USD</th>
+                    <th>Costs (in USD)</th>
+                    <th>Profit (in USD)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="h">
+                    <td>Hourly</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="d">
+                    <td>Daily</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="w">
+                    <td>Weekly</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="m">
+                    <td>Monthly</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="y">
+                    <td>Yearly</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+                </tr>
+            </table>
+        </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
-    <script src="/script"></script>
+    </div>
+
+
+
+
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="/script"></script>
 </body>
 
 </html>
