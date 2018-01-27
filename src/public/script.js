@@ -3,7 +3,7 @@ var difficulty = {};
 var userInput = {};
 var results = {};
 
-function calculateCoinsMined(input) {
+function calculateCoinsMinedBTC(input) {
     if (input.hashrateUnit == "TH/s") {
         var hashrate = input.hashrate * Math.pow(10, 12);
     } else if (input.hashrateUnit == "GH/s") {
@@ -12,6 +12,19 @@ function calculateCoinsMined(input) {
         var hashrate = input.hashrate * Math.pow(10, 6);
     }
     return (hashrate * (1 - (input.fee / 100)) * (1 - (input.reject / 100)) * input.reward / (Math.pow(2, 32) * input.diff));
+}
+
+function calculateCoinsMinedETH(input){
+    if (input.hashrateUnit == "TH/s") {
+        var hashrate = input.hashrate * Math.pow(10, 12);
+    } else if (input.hashrateUnit == "GH/s") {
+        var hashrate = input.hashrate * Math.pow(10, 9);
+    } else {
+        var hashrate = input.hashrate * Math.pow(10, 6);
+    }
+    //return (hashrate / (input.diff / 14.5 * 60)) * (14.5 * input.reward);
+    //return hashrate * input.reward * 1000000 / input.diff;
+    return ((hashrate*(1-((input.fee)/100)))/(difficulty))*input.reward;
 }
 
 function calculateProfitPerTimeFrame(miningProfit, diffChange, timeFrame) {
@@ -153,13 +166,15 @@ $("select[name=currency]").change(function () {
     if (userInput.selectedCurrency == "BTC") {
         $("#valuta").text("BTC");
         $("#value").val(price.btc);
+        $("input[name=reward]").val("12.5");
         $("#diff").val(difficulty.btc);
         $("#hashRateUnit").val("TH/s");
     } else if (userInput.selectedCurrency == "ETH") {
         $("#valuta").text("ETH");
+        $("input[name=reward]").val("3");
         $("#value").val(price.eth);
         $("#diff").val(difficulty.eth);
-        $("#hashRateUnit").val("GH/s");
+        $("#hashRateUnit").val("MH/s");
     } else {
         $("#valuta").text("LTC");
         $("#value").val(price.ltc);
@@ -184,6 +199,7 @@ function addListeners() {
 }
 
 function sendParameters() {
+    userInput.currency = $("input[name=currency]").val();
     userInput.hashrate = $("input[name=hashrate]").val();
     userInput.fee = $("input[name=fee]").val();
     userInput.reject = $("input[name=reject]").val();
@@ -198,7 +214,14 @@ function sendParameters() {
     userInput.timeFrame = $("input[name=time]").val();
     var hourlyCost = userInput.power * userInput.powerCost / 1000;
 
-    results.miningProfitS = calculateCoinsMined(userInput);
+    if(userInput.currency == "BTC"){
+        results.miningProfitS = calculateCoinsMinedBTC(userInput);
+    }else if(userInput.currency == "ETH"){
+        results.miningProfitS = calculateCoinsMinedETH(userInput);
+    }else{
+        results.miningProfitS = calculateCoinsMinedBTC(userInput);
+    }
+    
     var res = calculateProfitPerTimeFrame(results.miningProfitS, userInput.diffChange, userInput.timeFrame);
     var costs = calculateCosts(hourlyCost);
     var net = calculateNetProfit(costs, res, userInput.timeFrame, userInput.value);
