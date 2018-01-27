@@ -36,11 +36,14 @@ function calculateProfitPerTimeFrame(miningProfit, diffChange, timeFrame) {
     profit.year = 0;
     profit.miningProfitY = [];
     for (var i = 0; i <= timeFrame; i++) {
-            if (i == 0) {
+        if(i == 0){
+            profit.miningProfitY[i] = 0;
+        }
+        else if (i == 1) {
             profit.miningProfitY[i] = profit.miningProfitM;
             profit.year += profit.miningProfitY[i];
         } else {
-            profit.miningProfitY[i] = profit.miningProfitY[i] * (1 - (diffChange / 100));
+            profit.miningProfitY[i] = profit.miningProfitY[i - 1] * (1 - (diffChange / 100));
             if (i < 12) {
                 profit.year += profit.miningProfitY[i];
             }
@@ -85,9 +88,9 @@ function calculateROI(net, investment, timeFrame) {
     var roi = [];
     for (var i = 0; i <= timeFrame; i++) {
         if(i == 0){
-            roi[i] = -1 * investment + net.y[i];
+            roi[i] = -1 * investment;
         }else{
-            roi[i] = roi[i] + net.y[i];
+            roi[i] = roi[i - 1] + net.y[i];
         }        
     }
     //console.log(roi);
@@ -125,7 +128,7 @@ function drawChart(timeFrame, dataMined, dataROI) {
                     },
                     ticks: {
                         suggestedMin: dataROI[0],
-                        suggestedMax: dataMined[11]
+                        suggestedMax: dataMined[dataMined.length-1]
                     }
                 }],
                 xAxes: [{
