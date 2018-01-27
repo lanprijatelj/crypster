@@ -159,6 +159,7 @@ $(window).on("load", function () {
             $("#value").val(price.ltc);
         }
     });
+    drawChart(12, 0, 0);
 });
 
 $("select[name=currency]").change(function () {
