@@ -8,11 +8,17 @@ html, body {
     background-image: url("other/dust_scratches.png");
 }
 
+.container{
+    border-top: 2px solid black;
+    padding-top: 2em;
+
+}
+
 h1 {
     font-size: 4em;
     text-align: center;
     font-family: 'Slabo 27px', serif;
-    margin-top: 0;
+    margin: 0;
 }
 
 h3 {
@@ -32,7 +38,7 @@ h3 {
     margin: 0 auto; /* Gives that scrolling effect as the typing happens */
     animation: typing 3s steps(40, end),
     blink-caret .75s step-end infinite;
-    margin-bottom: 0.5em;
+
 }
 
 /* The typing effect */
@@ -49,6 +55,7 @@ h3 {
 
 /* stili za formatiranje tabele razultatov*/
 
+
 #calcMain {
     text-align: right;
 }
@@ -64,3 +71,19 @@ input[type=number]::-webkit-outer-spin-button {
     appearance: none;
     margin: 0;
 }
+
+#infoChart{
+    float: right;
+    margin-bottom: -1em;
+    right: -100px;
+}
+
+.info{
+    font-size: 0.6em;
+}
+
+#chartBox{
+    margin-bottom: 2em;
+    padding: 0;
+}
+
