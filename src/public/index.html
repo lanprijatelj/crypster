@@ -6,11 +6,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113183301-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
+        function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
         gtag('config', 'UA-113183301-1');
@@ -62,94 +58,99 @@
 <main role="main">
     <div class="container">
 
-        <div class="row">
-            <div class="row col-md-6">
-                <div class="col-md-12">
-                    <form id='calcMain'>
-                        <label>
-                            Select cryptocurrency:
-                            <select id='currency' name='currency'>
-                                <option value='BTC'>BTC</option>
-                                <option value='ETH'>ETH</option>
-                                <option value='LTC'>LTC</option>
-                            </select>
-                        </label>
-                        <br/>
-                        <label>
-                            <select id='hashRateUnit' name='hashrateUnit'>
-                                <option value='TH/s'>TH/s</option>
-                                <option value='GH/s'>GH/s</option>
-                                <option value='MH/s'>MH/s</option>
-                            </select>
-                            Hashrate:
-                            <input id="hashrate" name='hashrate' type='number' placeholder="Enter hashrate"/>
-                        </label>
-                        <br/>
-                        <label>
-                            <i class="fa fa-info-circle info" aria-hidden="true" data-toggle="tooltip"
-                               data-placement="left"
-                               title="Coin value has a preset value of current coin value as show on Coin market cap"></i>
-                            Coin value:
-                            <input id="value" name='value' type='number'/>
-                        </label>
-                        <br/>
-                        <label>
-                            <i class="fa fa-info-circle info" aria-hidden="true" data-toggle="tooltip"
-                               data-placement="left"
-                               title="Difficulty has a preset value of current coin difficulty as show on Blokchain.info Etherchain.org or Explorer.litecoin.net respectively "></i>
-                            Difficulty:
-                            <input id="diff" name='diff' type='number'/>
-                        </label>
-                        <br/>
-                        <label>
-                            Block reward:
-                            <input name='reward' type='number' value="12.5"/>
-                        </label>
-                        <br/>
-                        <label>
-                            Power consumption (W):
-                            <input name='power' type='number' value="0"/>
-                        </label>
-                        <br/>
-                        <label>
-                            Power cost ($/kWh):
-                            <input name='powerCost' type='number' value="0.1"/>
-                        </label>
-                        <br/>
-                        <label>
-                            Pool fee (%):
-                            <input name='fee' type='number' value="1"/>
-                        </label>
-                        <br/>
-                        <label>
-                            Reject rate (%):
-                            <input name='reject' type='number' value="1"/>
-                        </label>
-                        <br/>
-                        <label>
-                            <span class="info"></span>
-                            <i class="fa fa-question-circle info" aria-hidden="true" data-toggle="tooltip"
-                               data-placement="left"
-                               title="The diff change is the rate at which the network difficulty is changing every month. Diff change is used for the estimated future profits graph and break-even analysis. Typically in crypto, network difficulty tends to increase over time, meaning a miner will generate less crypto with the same hardware. Accounting for this changing difficulty is essential to generate long term profitability predictions. "></i>
-                            Difficulty change (%/month):
-                            <input name='diffChange' type='number' value="20"/>
-                        </label>
-                        <br/>
-                        <label>
-                            Investment:
-                            <input name='invest' type='number' value="0"/>
-                        </label>
-                        <br/>
-                        <label id="tFrame">
-                            Time Frame (months):
-                            <input name='time' type='number' value="12" align="right"/>
-                        </label>
-                        <br/>
-                        <button id="resetButton" type="button" class="btn btn-outline-primary btn-sm">Reset Values
-                        </button>
-                    </form>
-                </div>
+
+    <div class="row">
+        <div class="row col-md-6">
+            <div class="col-md-12">
+                <form id='calcMain'>
+                    <label>
+                        Select cryptocurrency:
+                        <select id='currency' name='currency'>
+                            <option value='BTC'>BTC</option>
+                            <option value='ETH'>ETH</option>
+                            <option value='LTC'>LTC</option>
+                        </select>
+                    </label>
+                    <br/>
+                    <label>
+                        <select id='hashRateUnit' name='hashrateUnit'>
+                            <option value='TH/s'>TH/s</option>
+                            <option value='GH/s'>GH/s</option>
+                            <option value='MH/s'>MH/s</option>
+                        </select>
+                        Hashrate:
+                        <input id="hashrate" name='hashrate' type='number' placeholder="Enter hashrate"/>
+                    </label>
+                    <br/>
+                    <label>
+                        <i class="fa fa-info-circle info" aria-hidden="true" data-toggle="tooltip"
+                           data-placement="left"
+                           title="Coin value has a preset value of current coin value as show on Coin market cap"></i>
+                        Coin value:
+                        <input id="value" name='value' type='number'/>
+                    </label>
+                    <br/>
+                    <label>
+                        <i class="fa fa-info-circle info" aria-hidden="true" data-toggle="tooltip"
+                           data-placement="left"
+                           title="Difficulty has a preset value of current coin difficulty as show on Blokchain.info Etherchain.org or Explorer.litecoin.net respectively "></i>
+                        Difficulty:
+                        <input id="diff" name='diff' type='number'/>
+                    </label>
+                    <br/>
+                    <label>
+                        Block reward:
+                        <input name='reward' type='number' value="12.5"/>
+                    </label>
+                    <br/>
+                    <label>
+                        Power consumption (W):
+                        <input name='power' type='number' value="0"/>
+                    </label>
+                    <br/>
+                    <label>
+                        Power cost ($/kWh):
+                        <input name='powerCost' type='number' value="0.1"/>
+                    </label>
+                    <br/>
+                    <label>
+                        Pool fee:
+                        <input name='fee' type='number' value="1"/>
+                    </label>
+                    <br/>
+                    <label>
+                        Reject rate:
+                        <input name='reject' type='number' value="1"/>
+                    </label>
+                    <br/>
+                    <label>
+                        <span class="info"></span>
+                        <i class="fa fa-question-circle info" aria-hidden="true" data-toggle="tooltip"
+                           data-placement="left"
+                           title="The diff change is the rate at which the network difficulty is changing every month. Diff change is used for the estimated future profits graph and break-even analysis. Typically in crypto, network difficulty tends to increase over time, meaning a miner will generate less crypto with the same hardware. Accounting for this changing difficulty is essential to generate long term profitability predictions. "></i>
+                        Difficulty change (%/month):
+                        <input name='diffChange' type='number' value="20"/>
+                    </label>
+                    <br/>
+                    <label>
+                        Coin value change (%/month):
+                        <input name='CoinValueChange' type='number' value="0"/>
+                    </label>
+                    <br/>
+                    <label>
+                        Investment:
+                        <input name='invest' type='number' value="0"/>
+                    </label>
+                    <br/>
+                    <label id="tFrame">
+                        Time Frame (months):
+                        <input name='time' type='number' value="12" align="right"/>
+                    </label>
+                    <br/>
+                    <button id="resetButton" type="button" class="btn btn-outline-primary btn-sm">Reset Values</button>
+                </form>
             </div>
+        </div>
 
 
             <div class="row col-md-6">
