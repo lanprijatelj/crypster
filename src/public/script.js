@@ -8,25 +8,25 @@ function calculateCoinsMinedBTC(input) {
         var hashrate = input.hashrate * Math.pow(10, 12);
     } else if (input.hashrateUnit == "GH/s") {
         var hashrate = input.hashrate * Math.pow(10, 9);
-    } else {        
+    } else {
         var hashrate = input.hashrate * Math.pow(10, 6);
     }
     return (hashrate * (1 - (input.fee / 100)) * (1 - (input.reject / 100)) * input.reward / (Math.pow(2, 32) * input.diff));
 }
 
-function calculateCoinsMinedETH(input){
-    if (input.hashrateUnit == "TH/s") {    
+function calculateCoinsMinedETH(input) {
+    if (input.hashrateUnit == "TH/s") {
         var factor = 1;
         var hashrate = input.hashrate * Math.pow(10, 6);
     } else if (input.hashrateUnit == "GH/s") {
         var factor = 1000;
         var hashrate = input.hashrate * Math.pow(10, 3);
-    } else {        
+    } else {
         var factor = 1000000;
         var hashrate = input.hashrate;
     }
     console.log(hashrate);
-    return ((hashrate  * factor / ((input.diff / Math.pow(10, 12)) / 14.8 * Math.pow(10, 12))) * ((60 / 14.8) * input.reward)) * (1 - (input.fee / 100)) * (1 - (input.reject / 100)) / 60;    
+    return ((hashrate * factor / ((input.diff / Math.pow(10, 12)) / 14.8 * Math.pow(10, 12))) * ((60 / 14.8) * input.reward)) * (1 - (input.fee / 100)) * (1 - (input.reject / 100)) / 60;
 }
 
 function calculateCoinsMinedLTC(input) {
@@ -34,10 +34,10 @@ function calculateCoinsMinedLTC(input) {
         var hashrate = input.hashrate * Math.pow(10, 9);
     } else if (input.hashrateUnit == "GH/s") {
         var hashrate = input.hashrate * Math.pow(10, 6);
-    } else {        
+    } else {
         var hashrate = input.hashrate * Math.pow(10, 3);
     }
-    return (input.reward * hashrate)/(49.7 * input.diff) / 86400;
+    return (input.reward * hashrate) / (49.7 * input.diff) / 86400;
 }
 
 function calculateProfitPerTimeFrame(miningProfit, diffChange, timeFrame) {
@@ -49,7 +49,7 @@ function calculateProfitPerTimeFrame(miningProfit, diffChange, timeFrame) {
     profit.year = 0;
     profit.miningProfitY = [];
     for (var i = 0; i <= timeFrame; i++) {
-        if(i == 0){
+        if (i == 0) {
             profit.miningProfitY[i] = 0;
         }
         else if (i == 1) {
@@ -65,6 +65,7 @@ function calculateProfitPerTimeFrame(miningProfit, diffChange, timeFrame) {
     }
     return profit;
 }
+
 function calculateCosts(hourlyCost) {
     var cost = {};
     cost.H = hourlyCost;
@@ -84,9 +85,9 @@ function calculateNetProfit(costs, profits, timeFrame, value) {
     net.y = [];
     net.year = 0;
     for (var i = 0; i <= timeFrame; i++) {
-        if(i==0){
+        if (i == 0) {
             net.y[i] = 0;
-        }else{
+        } else {
             net.y[i] = (profits.miningProfitY[i] * value) - costs.M;
             if (i < 12) {
                 net.year += net.y[i];
@@ -100,11 +101,11 @@ function calculateNetProfit(costs, profits, timeFrame, value) {
 function calculateROI(net, investment, timeFrame) {
     var roi = [];
     for (var i = 0; i <= timeFrame; i++) {
-        if(i == 0){
+        if (i == 0) {
             roi[i] = -1 * investment;
-        }else{
+        } else {
             roi[i] = roi[i - 1] + net.y[i];
-        }        
+        }
     }
     //console.log(roi);
     return roi;
@@ -112,7 +113,7 @@ function calculateROI(net, investment, timeFrame) {
 
 function drawChart(timeFrame, dataMined, dataROI) {
     var labels = [];
-    for(var i = 0; i <= timeFrame; i++){
+    for (var i = 0; i <= timeFrame; i++) {
         labels[i] = i;
     }
     var ctx = document.getElementById("chart").getContext('2d');
@@ -120,11 +121,11 @@ function drawChart(timeFrame, dataMined, dataROI) {
         type: 'line',
         data: {
             datasets: [{
-                label: 'Net mining profits per month',
+                label: 'Net mining profits / month',
                 data: dataMined,
                 borderColor: "rgba(45, 118, 237, 1)",
                 backgroundColor: "rgba(45, 118, 237, 0.5)"
-            },{
+            }, {
                 label: 'profit $$$',
                 data: dataROI,
                 borderColor: "rgb(255, 239, 22)",
@@ -141,7 +142,7 @@ function drawChart(timeFrame, dataMined, dataROI) {
                     },
                     ticks: {
                         suggestedMin: dataROI[0],
-                        suggestedMax: dataMined[dataMined.length-1]
+                        suggestedMax: dataMined[dataMined.length - 1]
                     }
                 }],
                 xAxes: [{
@@ -149,7 +150,7 @@ function drawChart(timeFrame, dataMined, dataROI) {
                         display: true,
                         labelString: 'months'
                     }
-                    }]
+                }]
             },
             responsive: true,
             events: ["click"]
@@ -193,16 +194,25 @@ $(window).on("load", function () {
     drawChart(12, 0, 0);
 
 
-    setTimeout(function(){
-        $('#welcomeMessage').css({
-            "border-style": 'hidden'
-        });
-    }, 4400);
+    $('.drawer').drawer();
 
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
+
 });
+
+
+
+
+setTimeout(function () {
+    $('#welcomeMessage').css({
+        "border-style": 'hidden'
+    });
+}, 4400);
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+
+;
 
 $("select[name=currency]").change(function () {
     userInput.selectedCurrency = $("select[name=currency]").val();
@@ -227,7 +237,7 @@ $("select[name=currency]").change(function () {
     }
 });
 
-$("#resetButton").click(function(){
+$("#resetButton").click(function () {
     userInput.selectedCurrency = $("select[name=currency]").val();
     if (userInput.selectedCurrency == "BTC") {
         $("#hashrate").val("");
@@ -263,7 +273,7 @@ function addListeners() {
     $("input[name=reject]").keyup(sendParameters);
     $("input[name=reward]").keyup(sendParameters);
     $("input[name=diff]").keyup(sendParameters);
-    $("input[name=value]").keyup(sendParameters);    
+    $("input[name=value]").keyup(sendParameters);
     $("input[name=power]").keyup(sendParameters);
     $("input[name=powerCost]").keyup(sendParameters);
     $("input[name=diffChange]").keyup(sendParameters);
@@ -287,14 +297,14 @@ function sendParameters() {
     userInput.timeFrame = $("input[name=time]").val();
     var hourlyCost = userInput.power * userInput.powerCost / 1000;
 
-    if(userInput.currency == "BTC"){
+    if (userInput.currency == "BTC") {
         results.miningProfitS = calculateCoinsMinedBTC(userInput);
-    }else if(userInput.currency == "ETH"){
+    } else if (userInput.currency == "ETH") {
         results.miningProfitS = calculateCoinsMinedETH(userInput);
-    }else{
+    } else {
         results.miningProfitS = calculateCoinsMinedLTC(userInput);
     }
-    
+
     var res = calculateProfitPerTimeFrame(results.miningProfitS, userInput.diffChange, userInput.timeFrame);
     var costs = calculateCosts(hourlyCost);
     var net = calculateNetProfit(costs, res, userInput.timeFrame, userInput.value);

@@ -22,6 +22,11 @@ app.get('/other/dust_scratches.png', function (request, response) {
     response.sendFile(__dirname + '/public/other/dust_scratches.png');
 });
 
+app.get('/other/iconmonstr-calculator-1.svg', function (request, response) {
+    response.sendFile(__dirname + '/public/other/iconmonstr-calculator-1.svg');
+});
+
+
 app.listen(PORT, error => (
   error
     ? console.error(error)
