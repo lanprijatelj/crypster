@@ -125,7 +125,7 @@ function drawChart(timeFrame, dataMined, dataROI) {
                 borderColor: "rgba(45, 118, 237, 1)",
                 backgroundColor: "rgba(45, 118, 237, 0.5)"
             },{
-                label: '$$$ earned',
+                label: 'profit $$$',
                 data: dataROI,
                 borderColor: "rgb(255, 239, 22)",
                 backgroundColor: "rgba(255, 239, 22, 0.5)"
