@@ -14,6 +14,8 @@ function calculateCoinsMinedBTC(input) {
     return (hashrate * (1 - (input.fee / 100)) * (1 - (input.reject / 100)) * input.reward / (Math.pow(2, 32) * input.diff));
 }
 
+(UserHashMh * 1e6 / ((difficultyTH / BlockTimeSec)*1000*1e9))*((60/ BlockTimeSec)*BlockReward)*(60*24*30)*(EthPrice)
+
 function calculateCoinsMinedETH(input){
     if (input.hashrateUnit == "TH/s") {
         var hashrate = input.hashrate * Math.pow(10, 12);
@@ -24,7 +26,7 @@ function calculateCoinsMinedETH(input){
     }
     //return (hashrate / (input.diff / 14.5 * 60)) * (14.5 * input.reward);
     //return hashrate * input.reward * 1000000 / input.diff;
-    return ((hashrate*(1-((input.fee)/100)))/(difficulty))*input.reward;
+    return ((hashrate / (1-((input.fee)/100)))/(difficulty))*input.reward;
 }
 
 function calculateProfitPerTimeFrame(miningProfit, diffChange, timeFrame) {
@@ -216,6 +218,7 @@ $("select[name=currency]").change(function () {
 });
 
 function addListeners() {
+    $("#hashRateUnit").change(sendParameters);
     $("input[name=hashrate]").keyup(sendParameters);
     $("input[name=fee]").keyup(sendParameters);
     $("input[name=reject]").keyup(sendParameters);
