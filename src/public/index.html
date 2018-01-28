@@ -113,7 +113,7 @@
                         <input name='time' type='number' value="12" align="right"/>
                     </label>
                     <br/>
-                    <button id="button" type="button">Reset Values</button>
+                    <button id="resetButton" type="button" class="btn btn-outline-primary btn-sm">Reset Values</button>
                 </form>
             </div>
         </div>
@@ -123,12 +123,12 @@
 
             <div id="chartBox" class="col-md-12">
                 <i id="infoChart" class="fa fa-info-circle"></i>
-                <canvas id="chart" aria-hidden="true" data-toggle="tooltip" data-placement="left"
+                <canvas id="chart" aria-hidden="true" data-toggle="tooltip" data-placement="bottom"
                         title="When the two lines meet you will be breakeven"></canvas>
             </div>
 
             <div class="col-md-12 ">
-                <table id="tableResults" class="table table-striped table-bordered .table-responsive">
+                <table id="tableResults" class="table table-striped table-responsive">
                     <thead class="thead-dark">
                     <tr>
                         <th>Period</th>

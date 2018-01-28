@@ -88,3 +88,9 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 0;
 }
 
+#tableResults{
+    margin-left: 1em;
+}
+#resetButton{
+    margin-right: 0.25em;
+}

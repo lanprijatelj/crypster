@@ -227,7 +227,7 @@ $("select[name=currency]").change(function () {
     }
 });
 
-$("#button").click(function(){
+$("#resetButton").click(function(){
     userInput.selectedCurrency = $("select[name=currency]").val();
     if (userInput.selectedCurrency == "BTC") {
         $("#hashrate").val("");
