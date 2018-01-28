@@ -124,7 +124,7 @@ function drawChart(timeFrame, dataMined, dataROI) {
                 yAxes: [{
                     scaleLabel: {
                         display: true,
-                        labelString: '$'
+                        labelString: ''
                     },
                     ticks: {
                         suggestedMin: dataROI[0],
@@ -185,6 +185,10 @@ $(window).on("load", function () {
             "border-style": 'hidden'
         });
     }, 4400);
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 
 
 });
