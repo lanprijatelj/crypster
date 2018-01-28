@@ -75,19 +75,20 @@ function calculateCosts(hourlyCost) {
     return cost;
 }
 
-function calculateNetProfit(costs, profits, timeFrame, value) {
-    var net = {};
+function calculateNetProfit(costs, profits, timeFrame, value, valueChange) {
+    var net = {};    
     net.h = (profits.miningProfitH * value) - costs.H;
     net.d = (profits.miningProfitD * value) - costs.D;
     net.w = (profits.miningProfitW * value) - costs.W;
     net.m = (profits.miningProfitM * value) - costs.M;
     net.y = [];
     net.year = 0;
-    for (var i = 0; i <= timeFrame; i++) {
-        if(i==0){
+    for (var i = 0; i <= timeFrame; i++) {        
+        if(i==0){        
             net.y[i] = 0;
         }else{
-            net.y[i] = (profits.miningProfitY[i] * value) - costs.M;
+            value = value * (1 + (valueChange / 100));
+            net.y[i] = profits.miningProfitY[i] * value - costs.M;
             if (i < 12) {
                 net.year += net.y[i];
             }
@@ -190,8 +191,8 @@ $(window).on("load", function () {
             $("#value").val(price.ltc);
         }
     });
-    drawChart(12, 0, 0);
 
+    drawChart(12, 0, 0);
 
     setTimeout(function(){
         $('#welcomeMessage').css({
@@ -229,6 +230,8 @@ $("select[name=currency]").change(function () {
 
 $("#resetButton").click(function(){
     userInput.selectedCurrency = $("select[name=currency]").val();
+    $("input[name=CoinValueChange]").val("0");
+    $("input[name=diffChange]").val("20");
     if (userInput.selectedCurrency == "BTC") {
         $("#hashrate").val("");
         $("#valuta").text("BTC");
@@ -262,7 +265,8 @@ function addListeners() {
     $("input[name=fee]").keyup(sendParameters);
     $("input[name=reject]").keyup(sendParameters);
     $("input[name=reward]").keyup(sendParameters);
-    $("input[name=diff]").keyup(sendParameters);
+    $("input[name=diff]").keyup(sendParameters);    
+    $("input[name=CoinValueChange]").keyup(sendParameters);
     $("input[name=value]").keyup(sendParameters);    
     $("input[name=power]").keyup(sendParameters);
     $("input[name=powerCost]").keyup(sendParameters);
@@ -285,6 +289,7 @@ function sendParameters() {
     userInput.diffChange = $("input[name=diffChange]").val();
     userInput.invest = $("input[name=invest]").val();
     userInput.timeFrame = $("input[name=time]").val();
+    userInput.coinValueChange = $("input[name=CoinValueChange]").val();
     var hourlyCost = userInput.power * userInput.powerCost / 1000;
 
     if(userInput.currency == "BTC"){
@@ -297,7 +302,7 @@ function sendParameters() {
     
     var res = calculateProfitPerTimeFrame(results.miningProfitS, userInput.diffChange, userInput.timeFrame);
     var costs = calculateCosts(hourlyCost);
-    var net = calculateNetProfit(costs, res, userInput.timeFrame, userInput.value);
+    var net = calculateNetProfit(costs, res, userInput.timeFrame, userInput.value, userInput.coinValueChange);
     var roi = calculateROI(net, userInput.invest, userInput.timeFrame);
 
     drawChart(userInput.timeFrame, net.y, roi);
