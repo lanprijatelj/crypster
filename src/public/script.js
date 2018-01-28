@@ -8,25 +8,38 @@ function calculateCoinsMinedBTC(input) {
         var hashrate = input.hashrate * Math.pow(10, 12);
     } else if (input.hashrateUnit == "GH/s") {
         var hashrate = input.hashrate * Math.pow(10, 9);
-    } else {
+    } else {        
         var hashrate = input.hashrate * Math.pow(10, 6);
     }
     return (hashrate * (1 - (input.fee / 100)) * (1 - (input.reject / 100)) * input.reward / (Math.pow(2, 32) * input.diff));
 }
 
-(UserHashMh * 1e6 / ((difficultyTH / BlockTimeSec)*1000*1e9))*((60/ BlockTimeSec)*BlockReward)*(60*24*30)*(EthPrice)
+//(UserHashMh * 1e6 / ((difficultyTH / BlockTimeSec)*1000*1e9))*((60/ BlockTimeSec)*BlockReward)*(60*24*30)*(EthPrice)
 
 function calculateCoinsMinedETH(input){
-    if (input.hashrateUnit == "TH/s") {
-        var hashrate = input.hashrate * Math.pow(10, 12);
-    } else if (input.hashrateUnit == "GH/s") {
-        var hashrate = input.hashrate * Math.pow(10, 9);
-    } else {
+    if (input.hashrateUnit == "TH/s") {    
+        var factor = 1;
         var hashrate = input.hashrate * Math.pow(10, 6);
+    } else if (input.hashrateUnit == "GH/s") {
+        var factor = 1000;
+        var hashrate = input.hashrate * Math.pow(10, 3);
+    } else {        
+        var factor = 1000000;
+        var hashrate = input.hashrate;
     }
-    //return (hashrate / (input.diff / 14.5 * 60)) * (14.5 * input.reward);
-    //return hashrate * input.reward * 1000000 / input.diff;
-    return ((hashrate / (1-((input.fee)/100)))/(difficulty))*input.reward;
+    console.log(hashrate);
+    return ((hashrate  * factor / ((input.diff / Math.pow(10, 12)) / 14.8 * Math.pow(10, 12))) * ((60 / 14.8) * input.reward)) * (1 - (input.fee / 100)) * (1 - (input.reject / 100)) / 60;    
+}
+
+function calculateCoinsMinedLTC(input) {
+    if (input.hashrateUnit == "TH/s") {
+        var hashrate = input.hashrate * Math.pow(10, 9);
+    } else if (input.hashrateUnit == "GH/s") {
+        var hashrate = input.hashrate * Math.pow(10, 6);
+    } else {        
+        var hashrate = input.hashrate * Math.pow(10, 3);
+    }
+    return (input.reward * hashrate)/(49.7 * input.diff) / 86400;
 }
 
 function calculateProfitPerTimeFrame(miningProfit, diffChange, timeFrame) {
@@ -205,13 +218,14 @@ $("select[name=currency]").change(function () {
         $("#hashRateUnit").val("TH/s");
     } else if (userInput.selectedCurrency == "ETH") {
         $("#valuta").text("ETH");
-        $("input[name=reward]").val("3");
+        $("input[name=reward]").val("3.5");
         $("#value").val(price.eth);
         $("#diff").val(difficulty.eth);
         $("#hashRateUnit").val("MH/s");
     } else {
         $("#valuta").text("LTC");
         $("#value").val(price.ltc);
+        $("input[name=reward]").val("25");
         $("#diff").val(difficulty.ltc);
         $("#hashRateUnit").val("MH/s");
     }
@@ -224,8 +238,7 @@ function addListeners() {
     $("input[name=reject]").keyup(sendParameters);
     $("input[name=reward]").keyup(sendParameters);
     $("input[name=diff]").keyup(sendParameters);
-    $("input[name=value]").keyup(sendParameters);
-    $("select[name=hashrateUnit]").keyup(sendParameters);
+    $("input[name=value]").keyup(sendParameters);    
     $("input[name=power]").keyup(sendParameters);
     $("input[name=powerCost]").keyup(sendParameters);
     $("input[name=diffChange]").keyup(sendParameters);
@@ -234,7 +247,7 @@ function addListeners() {
 }
 
 function sendParameters() {
-    userInput.currency = $("input[name=currency]").val();
+    userInput.currency = $("#currency").val();
     userInput.hashrate = $("input[name=hashrate]").val();
     userInput.fee = $("input[name=fee]").val();
     userInput.reject = $("input[name=reject]").val();
@@ -254,7 +267,7 @@ function sendParameters() {
     }else if(userInput.currency == "ETH"){
         results.miningProfitS = calculateCoinsMinedETH(userInput);
     }else{
-        results.miningProfitS = calculateCoinsMinedBTC(userInput);
+        results.miningProfitS = calculateCoinsMinedLTC(userInput);
     }
     
     var res = calculateProfitPerTimeFrame(results.miningProfitS, userInput.diffChange, userInput.timeFrame);
