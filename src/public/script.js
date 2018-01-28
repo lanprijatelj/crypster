@@ -14,8 +14,6 @@ function calculateCoinsMinedBTC(input) {
     return (hashrate * (1 - (input.fee / 100)) * (1 - (input.reject / 100)) * input.reward / (Math.pow(2, 32) * input.diff));
 }
 
-//(UserHashMh * 1e6 / ((difficultyTH / BlockTimeSec)*1000*1e9))*((60/ BlockTimeSec)*BlockReward)*(60*24*30)*(EthPrice)
-
 function calculateCoinsMinedETH(input){
     if (input.hashrateUnit == "TH/s") {    
         var factor = 1;
@@ -204,8 +202,6 @@ $(window).on("load", function () {
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
-
-
 });
 
 $("select[name=currency]").change(function () {
@@ -228,6 +224,35 @@ $("select[name=currency]").change(function () {
         $("input[name=reward]").val("25");
         $("#diff").val(difficulty.ltc);
         $("#hashRateUnit").val("MH/s");
+    }
+});
+
+$("#button").click(function(){
+    userInput.selectedCurrency = $("select[name=currency]").val();
+    if (userInput.selectedCurrency == "BTC") {
+        $("#hashrate").val("");
+        $("#valuta").text("BTC");
+        $("#value").val(price.btc);
+        $("input[name=reward]").val("12.5");
+        $("#diff").val(difficulty.btc);
+        $("#hashRateUnit").val("TH/s");
+        sendParameters();
+    } else if (userInput.selectedCurrency == "ETH") {
+        $("#hashrate").val("");
+        $("#valuta").text("ETH");
+        $("input[name=reward]").val("3.5");
+        $("#value").val(price.eth);
+        $("#diff").val(difficulty.eth);
+        $("#hashRateUnit").val("MH/s");
+        sendParameters();
+    } else {
+        $("#hashrate").val("");
+        $("#valuta").text("LTC");
+        $("#value").val(price.ltc);
+        $("input[name=reward]").val("25");
+        $("#diff").val(difficulty.ltc);
+        $("#hashRateUnit").val("MH/s");
+        sendParameters();
     }
 });
 
