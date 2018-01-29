@@ -57,7 +57,7 @@ function calculateProfitPerTimeFrame(miningProfit, diffChange, timeFrame) {
             profit.year += profit.miningProfitY[i];
         } else {
             profit.miningProfitY[i] = profit.miningProfitY[i - 1] * (1 - (diffChange / 100));
-            if (i < 12) {
+            if (i < 13) {
                 profit.year += profit.miningProfitY[i];
             }
         }
@@ -90,7 +90,7 @@ function calculateNetProfit(costs, profits, timeFrame, value, valueChange) {
         } else {
             value = value * (1 + (valueChange / 100));
             net.y[i] = profits.miningProfitY[i] * value - costs.M;
-            if (i < 12) {
+            if (i < 13) {
                 net.year += net.y[i];
             }
         }
@@ -223,7 +223,7 @@ $("select[name=currency]").change(function () {
         $("#hashRateUnit").val("TH/s");
     } else if (userInput.selectedCurrency == "ETH") {
         $("#valuta").text("ETH");
-        $("input[name=reward]").val("3.5");
+        $("input[name=reward]").val("3");
         $("#value").val(price.eth);
         $("#diff").val(difficulty.eth);
         $("#hashRateUnit").val("MH/s");
@@ -239,7 +239,7 @@ $("select[name=currency]").change(function () {
 $("#resetButton").click(function () {
     userInput.selectedCurrency = $("select[name=currency]").val();
     $("input[name=CoinValueChange]").val("0");
-    $("input[name=diffChange]").val("20");
+    $("input[name=diffChange]").val("15");
     if (userInput.selectedCurrency == "BTC") {
         $("#hashrate").val("");
         $("#valuta").text("BTC");
