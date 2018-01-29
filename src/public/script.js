@@ -215,6 +215,7 @@ $(function () {
 
 $("select[name=currency]").change(function () {
     userInput.selectedCurrency = $("select[name=currency]").val();
+    $("input[name=hashrate]").val("");
     if (userInput.selectedCurrency == "BTC") {
         $("#valuta").text("BTC");
         $("#value").val(price.btc);
@@ -240,6 +241,7 @@ $("#resetButton").click(function () {
     userInput.selectedCurrency = $("select[name=currency]").val();
     $("input[name=CoinValueChange]").val("0");
     $("input[name=diffChange]").val("15");
+    $("input[name=hashrate]").val("");
     if (userInput.selectedCurrency == "BTC") {
         $("#hashrate").val("");
         $("#valuta").text("BTC");
