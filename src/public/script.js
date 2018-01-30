@@ -119,12 +119,17 @@ function calculateROI(net, investment, timeFrame) {
 
 function calculateBE(investment, incomes){
     var days = 0;
-    var count = 1;
+    var count = 0;
     while(investment > 0){
         investment -= incomes.y[count];
         count ++;
     }
-    return days = (count - 2) * 30.417 + (30.417 - (30.417 * (-1 * investment / incomes.y[count])));    
+    if(count > 2){
+        return days = (count - 2) * 30.417 + (30.417 - (30.417 * (-1 * investment / incomes.y[count]))); 
+    }else{
+        return 30.417 - (30.417 * (-1 * investment / incomes.y[count - 1]));
+    }
+       
 }
 
 function drawChart(timeFrame, dataMined, dataROI) {
@@ -332,13 +337,10 @@ function sendParameters() {
     //console.log(userInput.invest);
     if(userInput.invest != "0"){
         var BE = calculateBE(userInput.invest, net);
-        if(!isNaN(BE)){
-            if(BE < 0){
-                $("#BE").text("Never");
-            }
+        if(!isNaN(BE)){            
             $("#BE").text(BE.toFixed(2));
         }else{
-            $("#BE").text("0"); 
+            $("#BE").text("Never"); 
         }    
     }
 
