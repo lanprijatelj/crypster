@@ -90,6 +90,10 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
 #infoChart {
     float: right;
     margin-bottom: -1em;

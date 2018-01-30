@@ -100,7 +100,7 @@
                                data-placement="left"
                                title="Coin value has a preset value of current coin value as show on Coin market cap"></i>
                             Coin value:
-                            <input id="value" name='value' type='number'/>
+                            <input id="value" name='value' type='number' step="0.01"/>
                         </label>
                         <br/>
                         <label>
@@ -108,12 +108,12 @@
                                data-placement="left"
                                title="Difficulty has a preset value of current coin difficulty as show on Blokchain.info Etherchain.org or Explorer.litecoin.net respectively "></i>
                             Difficulty:
-                            <input id="diff" name='diff' type='number'/>
+                            <input id="diff" name='diff' type='number' step="0.00001"/>
                         </label>
                         <br/>
                         <label>
                             Block reward:
-                            <input name='reward' type='number' value="12.5"/>
+                            <input name='reward' type='number' value="12.5" step="0.01"/>
                         </label>
                         <br/>
                         <label>
@@ -140,7 +140,7 @@
                             <span class="info"></span>
                             <i class="fa fa-question-circle info" aria-hidden="true" data-toggle="tooltip"
                                data-placement="left"
-                               title="The diff change is the rate at which the network difficulty is changing every month. Diff change is used for the estimated future profits graph and break-even analysis. Typically in crypto, network difficulty tends to increase over time, meaning a miner will generate less crypto with the same hardware. Accounting for this changing difficulty is essential to generate long term profitability predictions. "></i>
+                               title="The diff change is the rate at which the network difficulty is changing every month. Diff change is used for the estimated future profits graph and break even analysis. Typically in crypto, network difficulty tends to increase over time, meaning a miner will generate less crypto with the same hardware. Accounting for this changing difficulty is essential to generate long term profitability predictions. "></i>
                             Difficulty change (%/month):
                             <input name='diffChange' type='number' value="15"/>
                         </label>
@@ -173,7 +173,7 @@
                     <canvas id="chart" aria-hidden="true"></canvas>
                 </div>
 
-                <div class="col-md-12 ">
+                <div class="col-md-12">
                     <table id="tableResults" class="table table-striped table-responsive">
                         <thead class="thead-dark">
                         <tr>
@@ -224,7 +224,10 @@
                         </tr>
                     </table>
                 </div>
-
+                <br />
+                <div class="col-md-12">
+                    <p>Days to break even: <span id="BE">0</span></p>
+                </div>
             </div>
         </div>
     </div>

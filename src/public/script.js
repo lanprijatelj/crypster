@@ -48,15 +48,19 @@ function calculateProfitPerTimeFrame(miningProfit, diffChange, timeFrame) {
     profit.miningProfitM = (miningProfit * 2628000);
     profit.year = 0;
     profit.miningProfitY = [];
-    for (var i = 0; i <= timeFrame; i++) {
+    var factor = Math.abs(1 - (diffChange / 100));
+    for (var i = 0; i <= timeFrame; i++) {        
         if (i == 0) {
             profit.miningProfitY[i] = 0;
         }
-        else if (i == 1) {
+        else if (i == 1) {            
             profit.miningProfitY[i] = profit.miningProfitM;
             profit.year += profit.miningProfitY[i];
-        } else {
-            profit.miningProfitY[i] = profit.miningProfitY[i - 1] * (1 - (diffChange / 100));
+        } else {            
+            if(factor > 1){
+                factor *= -1;
+            }
+            profit.miningProfitY[i] = Math.abs(profit.miningProfitY[i - 1]) * factor;
             if (i < 13) {
                 profit.year += profit.miningProfitY[i];
             }
@@ -84,11 +88,12 @@ function calculateNetProfit(costs, profits, timeFrame, value, valueChange) {
     net.m = (profits.miningProfitM * value) - costs.M;
     net.y = [];
     net.year = 0;
+    var factor = (1 + (valueChange / 100));
     for (var i = 0; i <= timeFrame; i++) {
         if (i == 0) {
             net.y[i] = 0;
         } else {
-            value = value * (1 + (valueChange / 100));
+            value = value * factor;
             net.y[i] = profits.miningProfitY[i] * value - costs.M;
             if (i < 13) {
                 net.year += net.y[i];
@@ -110,6 +115,16 @@ function calculateROI(net, investment, timeFrame) {
     }
     //console.log(roi);
     return roi;
+}
+
+function calculateBE(investment, incomes){
+    var days = 0;
+    var count = 1;
+    while(investment > 0){
+        investment -= incomes.y[count];
+        count ++;
+    }
+    return days = (count - 2) * 30.417 + (30.417 - (30.417 * (-1 * investment / incomes.y[count])));    
 }
 
 function drawChart(timeFrame, dataMined, dataROI) {
@@ -314,6 +329,18 @@ function sendParameters() {
     var costs = calculateCosts(hourlyCost);
     var net = calculateNetProfit(costs, res, userInput.timeFrame, userInput.value, userInput.coinValueChange);
     var roi = calculateROI(net, userInput.invest, userInput.timeFrame);
+    //console.log(userInput.invest);
+    if(userInput.invest != "0"){
+        var BE = calculateBE(userInput.invest, net);
+        if(!isNaN(BE)){
+            if(BE < 0){
+                $("#BE").text("Never");
+            }
+            $("#BE").text(BE.toFixed(2));
+        }else{
+            $("#BE").text("0"); 
+        }    
+    }
 
     drawChart(userInput.timeFrame, net.y, roi);
 
