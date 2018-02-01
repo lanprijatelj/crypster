@@ -49,15 +49,15 @@ function calculateProfitPerTimeFrame(miningProfit, diffChange, timeFrame) {
     profit.year = 0;
     profit.miningProfitY = [];
     var factor = Math.abs(1 - (diffChange / 100));
-    for (var i = 0; i <= timeFrame; i++) {        
+    for (var i = 0; i <= timeFrame; i++) {
         if (i == 0) {
             profit.miningProfitY[i] = 0;
         }
-        else if (i == 1) {            
+        else if (i == 1) {
             profit.miningProfitY[i] = profit.miningProfitM;
             profit.year += profit.miningProfitY[i];
-        } else {            
-            if(factor > 1){
+        } else {
+            if (factor > 1) {
                 factor *= -1;
             }
             profit.miningProfitY[i] = Math.abs(profit.miningProfitY[i - 1]) * factor;
@@ -117,19 +117,19 @@ function calculateROI(net, investment, timeFrame) {
     return roi;
 }
 
-function calculateBE(investment, incomes){
+function calculateBE(investment, incomes) {
     var days = 0;
     var count = 0;
-    while(investment > 0){
+    while (investment > 0) {
         investment -= incomes.y[count];
-        count ++;
+        count++;
     }
-    if(count > 2){
-        return days = (count - 2) * 30.417 + (30.417 - (30.417 * (-1 * investment / incomes.y[count]))); 
-    }else{
+    if (count > 2) {
+        return days = (count - 2) * 30.417 + (30.417 - (30.417 * (-1 * investment / incomes.y[count])));
+    } else {
         return 30.417 - (30.417 * (-1 * investment / incomes.y[count - 1]));
     }
-       
+
 }
 
 function drawChart(timeFrame, dataMined, dataROI) {
@@ -215,12 +215,23 @@ $(window).on("load", function () {
 
     drawChart(12, 0, 0);
 
-
     $('.drawer').drawer();
 
+    if ($(window).width() < 480 && window.scrollY == 0) {
+        $("#crtice").hide();
+        
+    }
 
 });
 
+$(document).scroll(function () {
+    var y = $(this).scrollTop();
+    if (y > 50 && $(window).width() < 480) {
+        $('#crtice').fadeIn();
+    } else if($(window).width() < 480){
+        $('#crtice').fadeOut();
+    }
+});
 
 setTimeout(function () {
     $('#welcomeMessage').css({
@@ -335,13 +346,13 @@ function sendParameters() {
     var net = calculateNetProfit(costs, res, userInput.timeFrame, userInput.value, userInput.coinValueChange);
     var roi = calculateROI(net, userInput.invest, userInput.timeFrame);
     //console.log(userInput.invest);
-    if(userInput.invest != "0"){
+    if (userInput.invest != "0") {
         var BE = calculateBE(userInput.invest, net);
-        if(!isNaN(BE)){            
+        if (!isNaN(BE)) {
             $("#BE").text(BE.toFixed(2));
-        }else{
-            $("#BE").text("Never"); 
-        }    
+        } else {
+            $("#BE").text("Never");
+        }
     }
 
     drawChart(userInput.timeFrame, net.y, roi);

@@ -64,10 +64,10 @@ h3 {
 }
 
 /* stili za formatiranje tabele razultatov*/
-@media screen and (min-width: 480px) {
+@media screen and (max-width: 480px) {
     #tableResults {
         display: table;
-    }
+    }    
 }
 
 #tableResults {
@@ -130,4 +130,3 @@ input[type=number] {
     height: 6em;
     margin-top: 6em;
 }
-
