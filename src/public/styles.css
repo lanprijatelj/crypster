@@ -36,6 +36,12 @@ h3 {
 
 }
 
+#ad{
+    position: absolute;
+    top: 10em;
+    right: 2em;
+}
+
 #welcomeMessage {
     width: 21em;
     overflow: hidden; /* Ensures the content is not revealed until the animation */
@@ -162,6 +168,9 @@ input[type=number] {
     }
     #donate{
         margin-top: 1.5em;
+    }
+    #ad{
+        visibility: hidden;
     }
     .float-right{
         float: none !important;
