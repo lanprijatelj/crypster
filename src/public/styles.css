@@ -101,6 +101,10 @@ input[type=number] {
     font-size: 0.6em;
 }
 
+.drawer-nav, .drawer-dropdown-menu{
+    background-image: url("other/dust_scratches.png");
+}
+
 #chartBox {
     margin-bottom: 2em;
     padding: 0;

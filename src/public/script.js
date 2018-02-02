@@ -238,6 +238,12 @@ $(window).on("load", function () {
         $("#crtice").hide();
     }
 
+    tippy('[title]', {
+        placement: 'left',
+        animation: 'scale',
+        duration: 800,
+        arrow: true
+      });
 
 });
 
