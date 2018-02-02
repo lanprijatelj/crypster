@@ -36,12 +36,6 @@ h3 {
 
 }
 
-#ad{
-    position: absolute;
-    top: 10em;
-    right: 2em;
-}
-
 #welcomeMessage {
     width: 21em;
     overflow: hidden; /* Ensures the content is not revealed until the animation */
@@ -143,7 +137,16 @@ input[type=number] {
 #donateButton{
     max-width: 165px;
 }
+/*-----------TABLET VIEW ------------*/
+@media screen and (min-device-width: 481px) and (max-width:993px) {
+   .form-group .form-group input{
+        width: 120px;
+    }
+    .form-group .form-group .smallerInput {
+        width: 60px;
+    }
 
+}
 /*-----------MOBILE VIEW ------------*/
 @media screen and (max-width: 480px) {
     #tableResults {
@@ -169,10 +172,10 @@ input[type=number] {
     #donate{
         margin-top: 1.5em;
     }
-    #ad{
-        visibility: hidden;
-    }
     .float-right{
         float: none !important;
+    }
+    #calcImg{
+        margin-top: 0;
     }
 }

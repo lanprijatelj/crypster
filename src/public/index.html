@@ -68,7 +68,7 @@
                 <div class="row col-md-6">
                     <div class="col-md-12">
                         <form id='calcMain' class="form-group">
-                            <div class="form-group  form-inline  float-right ">
+                            <div class="form-group  form-inline  float-right">
                                 <label class="col-form-label"> Select cryptocurrency:&nbsp; </label>
                                 <select id='currency' name='currency' class="form-control form-control-sm">
                                     <option value='BTC'>BTC</option>
@@ -88,55 +88,57 @@
                             <div class="form-group form-inline  float-right">
                                 <i class="fa fa-info-circle info" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="Coin value has a preset value of current coin value as show on Coin market cap"></i>&nbsp;
                                 <label class="col-form-label">Coin value: &nbsp;</label>
-                                <input id="value" name='value' type='number' step="0.01" class="form-control form-control-sm" />
+                                <input id="value" name='value' type='number' step="0.00001" class="form-control form-control-sm" />
                             </div>
                             <div class="form-group form-inline  float-right">
                                 <i class="fa fa-info-circle info" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="Difficulty has a preset value of current coin difficulty as show on Blokchain.info Etherchain.org or Explorer.litecoin.net respectively "></i>&nbsp;
                                 <label class="col-form-label">Difficulty: &nbsp;</label>
-                                <input id="diff" name='diff' type='number' step="0.00001" class="form-control form-control-sm" />
+                                <input id="diff" name='diff' type='number' step="0.000001" class="form-control form-control-sm" />
                             </div>
                             <div class="form-group form-inline float-right">
                                 <label class="col-form-label">
                                     Block reward:&nbsp;</label>
-                                <input name='reward' type='number' value="12.5" step="0.01" class="form-control form-control-sm" />
+                                <input name='reward' type='number' value="12.5" step="0.000001" class="form-control form-control-sm" />
                             </div>
                             <div class="form-group form-inline float-right">
                                 <label class="col-form-label">
                                     Power consumption (W):&nbsp;</label>
-                                <input name='power' type='number' value="0" class="form-control form-control-sm" />
+                                <div>
+                                    <input name='power' type='number' value="0" step="0.00001" class="form-control  form-control-sm" />
+                                </div>
                             </div>
                             <div class="form-group form-inline  float-right">
                                 <label class="col-form-label">
                                     Power cost ($/kWh):&nbsp;</label>
-                                <input name='powerCost' type='number' value="0.1" class="form-control form-control-sm" />
+                                <input name='powerCost' type='number' value="0.1" step="0.00001" class="form-control form-control-sm" />
                             </div>
                             <div class="form-group form-inline  float-right">
                                 <label class="col-form-label">
                                     Pool fee (%):&nbsp;</label>
-                                <input name='fee' type='number' value="1" class="form-control form-control-sm" />
+                                <input name='fee' type='number' value="1" step="0.00001" class="form-control form-control-sm" />
                             </div>
                             <div class="form-group form-inline  float-right">
                                 <label class="col-form-label">
                                     Reject rate (%):&nbsp; </label>
-                                <input name='reject' type='number' value="1" class="form-control form-control-sm" />
+                                <input name='reject' type='number' value="1" step="0.00001" class="form-control form-control-sm" />
                             </div>
                             <div class="form-group form-inline  float-right">
                                 <i class="fa fa-question-circle info" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="The difficulty change is the rate at which the network difficulty is changing every month. Diff change is used for the estimated future profits graph and break even analysis. Typically in crypto, network difficulty tends to increase over time, meaning a miner will generate less crypto with the same hardware. Accounting for this changing difficulty is essential to generate long term profitability predictions. "></i>&nbsp;
                                 <label class="col-form-label">Difficulty change (%/month):&nbsp;</label>
-                                <input name='diffChange' type='number' value="15" class="form-control form-control-sm" />
+                                <input name='diffChange' type='number' value="15" class="form-control form-control-sm smallerInput" />
 
                             </div>
                             <div class="form-group form-inline  float-right">
                                 <i class="fa fa-question-circle info" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="The Coin value change is your predicted change of price every month. Coin value change is used for the estimated future profits graph and break even analysis. We are used to very volatile markets in crypto space so be careful with your estimates as your calculations may vary drastically. It is essential to account coin price change if we wish to have accurate calculations and generate long term profitability predictions."></i>&nbsp;
                                 <label class="col-form-label">
                                     Coin value change (%/month):&nbsp;</label>
-                                <input name='CoinValueChange' type='number' value="0" class="form-control form-control-sm" />
+                                <input name='CoinValueChange' type='number' value="0" step="0.00001" class="form-control form-control-sm smallerInput" />
 
                             </div>
                             <div class="form-group form-inline  float-right">
                                 <label class="col-form-label">
                                     Investment:&nbsp; </label>
-                                <input name='invest' type='number' value="0" class="form-control form-control-sm" />
+                                <input name='invest' type='number' value="0" step="0.01" class="form-control form-control-sm" />
 
                             </div>
                             <div class="form-group form-inline  float-right">
@@ -224,18 +226,6 @@
                     </div>
                 </div>
             </div>            
-        </div>
-        <div id="ad">
-            <script type="text/javascript">
-                ( function() {
-                  if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] }; };
-                  var unit = {"calltype":"async[2]","publisher":"GangstaFrodo","width":160,"height":600,"sid":"Chitika Default"};
-                  var placement_id = window.CHITIKA.units.length;
-                  window.CHITIKA.units.push(unit);
-                  document.write('<div id="chitikaAdBlock-' + placement_id + '"></div>');
-              }());
-              </script>
-              <script type="text/javascript" src="//cdn.chitika.net/getads.js" async></script>   
         </div>
     </main>
     <footer>

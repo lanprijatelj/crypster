@@ -142,12 +142,12 @@ function drawChart(timeFrame, dataMined, dataROI) {
         type: 'line',
         data: {
             datasets: [{
-                label: 'Net mining profits per month',
+                label: 'Mining revenue/month',
                 data: dataMined,
                 borderColor: "rgba(45, 118, 237, 1)",
                 backgroundColor: "rgba(45, 118, 237, 0.5)"
             }, {
-                label: 'profit $$$',
+                label: 'Profit $$$',
                 data: dataROI,
                 borderColor: "rgb(255, 239, 22)",
                 backgroundColor: "rgba(255, 239, 22, 0.5)"
@@ -219,10 +219,17 @@ $(window).on("load", function () {
 
     if ($(window).width() < 480 && window.scrollY == 0) {
         $("#crtice").hide();
-        
+
+    }
+    if ($(window).width() < 480) {
+        $("#crtice").hide();
+
     }
 
+
 });
+
+/*resposive design-----------------------------------*/
 
 $(document).scroll(function () {
     var y = $(this).scrollTop();
@@ -232,6 +239,9 @@ $(document).scroll(function () {
         $('#crtice').fadeOut();
     }
 });
+
+
+
 
 setTimeout(function () {
     $('#welcomeMessage').css({
@@ -377,5 +387,5 @@ function sendParameters() {
     $(".y :nth-child(3)").html((net.year + costs.Y).toFixed(2));
     $(".y :nth-child(4)").html((costs.Y).toFixed(2));
     $(".y :nth-child(5)").html((net.year).toFixed(2));
-    //console.log(results.miningProfitS);
+
 }
