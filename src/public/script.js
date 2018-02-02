@@ -219,7 +219,7 @@ $(window).on("load", function () {
 
     $('#my_popup').popup({
         opacity: 0.8,
-        transition: 'all 0.3s',
+        transition: 'all 0.5s',
         onopen: function() {
             $("main,h1,h3").css({"filter":"blur(5px)",
             "-webkit-filter":"blur(5px)"});
@@ -241,7 +241,7 @@ $(window).on("load", function () {
     tippy('[title]', {
         placement: 'left',
         animation: 'scale',
-        duration: 800,
+        duration: 500,
         arrow: true
       });
 

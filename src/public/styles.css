@@ -126,8 +126,11 @@ input[type=number] {
 }
 
 #calcImg {
+    float: right;
     padding: 1em;
     height: 6em;
+    padding-right: 3em;
+
 }
 #breakEven{
     margin-left: 1em;
@@ -183,6 +186,10 @@ input[type=number] {
     .form-group .form-group .smallerInput {
         width: 60px;
     }
+    #my_popup{
+        width: 100%;
+        padding: 1em;
+    }
 
 }
 /*-----------MOBILE VIEW ------------*/
@@ -216,4 +223,9 @@ input[type=number] {
     #calcImg{
         margin-top: 0;
     }
+    #my_popup{
+        width: 100%;
+        padding: 2em;
+    }
+
 }
