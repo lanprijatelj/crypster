@@ -136,6 +136,41 @@ input[type=number] {
 #donateButton{
     max-width: 165px;
 }
+
+#menuAbout{
+ padding: 1em;
+ bottom:0;
+ position: fixed;
+}
+
+#my_popup{
+    color: azure;
+    width: 50%;
+}
+#closePopup{
+    float: right;
+    margin-bottom: 0.5em;
+    cursor: pointer;
+}
+
+/*-----------POPOUP ------------*/
+#fadeandscale {
+    transform: scale(0.6);
+}
+.popup_visible #fadeandscale {
+    transform: scale(1);
+}
+
+#wikiSource{
+    font-size: 0.8em;
+    color: slategrey;
+}
+#wikiSource :hover{
+    text-decoration: none;
+}
+
+
+
 /*-----------TABLET VIEW ------------*/
 @media screen and (min-device-width: 481px) and (max-width:993px) {
    .form-group .form-group input{

@@ -217,13 +217,25 @@ $(window).on("load", function () {
 
     $('.drawer').drawer();
 
+    $('#my_popup').popup({
+        opacity: 0.8,
+        transition: 'all 0.3s',
+        onopen: function() {
+            $("main,h1,h3").css({"filter":"blur(5px)",
+            "-webkit-filter":"blur(5px)"});
+        },
+        onclose: function() {
+            $("main,h1,h3").css({"filter":"blur(0px)",
+                "-webkit-filter":"blur(0px)"});
+        }
+    });
+
     if ($(window).width() < 480 && window.scrollY == 0) {
         $("#crtice").hide();
 
     }
     if ($(window).width() < 480) {
         $("#crtice").hide();
-
     }
 
 

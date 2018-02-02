@@ -43,9 +43,7 @@
     </button>
     <nav class="drawer-nav" role="navigation">
         <ul class="drawer-menu">
-            <li><a class="drawer-menu-item" href="#">Wiki</a></li>
-
-
+            <li><a class="drawer-menu-item my_popup_open" href="#">Wiki</a></li>
             <li class="drawer-dropdown">
                 <a class="drawer-menu-item" href="#" data-toggle="dropdown" role="button" aria-expanded="false">
                     About <span class="drawer-caret"></span>
@@ -53,29 +51,75 @@
                 <ul class="drawer-dropdown-menu">
                     <img src="/other/iconmonstr-calculator-1.svg" alt="calcPicture" id="calcImg">
                     <p id="menuText">
-                        Crypster Calc is a comprehensive cryptocurrency calculator. We saw a need to develop a mining calculator
+                        Crypster Calc is a comprehensive cryptocurrency calculator. We saw a need to develop a mining
+                        calculator
                         that could acknowledge
-                        the difficulty increase in time, the volatility of the market and therefore the constant price change. We
-                        also wanted a calculator that would look cool be enjoyable and easy to use. And so we made Crypster
+                        the difficulty increase in time, the volatility of the market and therefore the constant price
+                        change. We
+                        also wanted a calculator that would look cool be enjoyable and easy to use. And so we made
+                        Crypster
                         Calc.
                         <br>
-                        <br> Any feedback is appreciated. If you want us to add other currencies please, let us know and we'll do
+                        <br> Any feedback is appreciated. If you want us to add other currencies please, let us know and
+                        we'll do
                         our
                         best.
                     </p>
                 </ul>
             </li>
         </ul>
-        crypster.calc@gmail.com
-        <br>
-        <a href="https://www.linkedin.com/in/lan-prijatelj-b76483158/" target="_blank"> <i
-                class="fab fa-linkedin"></i></a>
-        <a href="https://www.linkedin.com/in/alja%C5%BE-klane%C4%8Dek-a18595131/" target="_blank"><i
-                class="fab fa-linkedin"></i></a>
-        <a href="https://www.facebook.com/crypstercalc/" target="_blank"><i class="fab fa-facebook-square"></i></a>
+        <div id="menuAbout">
+            crypster.calc@gmail.com
+            <br>
+            <a href="https://www.linkedin.com/in/lan-prijatelj-b76483158/" target="_blank"> <i
+                    class="fab fa-linkedin"></i></a>
+            <a href="https://www.linkedin.com/in/alja%C5%BE-klane%C4%8Dek-a18595131/" target="_blank"><i
+                    class="fab fa-linkedin"></i></a>
+            <a href="https://www.facebook.com/crypstercalc/" target="_blank"><i class="fab fa-facebook-square"></i></a>
+        </div>
     </nav>
 </header>
 
+<div id="my_popup">
+    <div id="closePopup">
+        <i class="far fa-times-circle my_popup_close"></i>
+    </div>
+    <b>What are cryptocurrencies?</b>
+    <p> A cryptocurrency is a digital asset designed to work as a medium of exchange that uses cryptography to secure
+        its transactions, to control the creation of additional units, and to verify the transfer of assets.
+        Cryptocurrencies are classified as a subset of digital currencies and are also classified as a subset of
+        alternative currencies and virtual currencies. Cryptocurrencies use decentralized control as opposed to
+        centralized electronic money and central banking systems. The decentralized control of each cryptocurrency works
+        through a blockchain, which is a public transaction database, functioning as a distributed ledger. As of January
+        2018, there were over 1384 and growing digital currencies in existence.
+    </p>
+
+    <b>What is cryptocurrency mining?</b>
+    <p> In cryptocurrency networks, mining is a validation of transactions. For this effort, successful miners obtain
+        new cryptocurrency as a reward. The reward decreases transaction fees by creating a complementary incentive to
+        contribute to the processing power of the network. The rate of generating hashes, which validate any
+        transaction, has been increased by the use of specialized machines such as FPGAs and ASICs running complex
+        hashing algorithms like SHA-256 and Scrypt. This arms race for cheaper-yet-efficient machines has been on since
+        the day the first cryptocurrency, bitcoin, was introduced in 2009.
+    </p>
+    <b>What is Crypster Calc?</b>
+    <p>Crypster Calc is s cryptocurrency mining calculator, for calculating mining profits and the time you'll need to
+        return your investment in hardware. You only need to input your hash rate, investment and costs or fees and it
+        does the rest for you. If you are an advanced user it also allows you to change many other parameters such as
+        difficulty and coin value change % per month. This makes your calculations much more accurate and is essential
+        for good mining profit predictions. Enjoy using Crypster calc the world’s most comprehensive mining calculator.
+    </p><a href="https://en.wikipedia.org/wiki/Cryptocurrency" target="_blank">
+    <i class="fas fa-link"></i><span id="wikiSource">&nbsp;Wiki source</span>
+
+
+
+</a>
+
+
+    <!-- Add an optional button to close the popup -->
+
+
+</div>
 
 <h1>Crypster Calc</h1>
 <div class="d-none d-sm-block">
@@ -297,6 +341,7 @@
 <!-- drawer.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.13/jquery.popupoverlay.js"></script>
 <script src="/script"></script>
 </body>
 
