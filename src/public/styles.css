@@ -27,6 +27,38 @@ h1 {
     margin: 0;
 }
 
+#calcImg {
+    float: right;
+    padding: 1em;
+    height: 6em;
+    padding-right: 3em;
+
+}
+#breakEven{
+    margin-left: 1em;
+}
+#donate{
+    margin-right: 1em;
+    margin-bottom: 1em;
+    padding: 0;
+}
+#donateButton{
+    max-width: 165px;
+}
+
+#chartBox {
+    margin-bottom: 2em;
+    padding: 0;
+}
+
+#resetButton {
+    margin-left: 100em;
+}
+
+
+
+/* Typewritter--------------------------------------------------------------------------------------*/
+
 h3 {
     font-size: 1.5em;
     text-align: center;
@@ -46,7 +78,6 @@ h3 {
     blink-caret .75s step-end infinite;
 
 }
-
 /* The typing effect */
 @keyframes typing {
     from {
@@ -67,7 +98,7 @@ h3 {
     }
 }
 
-/* stili za formatiranje tabele razultatov*/
+/* stili za formatiranje tabele razultatov-------------------------------------------------------------------*/
 @media screen and (max-width: 480px) {
     #tableResults {
         display: table;
@@ -101,20 +132,12 @@ input[type=number] {
     font-size: 0.6em;
 }
 
+
+/* side menu  -------------------------------------------------------------------------- */
+
 .drawer-nav, .drawer-dropdown-menu{
     background-image: url("other/dust_scratches.png");
 }
-
-#chartBox {
-    margin-bottom: 2em;
-    padding: 0;
-}
-
-#resetButton {
-    margin-left: 100em;
-}
-
-/* side menu   */
 .panel {
     position: fixed;
     left: -20em; /*left or right and the width of your navigation panel*/
@@ -125,42 +148,21 @@ input[type=number] {
     padding: 1em;
 }
 
-#calcImg {
-    float: right;
-    padding: 1em;
-    height: 6em;
-    padding-right: 3em;
-
-}
-#breakEven{
-    margin-left: 1em;
-}
-#donate{
-    margin-right: 1em;   
-    margin-bottom: 1em; 
-    padding: 0;
-}
-#donateButton{
-    max-width: 165px;
-}
-
 #menuAbout{
  padding: 1em;
  bottom:0;
  position: fixed;
 }
 
-#my_popup{
-    color: azure;
-    width: 50%;
+.no_outline{
+    outline: none;
 }
-#closePopup{
-    float: right;
-    margin-bottom: 0.5em;
-    cursor: pointer;
+#crtice{
+    outline: none;
 }
 
-/*-----------POPOUP ------------*/
+
+/*-----------POPOUP -----------------------------------------------------------------------*/
 #fadeandscale {
     transform: scale(0.6);
 }
@@ -176,9 +178,18 @@ input[type=number] {
     text-decoration: none;
 }
 
+#my_popup{
+    color: azure;
+    width: 50%;
+}
+#closePopup{
+    float: right;
+    margin-bottom: 0.5em;
+    cursor: pointer;
+}
 
 
-/*-----------TABLET VIEW ------------*/
+/*-----------TABLET VIEW -------------------------------------------*/
 @media screen and (min-device-width: 481px) and (max-width:993px) {
    .form-group .form-group input{
         width: 120px;
@@ -187,12 +198,29 @@ input[type=number] {
         width: 60px;
     }
     #my_popup{
-        width: 100%;
+        width: 90%;
         padding: 1em;
     }
 
 }
-/*-----------MOBILE VIEW ------------*/
+
+
+
+/*-----------TABLET LANDSCAPE VIEW -----------------------------*/
+@media screen and (min-device-width: 770px) and (max-width:1025px) {
+
+    #my_popup{
+        width: 80%;
+        padding: 1em;
+    }
+    .form-group {
+        margin-bottom: 0;
+    }
+    #resetButton{
+        margin-top: 0.5em;
+    }
+}
+/*-----------MOBILE VIEW -----------------------------------------*/
 @media screen and (max-width: 480px) {
     #tableResults {
         display: table;
@@ -213,6 +241,10 @@ input[type=number] {
     }
     #resetButton{
         margin: 0;
+        margin-top: 0.5em;
+    }
+    #currency{
+        margin-bottom: 0.5em;
     }
     #donate{
         margin-top: 1.5em;
@@ -226,6 +258,9 @@ input[type=number] {
     #my_popup{
         width: 100%;
         padding: 2em;
+    }
+    .form-group {
+        margin-bottom: 0;
     }
 
 }
