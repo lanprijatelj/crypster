@@ -181,6 +181,7 @@ input[type=number] {
 #my_popup{
     color: azure;
     width: 50%;
+    margin-top: -2000px
 }
 #closePopup{
     float: right;

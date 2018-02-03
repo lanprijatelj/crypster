@@ -243,8 +243,9 @@ $(window).on("load", function () {
         animation: 'scale',
         duration: 500,
         arrow: true
-      });
+    });
 
+      $("#my_popup").css({"margin-top": "0"});
 });
 
 /*resposive design-----------------------------------*/
