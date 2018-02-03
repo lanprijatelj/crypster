@@ -36,6 +36,10 @@ app.get('/other/LogoPrototype1_fullTransperent.png', function (request, response
     response.sendFile(__dirname + '/public/other/LogoPrototype1_fullTransperent.png');
 });
 
+app.get('/other/CrypsterLogo_onWhite.jpg', function (request, response) {
+    response.sendFile(__dirname + '/public/other/CrypsterLogo_onWhite.jpg');
+});
+
 
 
 app.listen(PORT, error => (
