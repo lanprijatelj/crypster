@@ -26,7 +26,7 @@ function calculateCoinsMinedETH(input) {
         var factor = 1000000;
         var hashrate = input.hashrate;
     }
-    console.log(hashrate);
+    //console.log(hashrate);
     return ((hashrate * factor / ((input.diff / Math.pow(10, 12)) / 14.8 * Math.pow(10, 12))) * ((60 / 14.8) * input.reward)) * (1 - (input.fee / 100)) * (1 - (input.reject / 100)) / 60;
 }
 
@@ -276,25 +276,26 @@ $jq(function () {
 
 $jq("select[name=currency]").change(function () {
     userInput.selectedCurrency = $jq("select[name=currency]").val();
-    $jq("input[name=hashrate]").val("");
+    $jq("input[name=hashrate]").val(""); 
+    $jq("#BE").text("0");   
     if (userInput.selectedCurrency == "BTC") {
         $jq("#valuta").text("BTC");
         $jq("#value").val(price.btc);
         $jq("input[name=reward]").val("12.5");
         $jq("#diff").val(difficulty.btc);
-        $jq("#hashRateUnit").val("TH/s");
+        $jq("#hashRateUnit").val("TH/s");        
     } else if (userInput.selectedCurrency == "ETH") {
         $jq("#valuta").text("ETH");
         $jq("input[name=reward]").val("3");
         $jq("#value").val(price.eth);
         $jq("#diff").val(difficulty.eth);
-        $jq("#hashRateUnit").val("MH/s");
+        $jq("#hashRateUnit").val("MH/s");        
     } else {
         $jq("#valuta").text("LTC");
         $jq("#value").val(price.ltc);
         $jq("input[name=reward]").val("25");
         $jq("#diff").val(difficulty.ltc);
-        $jq("#hashRateUnit").val("MH/s");
+        $jq("#hashRateUnit").val("MH/s");        
     }
 });
 
