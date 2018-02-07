@@ -40,6 +40,10 @@ app.get('/other/CrypsterLogo_onWhite.jpg', function (request, response) {
     response.sendFile(__dirname + '/public/other/CrypsterLogo_onWhite.jpg');
 });
 
+app.get('/other/sitemap.txt', function (request, response) {
+  response.sendFile(__dirname + '/public/other/sitemap.txt');
+});
+
 
 
 app.listen(PORT, error => (
