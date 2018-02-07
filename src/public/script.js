@@ -2,6 +2,7 @@ var price = {};
 var difficulty = {};
 var userInput = {};
 var results = {};
+var $jq = jQuery.noConflict();
 
 function calculateCoinsMinedBTC(input) {
     if (input.hashrateUnit == "TH/s") {
@@ -179,63 +180,63 @@ function drawChart(timeFrame, dataMined, dataROI) {
     });
 }
 
-$(window).on("load", function () {
+$jq(window).on("load", function () {
     addListeners();
-    userInput.selectedCurrency = $("select[name=currency]").val();
+    userInput.selectedCurrency = $jq("select[name=currency]").val();
 
-    $.post("/diffBTC").done(function (response) {
+    $jq.post("/diffBTC").done(function (response) {
         difficulty.btc = response.difficultyBTC;
         //console.log(difficulty);
-        $("#diff").val(difficulty.btc);
+        $jq("#diff").val(difficulty.btc);
     });
 
-    $.post("/diffETH").done(function (response) {
+    $jq.post("/diffETH").done(function (response) {
         difficulty.eth = response.difficultyETH[0].difficulty;
         //console.log(difficulty);        
     });
 
-    $.post("/diffLTC").done(function (response) {
+    $jq.post("/diffLTC").done(function (response) {
         difficulty.ltc = response.difficultyLTC;
         //console.log(difficulty);       
     });
 
-    $.post("/price").done(function (response) {
+    $jq.post("/price").done(function (response) {
         price.btc = response.valueBTC;
         price.eth = response.valueETH;
         price.ltc = response.valueLTC;
         //console.log(price);
         if (userInput.selectedCurrency == "BTC") {
-            $("#value").val(price.btc);
+            $jq("#value").val(price.btc);
         } else if (userInput.selectedCurrency == "ETH") {
-            $("#value").val(price.eth);
+            $jq("#value").val(price.eth);
         } else {
-            $("#value").val(price.ltc);
+            $jq("#value").val(price.ltc);
         }
     });
 
     drawChart(12, 0, 0);
 
-    $('.drawer').drawer();
+    $jq('.drawer').drawer();
 
-    $('#my_popup').popup({
+    $jq('#my_popup').popup({
         opacity: 0.8,
         transition: 'all 0.5s',
         onopen: function() {
-            $("main,h1,h3").css({"filter":"blur(5px)",
+            $jq("main,h1,h3").css({"filter":"blur(5px)",
             "-webkit-filter":"blur(5px)"});
         },
         onclose: function() {
-            $("main,h1,h3").css({"filter":"blur(0px)",
+            $jq("main,h1,h3").css({"filter":"blur(0px)",
                 "-webkit-filter":"blur(0px)"});
         }
     });
 
-    if ($(window).width() < 480 && window.scrollY == 0) {
-        $("#crtice").hide();
+    if ($jq(window).width() < 480 && window.scrollY == 0) {
+        $jq("#crtice").hide();
 
     }
-    if ($(window).width() < 480) {
-        $("#crtice").hide();
+    if ($jq(window).width() < 480) {
+        $jq("#crtice").hide();
     }
 
     tippy('[title]', {
@@ -245,17 +246,17 @@ $(window).on("load", function () {
         arrow: true
     });
 
-      $("#my_popup").css({"margin-top": "0"});
+      $jq("#my_popup").css({"margin-top": "0"});
 });
 
 /*resposive design-----------------------------------*/
 
-$(document).scroll(function () {
-    var y = $(this).scrollTop();
-    if (y > 50 && $(window).width() < 480) {
-        $('#crtice').fadeIn();
-    } else if($(window).width() < 480){
-        $('#crtice').fadeOut();
+$jq(document).scroll(function () {
+    var y = $jq(this).scrollTop();
+    if (y > 50 && $jq(window).width() < 480) {
+        $jq('#crtice').fadeIn();
+    } else if($jq(window).width() < 480){
+        $jq('#crtice').fadeOut();
     }
 });
 
@@ -263,103 +264,103 @@ $(document).scroll(function () {
 
 
 setTimeout(function () {
-    $('#welcomeMessage').css({
+    $jq('#welcomeMessage').css({
         "border-style": 'hidden'
     });
 }, 4400);
 
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
+$jq(function () {
+    $jq('[data-toggle="tooltip"]').tooltip()
 });
 
 
-$("select[name=currency]").change(function () {
-    userInput.selectedCurrency = $("select[name=currency]").val();
-    $("input[name=hashrate]").val("");
+$jq("select[name=currency]").change(function () {
+    userInput.selectedCurrency = $jq("select[name=currency]").val();
+    $jq("input[name=hashrate]").val("");
     if (userInput.selectedCurrency == "BTC") {
-        $("#valuta").text("BTC");
-        $("#value").val(price.btc);
-        $("input[name=reward]").val("12.5");
-        $("#diff").val(difficulty.btc);
-        $("#hashRateUnit").val("TH/s");
+        $jq("#valuta").text("BTC");
+        $jq("#value").val(price.btc);
+        $jq("input[name=reward]").val("12.5");
+        $jq("#diff").val(difficulty.btc);
+        $jq("#hashRateUnit").val("TH/s");
     } else if (userInput.selectedCurrency == "ETH") {
-        $("#valuta").text("ETH");
-        $("input[name=reward]").val("3");
-        $("#value").val(price.eth);
-        $("#diff").val(difficulty.eth);
-        $("#hashRateUnit").val("MH/s");
+        $jq("#valuta").text("ETH");
+        $jq("input[name=reward]").val("3");
+        $jq("#value").val(price.eth);
+        $jq("#diff").val(difficulty.eth);
+        $jq("#hashRateUnit").val("MH/s");
     } else {
-        $("#valuta").text("LTC");
-        $("#value").val(price.ltc);
-        $("input[name=reward]").val("25");
-        $("#diff").val(difficulty.ltc);
-        $("#hashRateUnit").val("MH/s");
+        $jq("#valuta").text("LTC");
+        $jq("#value").val(price.ltc);
+        $jq("input[name=reward]").val("25");
+        $jq("#diff").val(difficulty.ltc);
+        $jq("#hashRateUnit").val("MH/s");
     }
 });
 
-$("#resetButton").click(function () {
-    userInput.selectedCurrency = $("select[name=currency]").val();
-    $("input[name=CoinValueChange]").val("0");
-    $("input[name=diffChange]").val("15");
-    $("input[name=hashrate]").val("");
+$jq("#resetButton").click(function () {
+    userInput.selectedCurrency = $jq("select[name=currency]").val();
+    $jq("input[name=CoinValueChange]").val("0");
+    $jq("input[name=diffChange]").val("15");
+    $jq("input[name=hashrate]").val("");
     if (userInput.selectedCurrency == "BTC") {
-        $("#hashrate").val("");
-        $("#valuta").text("BTC");
-        $("#value").val(price.btc);
-        $("input[name=reward]").val("12.5");
-        $("#diff").val(difficulty.btc);
-        $("#hashRateUnit").val("TH/s");
+        $jq("#hashrate").val("");
+        $jq("#valuta").text("BTC");
+        $jq("#value").val(price.btc);
+        $jq("input[name=reward]").val("12.5");
+        $jq("#diff").val(difficulty.btc);
+        $jq("#hashRateUnit").val("TH/s");
         sendParameters();
     } else if (userInput.selectedCurrency == "ETH") {
-        $("#hashrate").val("");
-        $("#valuta").text("ETH");
-        $("input[name=reward]").val("3.5");
-        $("#value").val(price.eth);
-        $("#diff").val(difficulty.eth);
-        $("#hashRateUnit").val("MH/s");
+        $jq("#hashrate").val("");
+        $jq("#valuta").text("ETH");
+        $jq("input[name=reward]").val("3.5");
+        $jq("#value").val(price.eth);
+        $jq("#diff").val(difficulty.eth);
+        $jq("#hashRateUnit").val("MH/s");
         sendParameters();
     } else {
-        $("#hashrate").val("");
-        $("#valuta").text("LTC");
-        $("#value").val(price.ltc);
-        $("input[name=reward]").val("25");
-        $("#diff").val(difficulty.ltc);
-        $("#hashRateUnit").val("MH/s");
+        $jq("#hashrate").val("");
+        $jq("#valuta").text("LTC");
+        $jq("#value").val(price.ltc);
+        $jq("input[name=reward]").val("25");
+        $jq("#diff").val(difficulty.ltc);
+        $jq("#hashRateUnit").val("MH/s");
         sendParameters();
     }
 });
 
 function addListeners() {
-    $("#hashRateUnit").change(sendParameters);
-    $("input[name=hashrate]").keyup(sendParameters);
-    $("input[name=fee]").keyup(sendParameters);
-    $("input[name=reject]").keyup(sendParameters);
-    $("input[name=reward]").keyup(sendParameters);
-    $("input[name=diff]").keyup(sendParameters);
-    $("input[name=CoinValueChange]").keyup(sendParameters);
-    $("input[name=value]").keyup(sendParameters);
-    $("input[name=power]").keyup(sendParameters);
-    $("input[name=powerCost]").keyup(sendParameters);
-    $("input[name=diffChange]").keyup(sendParameters);
-    $("input[name=invest]").keyup(sendParameters);
-    $("input[name=time]").keyup(sendParameters);
+    $jq("#hashRateUnit").change(sendParameters);
+    $jq("input[name=hashrate]").keyup(sendParameters);
+    $jq("input[name=fee]").keyup(sendParameters);
+    $jq("input[name=reject]").keyup(sendParameters);
+    $jq("input[name=reward]").keyup(sendParameters);
+    $jq("input[name=diff]").keyup(sendParameters);
+    $jq("input[name=CoinValueChange]").keyup(sendParameters);
+    $jq("input[name=value]").keyup(sendParameters);
+    $jq("input[name=power]").keyup(sendParameters);
+    $jq("input[name=powerCost]").keyup(sendParameters);
+    $jq("input[name=diffChange]").keyup(sendParameters);
+    $jq("input[name=invest]").keyup(sendParameters);
+    $jq("input[name=time]").keyup(sendParameters);
 }
 
 function sendParameters() {
-    userInput.currency = $("#currency").val();
-    userInput.hashrate = $("input[name=hashrate]").val();
-    userInput.fee = $("input[name=fee]").val();
-    userInput.reject = $("input[name=reject]").val();
-    userInput.reward = $("input[name=reward]").val();
-    userInput.diff = $("input[name=diff]").val();
-    userInput.value = $("input[name=value]").val();
-    userInput.hashrateUnit = $("select[name=hashrateUnit]").val();
-    userInput.power = $("input[name=power]").val();
-    userInput.powerCost = $("input[name=powerCost]").val();
-    userInput.diffChange = $("input[name=diffChange]").val();
-    userInput.invest = $("input[name=invest]").val();
-    userInput.timeFrame = $("input[name=time]").val();
-    userInput.coinValueChange = $("input[name=CoinValueChange]").val();
+    userInput.currency = $jq("#currency").val();
+    userInput.hashrate = $jq("input[name=hashrate]").val();
+    userInput.fee = $jq("input[name=fee]").val();
+    userInput.reject = $jq("input[name=reject]").val();
+    userInput.reward = $jq("input[name=reward]").val();
+    userInput.diff = $jq("input[name=diff]").val();
+    userInput.value = $jq("input[name=value]").val();
+    userInput.hashrateUnit = $jq("select[name=hashrateUnit]").val();
+    userInput.power = $jq("input[name=power]").val();
+    userInput.powerCost = $jq("input[name=powerCost]").val();
+    userInput.diffChange = $jq("input[name=diffChange]").val();
+    userInput.invest = $jq("input[name=invest]").val();
+    userInput.timeFrame = $jq("input[name=time]").val();
+    userInput.coinValueChange = $jq("input[name=CoinValueChange]").val();
     var hourlyCost = userInput.power * userInput.powerCost / 1000;
 
     if (userInput.currency == "BTC") {
@@ -378,33 +379,33 @@ function sendParameters() {
     if (userInput.invest != "0") {
         var BE = calculateBE(userInput.invest, net);
         if (!isNaN(BE)) {
-            $("#BE").text(BE.toFixed(2));
+            $jq("#BE").text(BE.toFixed(2));
         } else {
-            $("#BE").text("Never");
+            $jq("#BE").text("Never");
         }
     }
 
     drawChart(userInput.timeFrame, net.y, roi);
 
-    $(".h :nth-child(2)").html((res.miningProfitH).toFixed(7));
-    $(".h :nth-child(3)").html((net.h + costs.H).toFixed(2));
-    $(".h :nth-child(4)").html((costs.H).toFixed(2));
-    $(".h :nth-child(5)").html((net.h).toFixed(2));
-    $(".d :nth-child(2)").html((res.miningProfitD).toFixed(4));
-    $(".d :nth-child(3)").html((net.d + costs.D).toFixed(2));
-    $(".d :nth-child(4)").html((costs.D).toFixed(2));
-    $(".d :nth-child(5)").html((net.d).toFixed(2));
-    $(".w :nth-child(2)").html((res.miningProfitW).toFixed(4));
-    $(".w :nth-child(3)").html((net.w + costs.W).toFixed(2));
-    $(".w :nth-child(4)").html((costs.W).toFixed(2));
-    $(".w :nth-child(5)").html((net.w).toFixed(2));
-    $(".m :nth-child(2)").html((res.miningProfitM).toFixed(4));
-    $(".m :nth-child(3)").html((net.m + costs.M).toFixed(2));
-    $(".m :nth-child(4)").html((costs.M).toFixed(2));
-    $(".m :nth-child(5)").html((net.m).toFixed(2));
-    $(".y :nth-child(2)").html((res.year).toFixed(4));
-    $(".y :nth-child(3)").html((net.year + costs.Y).toFixed(2));
-    $(".y :nth-child(4)").html((costs.Y).toFixed(2));
-    $(".y :nth-child(5)").html((net.year).toFixed(2));
+    $jq(".h :nth-child(2)").html((res.miningProfitH).toFixed(7));
+    $jq(".h :nth-child(3)").html((net.h + costs.H).toFixed(2));
+    $jq(".h :nth-child(4)").html((costs.H).toFixed(2));
+    $jq(".h :nth-child(5)").html((net.h).toFixed(2));
+    $jq(".d :nth-child(2)").html((res.miningProfitD).toFixed(4));
+    $jq(".d :nth-child(3)").html((net.d + costs.D).toFixed(2));
+    $jq(".d :nth-child(4)").html((costs.D).toFixed(2));
+    $jq(".d :nth-child(5)").html((net.d).toFixed(2));
+    $jq(".w :nth-child(2)").html((res.miningProfitW).toFixed(4));
+    $jq(".w :nth-child(3)").html((net.w + costs.W).toFixed(2));
+    $jq(".w :nth-child(4)").html((costs.W).toFixed(2));
+    $jq(".w :nth-child(5)").html((net.w).toFixed(2));
+    $jq(".m :nth-child(2)").html((res.miningProfitM).toFixed(4));
+    $jq(".m :nth-child(3)").html((net.m + costs.M).toFixed(2));
+    $jq(".m :nth-child(4)").html((costs.M).toFixed(2));
+    $jq(".m :nth-child(5)").html((net.m).toFixed(2));
+    $jq(".y :nth-child(2)").html((res.year).toFixed(4));
+    $jq(".y :nth-child(3)").html((net.year + costs.Y).toFixed(2));
+    $jq(".y :nth-child(4)").html((costs.Y).toFixed(2));
+    $jq(".y :nth-child(5)").html((net.year).toFixed(2));
 
 }
