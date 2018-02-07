@@ -54,7 +54,7 @@ app.listen(PORT, error => (
 
 
 app.post('/diffBTC', function (req, res) {
-  var queryBTC = "https://blockchain.info/charts/difficulty?timespan=1days&format=json";  
+  var queryBTC = "https://blockchain.info/charts/difficulty?timespan=2days&format=json";  
   var podatki = "";
   var odg = {};
   request({
