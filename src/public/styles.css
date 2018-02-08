@@ -161,6 +161,16 @@ input[type=number] {
     outline: none;
 }
 
+/*WIKI*/
+@media screen and (max-height:400px) {
+    #menuText{
+        height: 11em;
+        overflow: scroll;
+    }
+}
+
+
+
 
 /*-----------POPOUP -----------------------------------------------------------------------*/
 #fadeandscale {
@@ -189,9 +199,18 @@ input[type=number] {
     cursor: pointer;
 }
 
+#currency{
+    width: 67px;
+}
+
+#hashRateUnit{
+    width: 75px;
+    margin-bottom: 0.5em;
+}
+
 
 /*-----------TABLET VIEW -------------------------------------------*/
-@media screen and (min-device-width: 481px) and (max-width:993px) {
+@media screen and (min-width: 767px) and (max-width:993px) {
    .form-group .form-group input{
         width: 120px;
     }
@@ -202,13 +221,12 @@ input[type=number] {
         width: 90%;
         padding: 1em;
     }
-
 }
 
 
 
 /*-----------TABLET LANDSCAPE VIEW -----------------------------*/
-@media screen and (min-device-width: 770px) and (max-width:1025px) {
+@media screen and (min-width: 800px) and (max-width:1025px) {
 
     #my_popup{
         width: 80%;
@@ -221,8 +239,24 @@ input[type=number] {
         margin-top: 0.5em;
     }
 }
+
+/*-----------MOBILE LANDSCAPE-------------------------------------------*/
+@media screen and (min-width:480px) and (max-width:767px) {
+    .form-group .form-group input{
+        width: 200px;
+    }
+    .form-group .form-group .smallerInput {
+        width: 60px;
+    }
+    #my_popup{
+        width: 90%;
+        padding: 1em;
+    }
+
+}
 /*-----------MOBILE VIEW -----------------------------------------*/
 @media screen and (max-width: 480px) {
+
     #tableResults {
         display: table;
         margin-left: 0;
