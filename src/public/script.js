@@ -2,6 +2,7 @@ var price = {};
 var difficulty = {};
 var userInput = {};
 var results = {};
+var cardInfo = {};
 var $jq = jQuery.noConflict();
 
 function calculateCoinsMinedBTC(input) {
@@ -227,6 +228,33 @@ $jq(window).on("load", function () {
         }
     });
 
+    $jq.post("/cards").done(function (response) {
+        var data = "";
+        cardInfo.cards = response.cards;
+        cardInfo.ASIC = response.ASIC;
+        cardInfo.rigs = response.rigs;        
+        console.log(cardInfo.ASIC);                        
+        for(var i = 0; i < cardInfo.rigs.length; i++){
+            data += "<option value='" + cardInfo.rigs[i].Name + "'>" + cardInfo.rigs[i].Name + "</option>";            
+        }  
+        $jq("#rigs").append(data);
+        data = "";
+        for(var i = 0; i < cardInfo.ASIC.length; i++){
+            data += "<option value='" + cardInfo.ASIC[i].Name + "'>" + cardInfo.ASIC[i].Name + "</option>";            
+        }    
+        $jq("#asics").append(data);        
+        data = "";
+        for(var i = 0; i < cardInfo.cards.length; i++){
+            data += "<option value='" + cardInfo.cards[i].Name + "'>" + cardInfo.cards[i].Name + "</option>";            
+        }  
+        $jq("#gpus").append(data);
+        $jq('#select-equipment').selectize({
+            sortField: 'text',
+            lockOptgroupOrder: 'True'
+        });
+        $jq('#select-equipment').positionDropdown();
+    });
+
     drawChart(12, 0, 0);
 
     $jq('.drawer').drawer();
@@ -259,7 +287,7 @@ $jq(window).on("load", function () {
         arrow: true
     });
 
-      $jq("#my_popup").css({"margin-top": "0"});
+    $jq("#my_popup").css({"margin-top": "0"});    
 });
 
 /*resposive design-----------------------------------*/

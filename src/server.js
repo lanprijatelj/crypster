@@ -149,6 +149,45 @@ app.post('/diffZEC', function (req, res) {
   });
 });
 
+app.post('/cards', function (req, res) {
+  var cards = "https://www.cryptocompare.com/api/data/miningequipment/";
+  var podatki = "";
+  var odg = {};
+  request({
+    method: 'GET',
+    uri: cards,
+    encoding: null
+  }, function (error, response, body) {
+  }).on('data', function (data) {
+    podatki += data;
+  }).on('error', function (error) {
+    console.log(error);
+    odg.cards = -1;
+    odg.ASIC = -1;
+    odg.rigs = -1;
+    res.send(odg);
+  }).on('end', function () {
+    if (podatki[0] != "<") {
+      odg.cards = [];
+      odg.ASIC = [];
+      odg.rigs = [];
+      var odgovor = JSON.parse(podatki);  
+      for (key in odgovor.MiningData) {
+        if (odgovor.MiningData[key].EquipmentType === "GPU") {
+          odg.cards.push(odgovor.MiningData[key]);             
+        }
+        else if (odgovor.MiningData[key].EquipmentType === "ASIC") {
+          odg.ASIC.push(odgovor.MiningData[key]);             
+        }
+        else if (odgovor.MiningData[key].EquipmentType === "Rig") {
+          odg.rigs.push(odgovor.MiningData[key]);             
+        }
+      }
+      res.send(odg);
+    }
+  });
+});
+
 app.post('/price', function (req, res) {
   var querry = "https://api.coinmarketcap.com/v1/ticker/?limit=0";
   var podatki = "";
