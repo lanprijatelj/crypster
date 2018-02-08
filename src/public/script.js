@@ -39,6 +39,15 @@ function calculateCoinsMinedLTC(input) {
         var hashrate = input.hashrate * Math.pow(10, 3);
     }
     return (input.reward * hashrate) / (49.7 * input.diff) / 86400;
+} 
+
+function calculateCoinsMinedZEC(input) {
+    if (input.hashrateUnit == "Sols/s") {
+        var hashrate = input.hashrate ;
+    } else if (input.hashrateUnit == "kSols/s") {
+        var hashrate = input.hashrate * 1000;
+    }
+    return ((hashrate * (1 - (input.fee / 100)) * (1 - (input.reject / 100))) / (input.diff * 8192)) * input.reward;
 }
 
 function calculateProfitPerTimeFrame(miningProfit, diffChange, timeFrame) {
@@ -186,29 +195,33 @@ $jq(window).on("load", function () {
 
     $jq.post("/diffBTC").done(function (response) {
         difficulty.btc = response.difficultyBTC;
-        //console.log(difficulty);
         $jq("#diff").val(difficulty.btc);
     });
 
     $jq.post("/diffETH").done(function (response) {
         difficulty.eth = response.difficultyETH[0].difficulty;
-        //console.log(difficulty);        
     });
 
     $jq.post("/diffLTC").done(function (response) {
         difficulty.ltc = response.difficultyLTC;
-        //console.log(difficulty);       
+    });
+
+    $jq.post("/diffZEC").done(function (response) {
+        difficulty.zec = Math.round(response.difficultyZEC);        
     });
 
     $jq.post("/price").done(function (response) {
         price.btc = response.valueBTC;
         price.eth = response.valueETH;
         price.ltc = response.valueLTC;
+        price.zec = response.valueZEC
         //console.log(price);
         if (userInput.selectedCurrency == "BTC") {
             $jq("#value").val(price.btc);
         } else if (userInput.selectedCurrency == "ETH") {
             $jq("#value").val(price.eth);
+        } else if (userInput.selectedCurrency == "ZEC") {
+            $jq("#value").val(price.zec);
         } else {
             $jq("#value").val(price.ltc);
         }
@@ -277,7 +290,9 @@ $jq(function () {
 $jq("select[name=currency]").change(function () {
     userInput.selectedCurrency = $jq("select[name=currency]").val();
     $jq("input[name=hashrate]").val(""); 
-    $jq("#BE").text("0");   
+    $jq("#BE").text("0"); 
+    $jq(".sols").css({"display" : "none"}); 
+    $jq(".hashes").css({"display" : "block"}); 
     if (userInput.selectedCurrency == "BTC") {
         $jq("#valuta").text("BTC");
         $jq("#value").val(price.btc);
@@ -290,6 +305,14 @@ $jq("select[name=currency]").change(function () {
         $jq("#value").val(price.eth);
         $jq("#diff").val(difficulty.eth);
         $jq("#hashRateUnit").val("MH/s");        
+    } else if (userInput.selectedCurrency == "ZEC") {
+        $jq("#valuta").text("ZEC");
+        $jq("input[name=reward]").val("10");
+        $jq("#value").val(price.zec);
+        $jq("#diff").val(difficulty.zec);
+        $jq(".hashes").css({"display" : "none"});
+        $jq(".sols").css({"display" : "block"});
+        $jq("#hashRateUnit").val("Sols/s");        
     } else {
         $jq("#valuta").text("LTC");
         $jq("#value").val(price.ltc);
@@ -319,6 +342,14 @@ $jq("#resetButton").click(function () {
         $jq("#value").val(price.eth);
         $jq("#diff").val(difficulty.eth);
         $jq("#hashRateUnit").val("MH/s");
+        sendParameters();
+    } else if (userInput.selectedCurrency == "ZEC") {
+        $jq("#hashrate").val("");
+        $jq("#valuta").text("ZEC");
+        $jq("input[name=reward]").val("10");
+        $jq("#value").val(price.zec);
+        $jq("#diff").val(difficulty.zec);
+        $jq("#hashRateUnit").val("Sols/s");
         sendParameters();
     } else {
         $jq("#hashrate").val("");
@@ -368,6 +399,8 @@ function sendParameters() {
         results.miningProfitS = calculateCoinsMinedBTC(userInput);
     } else if (userInput.currency == "ETH") {
         results.miningProfitS = calculateCoinsMinedETH(userInput);
+    } else if (userInput.currency == "ZEC") {
+        results.miningProfitS = calculateCoinsMinedZEC(userInput);
     } else {
         results.miningProfitS = calculateCoinsMinedLTC(userInput);
     }

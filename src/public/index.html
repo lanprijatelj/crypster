@@ -143,13 +143,16 @@
                                 <option value='BTC'>BTC</option>
                                 <option value='ETH'>ETH</option>
                                 <option value='LTC'>LTC</option>
+                                <option value='ZEC'>ZEC</option>
                             </select>
                         </div>
                         <div class="form-group form-inline  float-right">
                             <select id='hashRateUnit' name='hashrateUnit' class="form-control form-control-sm">
-                                <option value='TH/s'>TH/s</option>
-                                <option value='GH/s'>GH/s</option>
-                                <option value='MH/s'>MH/s</option>
+                                <option value='TH/s' class="hashes">TH/s</option>
+                                <option value='GH/s' class="hashes">GH/s</option>
+                                <option value='MH/s' class="hashes">MH/s</option>
+                                <option value='Sols/s' class="sols">Sols/s</option>
+                                <option value='kSols/s' class="sols">kSols/s</option>
                             </select>
                             <label class="col-form-label"> &nbsp; Hashrate: &nbsp; </label>
                             <input id="hashrate" name='hashrate' type='number' placeholder="Enter hashrate"

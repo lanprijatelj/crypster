@@ -55,7 +55,9 @@ h1 {
     margin-left: 100em;
 }
 
-
+.sols{
+    display: none;
+}
 
 /* Typewritter--------------------------------------------------------------------------------------*/
 
@@ -113,7 +115,7 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none;
+    display: none;
     margin: 0;
 }
 

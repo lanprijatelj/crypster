@@ -22,22 +22,22 @@ app.get('/favicon', function (request, response) {
   response.sendFile(__dirname + '/public/favicon.ico');
 });
 app.get('/other/dust_scratches.png', function (request, response) {
-    response.sendFile(__dirname + '/public/other/dust_scratches.png');
+  response.sendFile(__dirname + '/public/other/dust_scratches.png');
 });
 
 app.get('/other/iconmonstr-calculator-1.svg', function (request, response) {
-    response.sendFile(__dirname + '/public/other/iconmonstr-calculator-1.svg');
+  response.sendFile(__dirname + '/public/other/iconmonstr-calculator-1.svg');
 });
 app.get('/other/LogoPrototype1.png', function (request, response) {
-    response.sendFile(__dirname + '/public/other/LogoPrototype1.png');
+  response.sendFile(__dirname + '/public/other/LogoPrototype1.png');
 });
 
 app.get('/other/LogoPrototype1_fullTransperent.png', function (request, response) {
-    response.sendFile(__dirname + '/public/other/LogoPrototype1_fullTransperent.png');
+  response.sendFile(__dirname + '/public/other/LogoPrototype1_fullTransperent.png');
 });
 
 app.get('/other/CrypsterLogo_onWhite.jpg', function (request, response) {
-    response.sendFile(__dirname + '/public/other/CrypsterLogo_onWhite.jpg');
+  response.sendFile(__dirname + '/public/other/CrypsterLogo_onWhite.jpg');
 });
 
 app.get('/other/sitemap.txt', function (request, response) {
@@ -54,75 +54,99 @@ app.listen(PORT, error => (
 
 
 app.post('/diffBTC', function (req, res) {
-  var queryBTC = "https://blockchain.info/charts/difficulty?timespan=2days&format=json";  
+  var queryBTC = "https://blockchain.info/charts/difficulty?timespan=2days&format=json";
   var podatki = "";
   var odg = {};
   request({
-      method: 'GET',
-      uri: queryBTC,
-      encoding: null
-    }, function (error, response, body) {
-    }).on('data', function (data) {
-      podatki += data;
-    }).on('error', function (error) {
-      console.log(error);
-      odg.difficultyBTC = -1;
+    method: 'GET',
+    uri: queryBTC,
+    encoding: null
+  }, function (error, response, body) {
+  }).on('data', function (data) {
+    podatki += data;
+  }).on('error', function (error) {
+    console.log(error);
+    odg.difficultyBTC = -1;
+    res.send(odg);
+  }).on('end', function () {
+    if (podatki[0] != "<") {
+      var odgovor = JSON.parse(podatki);
+      odg.difficultyBTC = odgovor.values[0].y;
       res.send(odg);
-    }).on('end', function () {
-      if (podatki[0] != "<") {
-        var odgovor = JSON.parse(podatki);
-        odg.difficultyBTC = odgovor.values[0].y;
-        res.send(odg);        
-      }
-    });
+    }
+  });
 });
 
-app.post('/diffLTC', function (req, res) {  
+app.post('/diffLTC', function (req, res) {
   var queryLTC = "http://explorer.litecoin.net/chain/Litecoin/q/getdifficulty";
   var podatki = "";
   var odg = {};
   request({
-      method: 'GET',
-      uri: queryLTC,
-      encoding: null
-    }, function (error, response, body) {
-    }).on('data', function (data) {
-      podatki += data;
-    }).on('error', function (error) {
-      console.log(error);
-      odg.difficultyLTC = -1;
+    method: 'GET',
+    uri: queryLTC,
+    encoding: null
+  }, function (error, response, body) {
+  }).on('data', function (data) {
+    podatki += data;
+  }).on('error', function (error) {
+    console.log(error);
+    odg.difficultyLTC = -1;
+    res.send(odg);
+  }).on('end', function () {
+    if (podatki[0] != "<") {
+      var odgovor = JSON.parse(podatki);
+      odg.difficultyLTC = odgovor;
       res.send(odg);
-    }).on('end', function () {
-      if (podatki[0] != "<") {
-        var odgovor = JSON.parse(podatki);
-        odg.difficultyLTC = odgovor;
-        res.send(odg);        
-      }
-    });
+    }
+  });
 });
 
-app.post('/diffETH', function (req, res) {  
+app.post('/diffETH', function (req, res) {
   var queryETH = "https://www.etherchain.org/api/difficulty";
   var podatki = "";
   var odg = {};
   request({
-      method: 'GET',
-      uri: queryETH,
-      encoding: null
-    }, function (error, response, body) {
-    }).on('data', function (data) {
-      podatki += data;
-    }).on('error', function (error) {
-      console.log(error);
-      odg.difficultyETH = -1;
+    method: 'GET',
+    uri: queryETH,
+    encoding: null
+  }, function (error, response, body) {
+  }).on('data', function (data) {
+    podatki += data;
+  }).on('error', function (error) {
+    console.log(error);
+    odg.difficultyETH = -1;
+    res.send(odg);
+  }).on('end', function () {
+    if (podatki[0] != "<") {
+      var odgovor = JSON.parse(podatki);
+      odg.difficultyETH = odgovor;
       res.send(odg);
-    }).on('end', function () {
-      if (podatki[0] != "<") {
-        var odgovor = JSON.parse(podatki);
-        odg.difficultyETH = odgovor;
-        res.send(odg);        
-      }
-    });
+    }
+  });
+});
+
+app.post('/diffZEC', function (req, res) {
+  var queryZEC = "https://api.zcha.in/v2/mainnet/network";
+  var podatki = "";
+  var odg = {};
+  request({
+    method: 'GET',
+    uri: queryZEC,
+    encoding: null
+  }, function (error, response, body) {
+  }).on('data', function (data) {
+    podatki += data;
+  }).on('error', function (error) {
+    console.log(error);
+    odg.difficultyZEC = -1;
+    res.send(odg);
+  }).on('end', function () {
+    if (podatki[0] != "<") {
+      var odgovor = JSON.parse(podatki);
+      odg.difficultyZEC = odgovor.difficulty;
+      res.send(odg);
+    }
+  });
 });
 
 app.post('/price', function (req, res) {
@@ -130,40 +154,46 @@ app.post('/price', function (req, res) {
   var podatki = "";
   var odg = {};
   request({
-      method: 'GET',
-      uri: querry,
-      encoding: null
-    }, function (error, response, body) {
-    }).on('data', function (data) {
-      podatki += data;
-    }).on('error', function (error) {
-      console.log(error);
+    method: 'GET',
+    uri: querry,
+    encoding: null
+  }, function (error, response, body) {
+  }).on('data', function (data) {
+    podatki += data;
+  }).on('error', function (error) {
+    console.log(error);
+    odg.valueBTC = -1;
+    odg.valueETH = -1;
+    odg.valueLTC = -1;
+    odg.valueZEC = -1;
+    res.send(odg);
+  }).on('end', function () {
+    if (podatki[0] != "<") {
+      var odgovor = JSON.parse(podatki);
+      for (var i = 0; i < odgovor.length; i++) {
+        if (odgovor[i].symbol === "BTC") {
+          odg.valueBTC = odgovor[i].price_usd;
+        }
+      } for (var i = 0; i < odgovor.length; i++) {
+        if (odgovor[i].symbol === "ETH") {
+          odg.valueETH = odgovor[i].price_usd;
+        }
+      } for (var i = 0; i < odgovor.length; i++) {
+        if (odgovor[i].symbol === "LTC") {
+          odg.valueLTC = odgovor[i].price_usd;
+        }
+      }
+      for (var i = 0; i < odgovor.length; i++) {
+        if (odgovor[i].symbol === "ZEC") {
+          odg.valueZEC = odgovor[i].price_usd;
+        }
+      }
+      res.send(odg);
+    } else {
       odg.valueBTC = -1;
       odg.valueETH = -1;
       odg.valueLTC = -1;
       res.send(odg);
-    }).on('end', function () {
-      if (podatki[0] != "<") {
-        var odgovor = JSON.parse(podatki);
-        for (var i = 0; i < odgovor.length; i++) {
-          if (odgovor[i].symbol === "BTC") {
-            odg.valueBTC = odgovor[i].price_usd;
-          }
-        } for (var i = 0; i < odgovor.length; i++) {
-          if (odgovor[i].symbol === "ETH") {
-            odg.valueETH = odgovor[i].price_usd;
-          }
-        } for (var i = 0; i < odgovor.length; i++) {
-          if (odgovor[i].symbol === "LTC") {
-            odg.valueLTC = odgovor[i].price_usd;
-          }
-        }
-        res.send(odg);
-      } else {
-        odg.valueBTC = -1;
-        odg.valueETH = -1;
-        odg.valueLTC = -1;
-        res.send(odg);
-      }
-    });
+    }
+  });
 });
