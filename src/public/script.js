@@ -248,11 +248,10 @@ $jq(window).on("load", function () {
             data += "<option value='" + cardInfo.cards[i].Name + "'>" + cardInfo.cards[i].Name + "</option>";            
         }  
         $jq("#gpus").append(data);
-        $jq('#select-equipment').selectize({
+        $jq('#equipment').selectize({
             sortField: 'text',
             lockOptgroupOrder: 'True'
-        });
-        $jq('#select-equipment').positionDropdown();
+        });        
     });
 
     drawChart(12, 0, 0);
