@@ -59,6 +59,7 @@ h1 {
     display: none;
 }
 
+
 /* Typewritter--------------------------------------------------------------------------------------*/
 
 h3 {
@@ -300,4 +301,12 @@ input[type=number] {
         margin-bottom: 0;
     }
 
+}
+
+/*........Ads............*/
+#ad{
+    position: absolute;
+    top: 7rem;
+    right: 5px;
+    overflow: hidden;
 }
