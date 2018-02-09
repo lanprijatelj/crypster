@@ -58,6 +58,10 @@ app.get('/other/ZEC-alt.svg', function (request, response) {
     response.sendFile(__dirname + '/public/other/ZEC-alt.svg');
 });
 
+app.get('/other/facebook_thumbnail', function (request, response) {
+  response.sendFile(__dirname + '/public/other/facebook_thumbnail.png');
+});
+
 
 
 
