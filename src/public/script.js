@@ -287,7 +287,6 @@ $jq(function () {
     $jq('[data-toggle="tooltip"]').tooltip()
 });
 
-
 $jq("select[name=currency]").change(function () {
     userInput.selectedCurrency = $jq("select[name=currency]").val();
     $jq("input[name=hashrate]").val(""); 
