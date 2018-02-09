@@ -15,13 +15,6 @@
 
         gtag('config', 'UA-113183301-1');
     </script>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-1087988538981350",
-            enable_page_level_ads: true
-        });
-    </script>
 
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
@@ -138,6 +131,10 @@
                 <div class="col-md-12">
                     <form id='calcMain' class="form-group">
                         <div class="form-group  form-inline  float-right">
+                            <span id="coinIcon"><img class="imgIcon" id="btcLogo" src="other/BTC.svg" alt="BTC Logo">
+                            <img class="imgIcon" src="other/LTC.svg" id="ltcLogo"  alt="LTC Logo">
+                            <img class="imgIcon" src="other/ETH.svg" id="ethLogo"  alt="ETH Logo">
+                            <img class="imgIcon" src="other/ZEC-alt.svg" id="zecLogo"  alt="ZEC Logo"></span>
                             <label class="col-form-label"> Select cryptocurrency:&nbsp; </label>
                             <select id='currency' name='currency' class="form-control form-control-sm">
                                 <option value='BTC'>BTC</option>
@@ -161,7 +158,7 @@
                         <div class="form-group form-inline  float-right">
                             <i class="fa fa-info-circle info"
                                title="Coin value has a preset value of current coin value as show on Coin market cap."></i>&nbsp;
-                            <label class="col-form-label">Coin value: &nbsp;</label>
+                            <label class="col-form-label">Coin value($): &nbsp;</label>
                             <input id="value" name='value' type='number' step="0.00001"
                                    class="form-control form-control-sm"/>
                         </div>
@@ -221,7 +218,7 @@
                         </div>
                         <div class="form-group form-inline  float-right">
                             <label class="col-form-label">
-                                Investment:&nbsp; </label>
+                                Investment($):&nbsp; </label>
                             <input name='invest' type='number' value="0" step="0.01"
                                    class="form-control form-control-sm"/>
 
@@ -319,7 +316,7 @@
     </div>
 </main>
 <footer>
-    <div class="row float-right" id="donate">
+    <div class="row" id="donate">
         <div>
             Donations appreciated:
             <br>
@@ -331,7 +328,7 @@
             }</script>
             <a onclick="shapeshift_click(this, event);"
                href="https://shapeshift.io/shifty.html?destination=0x92734e2523ac2Bf66EC3e49E1bd679a8F1f31E5E&amp;output=ETH&amp;amount=1">
-                <img id="donateButton" src="https://shapeshift.io/images/shifty/small_light_ss.png" class="ss-button">
+                <img id="donateButton" alt="donateButton" src="https://shapeshift.io/images/shifty/small_light_ss.png" class="ss-button">
             </a>
         </div>
     </div>
