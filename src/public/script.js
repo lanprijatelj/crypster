@@ -2,7 +2,6 @@ var price = {};
 var difficulty = {};
 var userInput = {};
 var results = {};
-var cardInfo = {};
 var $jq = jQuery.noConflict();
 
 function calculateCoinsMinedBTC(input) {
@@ -228,32 +227,6 @@ $jq(window).on("load", function () {
         }
     });
 
-    $jq.post("/cards").done(function (response) {
-        var data = "";
-        cardInfo.cards = response.cards;
-        cardInfo.ASIC = response.ASIC;
-        cardInfo.rigs = response.rigs;        
-        console.log(cardInfo.ASIC);                        
-        for(var i = 0; i < cardInfo.rigs.length; i++){
-            data += "<option value='" + cardInfo.rigs[i].Name + "'>" + cardInfo.rigs[i].Name + "</option>";            
-        }  
-        $jq("#rigs").append(data);
-        data = "";
-        for(var i = 0; i < cardInfo.ASIC.length; i++){
-            data += "<option value='" + cardInfo.ASIC[i].Name + "'>" + cardInfo.ASIC[i].Name + "</option>";            
-        }    
-        $jq("#asics").append(data);        
-        data = "";
-        for(var i = 0; i < cardInfo.cards.length; i++){
-            data += "<option value='" + cardInfo.cards[i].Name + "'>" + cardInfo.cards[i].Name + "</option>";            
-        }  
-        $jq("#gpus").append(data);
-        $jq('#equipment').selectize({
-            sortField: 'text',
-            lockOptgroupOrder: 'True'
-        });        
-    });
-
     drawChart(12, 0, 0);
 
     $jq('.drawer').drawer();
@@ -286,7 +259,8 @@ $jq(window).on("load", function () {
         arrow: true
     });
 
-    $jq("#my_popup").css({"margin-top": "0"});    
+      $jq("#my_popup").css({"margin-top": "0"});
+      $jq("#btcLogo").css({'display': 'block'});
 });
 
 /*resposive design-----------------------------------*/
@@ -319,19 +293,25 @@ $jq("select[name=currency]").change(function () {
     $jq("input[name=hashrate]").val(""); 
     $jq("#BE").text("0"); 
     $jq(".sols").css({"display" : "none"}); 
-    $jq(".hashes").css({"display" : "block"}); 
+    $jq(".hashes").css({"display" : "block"});
+    $jq("#btcLogo").css({'display': 'none'});
+    $jq("#ltcLogo").css({'display': 'none'});
+    $jq("#ethLogo").css({'display': 'none'});
+    $jq("#zecLogo").css({'display': 'none'});
     if (userInput.selectedCurrency == "BTC") {
         $jq("#valuta").text("BTC");
         $jq("#value").val(price.btc);
         $jq("input[name=reward]").val("12.5");
         $jq("#diff").val(difficulty.btc);
-        $jq("#hashRateUnit").val("TH/s");        
+        $jq("#hashRateUnit").val("TH/s");
+        $jq("#btcLogo").css({'display': 'block'});
     } else if (userInput.selectedCurrency == "ETH") {
         $jq("#valuta").text("ETH");
         $jq("input[name=reward]").val("3");
         $jq("#value").val(price.eth);
         $jq("#diff").val(difficulty.eth);
-        $jq("#hashRateUnit").val("MH/s");        
+        $jq("#hashRateUnit").val("MH/s");
+        $jq("#ethLogo").css({'display': 'block'});
     } else if (userInput.selectedCurrency == "ZEC") {
         $jq("#valuta").text("ZEC");
         $jq("input[name=reward]").val("10");
@@ -339,13 +319,15 @@ $jq("select[name=currency]").change(function () {
         $jq("#diff").val(difficulty.zec);
         $jq(".hashes").css({"display" : "none"});
         $jq(".sols").css({"display" : "block"});
-        $jq("#hashRateUnit").val("Sols/s");        
+        $jq("#hashRateUnit").val("Sols/s");
+        $jq("#zecLogo").css({'display': 'block'});
     } else {
         $jq("#valuta").text("LTC");
         $jq("#value").val(price.ltc);
         $jq("input[name=reward]").val("25");
         $jq("#diff").val(difficulty.ltc);
-        $jq("#hashRateUnit").val("MH/s");        
+        $jq("#hashRateUnit").val("MH/s");
+        $jq("#ltcLogo").css({'display': 'block'});
     }
 });
 

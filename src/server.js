@@ -43,6 +43,22 @@ app.get('/other/CrypsterLogo_onWhite.jpg', function (request, response) {
 app.get('/other/sitemap.txt', function (request, response) {
   response.sendFile(__dirname + '/public/other/sitemap.txt');
 });
+app.get('/other/BTC.svg', function (request, response) {
+    response.sendFile(__dirname + '/public/other/BTC.svg');
+});
+app.get('/other/LTC.svg', function (request, response) {
+    response.sendFile(__dirname + '/public/other/LTC.svg');
+});
+
+app.get('/other/ETH.svg', function (request, response) {
+    response.sendFile(__dirname + '/public/other/ETH.svg');
+});
+
+app.get('/other/ZEC-alt.svg', function (request, response) {
+    response.sendFile(__dirname + '/public/other/ZEC-alt.svg');
+});
+
+
 
 
 

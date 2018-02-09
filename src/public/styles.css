@@ -38,7 +38,7 @@ h1 {
     margin-left: 1em;
 }
 #donate{
-    margin-right: 1em;
+    margin-left: 1em;
     margin-bottom: 1em;
     padding: 0;
 }
@@ -58,6 +58,7 @@ h1 {
 .sols{
     display: none;
 }
+
 
 /* Typewritter--------------------------------------------------------------------------------------*/
 
@@ -206,8 +207,17 @@ input[type=number] {
 }
 
 #hashRateUnit{
-    width: 75px;
-    /*margin-bottom: 0.5em;*/
+    width: min-content;
+    margin-bottom: 0.5em;
+}
+#coinIcon{
+    margin-right: 0.5em;
+}
+.imgIcon{
+    height: 2.25em;
+}
+#btcLogo, #ltcLogo, #ethLogo, #zecLogo {
+    display: none;
 }
 
 
@@ -240,6 +250,9 @@ input[type=number] {
     #resetButton{
         margin-top: 0.5em;
     }
+    .imgIcon{
+        margin-bottom: 0.5em;
+    }
 }
 
 /*-----------MOBILE LANDSCAPE-------------------------------------------*/
@@ -266,13 +279,7 @@ input[type=number] {
     #chartBox{
         margin-top: 1em;
     }
-    #donate{
-        margin-left: 50%;
-        margin-bottom: 1em;
-    }
-    #breakEven{
-        margin-left: 0;
-    }
+
     #calcMain{
         margin: 1em;
     }
@@ -298,6 +305,28 @@ input[type=number] {
     }
     .form-group {
         margin-bottom: 0;
+    }
+    .imgIcon{
+        margin-bottom: 0.5em;
+    }
+    #breakEven{
+        margin-left: 30%;
+    }
+
+}
+
+/*-----------Ads--------------*/
+#ad{
+    position: absolute;
+    top: 4em;
+    right: 5px;
+    overflow: hidden;
+
+
+}
+@media screen and (max-width:1300px){
+    #ad{
+        display: none;
     }
 
 }
