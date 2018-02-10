@@ -44,19 +44,23 @@ app.get('/other/sitemap.txt', function (request, response) {
   response.sendFile(__dirname + '/public/other/sitemap.txt');
 });
 app.get('/other/BTC.svg', function (request, response) {
-    response.sendFile(__dirname + '/public/other/BTC.svg');
+  response.sendFile(__dirname + '/public/other/BTC.svg');
 });
 app.get('/other/LTC.svg', function (request, response) {
-    response.sendFile(__dirname + '/public/other/LTC.svg');
+  response.sendFile(__dirname + '/public/other/LTC.svg');
 });
 
 app.get('/other/ETH.svg', function (request, response) {
-    response.sendFile(__dirname + '/public/other/ETH.svg');
+  response.sendFile(__dirname + '/public/other/ETH.svg');
 });
 
 app.get('/other/ZEC-alt.svg', function (request, response) {
-    response.sendFile(__dirname + '/public/other/ZEC-alt.svg');
+  response.sendFile(__dirname + '/public/other/ZEC-alt.svg');
 });
+app.get('/other/XMR.svg', function (request, response) {
+    response.sendFile(__dirname + '/public/other/XMR.svg');
+});
+
 
 app.get('/other/facebook_thumbnail', function (request, response) {
   response.sendFile(__dirname + '/public/other/facebook_thumbnail.png');
@@ -169,6 +173,31 @@ app.post('/diffZEC', function (req, res) {
   });
 });
 
+app.post('/moneroInfo', function (req, res) {
+  var queryXMR = "https://moneroblocks.info/api/get_stats";
+  var podatki = "";
+  var odg = {};
+  request({
+    method: 'GET',
+    uri: queryXMR,
+    encoding: null
+  }, function (error, response, body) {
+  }).on('data', function (data) {
+    podatki += data;
+  }).on('error', function (error) {
+    console.log(error);
+    odg = -1;
+    res.send(odg);
+  }).on('end', function () {
+    if (podatki[0] != "<") {
+      var odgovor = JSON.parse(podatki);
+      odg.difficulty = Math.round(odgovor.difficulty);
+      odg.blockReward = odgovor.last_reward/Math.pow(10, 12);
+      res.send(odg);
+    }
+  });
+});
+
 app.post('/cards', function (req, res) {
   var cards = "https://www.cryptocompare.com/api/data/miningequipment/";
   var podatki = "";
@@ -191,16 +220,16 @@ app.post('/cards', function (req, res) {
       odg.cards = [];
       odg.ASIC = [];
       odg.rigs = [];
-      var odgovor = JSON.parse(podatki);  
+      var odgovor = JSON.parse(podatki);
       for (key in odgovor.MiningData) {
         if (odgovor.MiningData[key].EquipmentType === "GPU") {
-          odg.cards.push(odgovor.MiningData[key]);             
+          odg.cards.push(odgovor.MiningData[key]);
         }
         else if (odgovor.MiningData[key].EquipmentType === "ASIC") {
-          odg.ASIC.push(odgovor.MiningData[key]);             
+          odg.ASIC.push(odgovor.MiningData[key]);
         }
         else if (odgovor.MiningData[key].EquipmentType === "Rig") {
-          odg.rigs.push(odgovor.MiningData[key]);             
+          odg.rigs.push(odgovor.MiningData[key]);
         }
       }
       res.send(odg);
@@ -225,6 +254,7 @@ app.post('/price', function (req, res) {
     odg.valueETH = -1;
     odg.valueLTC = -1;
     odg.valueZEC = -1;
+    odg.valueXMR = -1;
     res.send(odg);
   }).on('end', function () {
     if (podatki[0] != "<") {
@@ -232,19 +262,14 @@ app.post('/price', function (req, res) {
       for (var i = 0; i < odgovor.length; i++) {
         if (odgovor[i].symbol === "BTC") {
           odg.valueBTC = odgovor[i].price_usd;
-        }
-      } for (var i = 0; i < odgovor.length; i++) {
-        if (odgovor[i].symbol === "ETH") {
+        } else if (odgovor[i].symbol === "ETH") {
           odg.valueETH = odgovor[i].price_usd;
-        }
-      } for (var i = 0; i < odgovor.length; i++) {
-        if (odgovor[i].symbol === "LTC") {
+        } else if (odgovor[i].symbol === "LTC") {
           odg.valueLTC = odgovor[i].price_usd;
-        }
-      }
-      for (var i = 0; i < odgovor.length; i++) {
-        if (odgovor[i].symbol === "ZEC") {
+        } else if (odgovor[i].symbol === "ZEC") {
           odg.valueZEC = odgovor[i].price_usd;
+        }else if (odgovor[i].symbol === "XMR") {
+          odg.valueXMR = odgovor[i].price_usd;
         }
       }
       res.send(odg);

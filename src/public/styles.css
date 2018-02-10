@@ -203,7 +203,7 @@ input[type=number] {
 }
 
 #currency{
-    width: 67px;
+    width: min-content;
 }
 
 #hashRateUnit{
@@ -216,7 +216,7 @@ input[type=number] {
 .imgIcon{
     height: 2.25em;
 }
-#btcLogo, #ltcLogo, #ethLogo, #zecLogo {
+#btcLogo, #ltcLogo, #ethLogo, #zecLogo, #xmrLogo {
     display: none;
 }
 
@@ -280,9 +280,6 @@ input[type=number] {
         margin-top: 1em;
     }
 
-    #calcMain{
-        margin: 1em;
-    }
     #resetButton{
         margin: 0;
         margin-top: 0.5em;
