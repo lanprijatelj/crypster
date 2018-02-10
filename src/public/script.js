@@ -449,8 +449,7 @@ function sendParameters() {
     var res = calculateProfitPerTimeFrame(results.miningProfitS, userInput.diffChange, userInput.timeFrame);
     var costs = calculateCosts(hourlyCost);
     var net = calculateNetProfit(costs, res, userInput.timeFrame, userInput.value, userInput.coinValueChange);
-    var roi = calculateROI(net, userInput.invest, userInput.timeFrame);
-    //console.log(userInput.invest);
+    var roi = calculateROI(net, userInput.invest, userInput.timeFrame);    
     if (userInput.invest != "0") {
         var BE = calculateBE(userInput.invest, net);
         if (!isNaN(BE)) {
