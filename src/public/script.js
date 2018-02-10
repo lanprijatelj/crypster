@@ -2,6 +2,7 @@ var price = {};
 var difficulty = {};
 var userInput = {};
 var results = {};
+var moneroInfo = {};
 var $jq = jQuery.noConflict();
 
 function calculateCoinsMinedBTC(input) {
@@ -48,6 +49,18 @@ function calculateCoinsMinedZEC(input) {
         var hashrate = input.hashrate * 1000;
     }
     return ((hashrate * (1 - (input.fee / 100)) * (1 - (input.reject / 100))) / (input.diff * 8192)) * input.reward;
+}
+
+function calculateCoinsMinedXMR(input) {
+    if (input.hashrateUnit == "H/s") {
+        var hashrate = input.hashrate ;
+    } else if (input.hashrateUnit == "kH/s") {
+        var hashrate = input.hashrate * 1000;
+    }
+    else if (input.hashrateUnit == "MH/s") {
+        var hashrate = input.hashrate * 1000000;
+    }
+    return ( (hashrate * (1 - (input.fee / 100)) * (1 - (input.reject / 100))) * moneroInfo.blockReward) / (moneroInfo.difficulty);
 }
 
 function calculateProfitPerTimeFrame(miningProfit, diffChange, timeFrame) {
@@ -210,11 +223,16 @@ $jq(window).on("load", function () {
         difficulty.zec = Math.round(response.difficultyZEC);        
     });
 
+    $jq.post("/moneroInfo").done(function (response) {
+        moneroInfo = response;        
+    });
+
     $jq.post("/price").done(function (response) {
         price.btc = response.valueBTC;
         price.eth = response.valueETH;
         price.ltc = response.valueLTC;
-        price.zec = response.valueZEC
+        price.zec = response.valueZEC;
+        price.xmr = response.valueXMR;
         //console.log(price);
         if (userInput.selectedCurrency == "BTC") {
             $jq("#value").val(price.btc);
@@ -293,10 +311,12 @@ $jq("select[name=currency]").change(function () {
     $jq("#BE").text("0"); 
     $jq(".sols").css({"display" : "none"}); 
     $jq(".hashes").css({"display" : "block"});
+    $jq(".slowHashrate").css({"display" : "none"});
     $jq("#btcLogo").css({'display': 'none'});
     $jq("#ltcLogo").css({'display': 'none'});
     $jq("#ethLogo").css({'display': 'none'});
     $jq("#zecLogo").css({'display': 'none'});
+    //$jq("#xmrLogo").css({'display': 'none'});
     if (userInput.selectedCurrency == "BTC") {
         $jq("#valuta").text("BTC");
         $jq("#value").val(price.btc);
@@ -315,11 +335,20 @@ $jq("select[name=currency]").change(function () {
         $jq("#valuta").text("ZEC");
         $jq("input[name=reward]").val("10");
         $jq("#value").val(price.zec);
-        $jq("#diff").val(difficulty.zec);
-        $jq(".hashes").css({"display" : "none"});
+        $jq("#diff").val(difficulty.zec); 
+        $jq(".hashes").css({"display" : "none"});       
         $jq(".sols").css({"display" : "block"});
         $jq("#hashRateUnit").val("Sols/s");
         $jq("#zecLogo").css({'display': 'block'});
+    } else if (userInput.selectedCurrency == "XMR") {
+        $jq("#valuta").text("XMR");
+        $jq("input[name=reward]").val(moneroInfo.blockReward.toFixed(4));
+        $jq("#value").val(price.xmr);
+        $jq("#diff").val(moneroInfo.difficulty);
+        $jq(".hashes").css({"display" : "none"});                
+        $jq(".slowHashrate").css({"display" : "block"});
+        $jq("#hashRateUnit").val("kH/s");
+        //$jq("#xmrLogo").css({'display': 'block'});
     } else {
         $jq("#valuta").text("LTC");
         $jq("#value").val(price.ltc);
@@ -358,6 +387,14 @@ $jq("#resetButton").click(function () {
         $jq("#value").val(price.zec);
         $jq("#diff").val(difficulty.zec);
         $jq("#hashRateUnit").val("Sols/s");
+        sendParameters();
+    } else if (userInput.selectedCurrency == "XMR") {
+        $jq("#hashrate").val("");
+        $jq("#valuta").text("XMR");
+        $jq("input[name=reward]").val(moneroInfo.blockReward);
+        $jq("#value").val(price.xmr);
+        $jq("#diff").val(moneroInfo.difficulty);
+        $jq("#hashRateUnit").val("kH/s");
         sendParameters();
     } else {
         $jq("#hashrate").val("");
@@ -409,6 +446,8 @@ function sendParameters() {
         results.miningProfitS = calculateCoinsMinedETH(userInput);
     } else if (userInput.currency == "ZEC") {
         results.miningProfitS = calculateCoinsMinedZEC(userInput);
+    } else if (userInput.currency == "XMR") {
+        results.miningProfitS = calculateCoinsMinedXMR(userInput);
     } else {
         results.miningProfitS = calculateCoinsMinedLTC(userInput);
     }
