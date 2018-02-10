@@ -236,12 +236,6 @@ $jq(window).on("load", function () {
         //console.log(price);
         if (userInput.selectedCurrency == "BTC") {
             $jq("#value").val(price.btc);
-        } else if (userInput.selectedCurrency == "ETH") {
-            $jq("#value").val(price.eth);
-        } else if (userInput.selectedCurrency == "ZEC") {
-            $jq("#value").val(price.zec);
-        } else {
-            $jq("#value").val(price.ltc);
         }
     });
 
@@ -316,7 +310,7 @@ $jq("select[name=currency]").change(function () {
     $jq("#ltcLogo").css({'display': 'none'});
     $jq("#ethLogo").css({'display': 'none'});
     $jq("#zecLogo").css({'display': 'none'});
-    //$jq("#xmrLogo").css({'display': 'none'});
+    $jq("#xmrLogo").css({'display': 'none'});
     if (userInput.selectedCurrency == "BTC") {
         $jq("#valuta").text("BTC");
         $jq("#value").val(price.btc);
@@ -348,7 +342,7 @@ $jq("select[name=currency]").change(function () {
         $jq(".hashes").css({"display" : "none"});                
         $jq(".slowHashrate").css({"display" : "block"});
         $jq("#hashRateUnit").val("kH/s");
-        //$jq("#xmrLogo").css({'display': 'block'});
+        $jq("#xmrLogo").css({'display': 'block'});
     } else {
         $jq("#valuta").text("LTC");
         $jq("#value").val(price.ltc);

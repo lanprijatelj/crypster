@@ -57,6 +57,10 @@ app.get('/other/ETH.svg', function (request, response) {
 app.get('/other/ZEC-alt.svg', function (request, response) {
   response.sendFile(__dirname + '/public/other/ZEC-alt.svg');
 });
+app.get('/other/XMR.svg', function (request, response) {
+    response.sendFile(__dirname + '/public/other/XMR.svg');
+});
+
 
 app.get('/other/facebook_thumbnail', function (request, response) {
   response.sendFile(__dirname + '/public/other/facebook_thumbnail.png');
