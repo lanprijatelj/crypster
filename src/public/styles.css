@@ -223,9 +223,13 @@ input[type=number] {
     width: min-content;
     margin-bottom: 0.5em;
 }
-#coinIcon{
+#coinIcon {
     margin-right: 0.5em;
 }
+#coinIcon2{
+    margin-left: 0.5em;
+}
+
 .imgIcon{
     height: 2.25em;
 }

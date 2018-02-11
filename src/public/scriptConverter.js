@@ -3,7 +3,7 @@ var userInput = {};
 
 var $jq = jQuery.noConflict();
 
-$jq(window).on("load", function () {   
+$jq(window).on("load", function () {
     userInput.selectedCurrency1 = $jq("select[name=currency1]").val();
     userInput.selectedCurrency2 = $jq("select[name=currency2]").val();
 
@@ -70,14 +70,14 @@ $jq(document).scroll(function () {
 });
 
 function changedFirstCurrency() {
-    var val1 = $jq("#value1").val();    
+    var val1 = $jq("#value1").val();
     var currency1 = userInput.selectedCurrency1;
     var currency2 = userInput.selectedCurrency2;
     var result = calculate(val1, currency1, currency2);
     $jq("#value2").val(result);
 }
 
-function changedSecondCurrency() {    
+function changedSecondCurrency() {
     var val2 = $jq("#value2").val();
     var currency1 = userInput.selectedCurrency1;
     var currency2 = userInput.selectedCurrency2;
@@ -85,15 +85,15 @@ function changedSecondCurrency() {
     $jq("#value1").val(result);
 }
 
-$jq("#value1").keyup(function(){
-    var val1 = $jq("#value1").val();    
+$jq("#value1").keyup(function () {
+    var val1 = $jq("#value1").val();
     var currency1 = userInput.selectedCurrency1;
     var currency2 = userInput.selectedCurrency2;
     var result = calculate(val1, currency1, currency2);
     $jq("#value2").val(result);
 });
 
-$jq("#value2").change(function(){
+$jq("#value2").change(function () {
     var val2 = $jq("#value2").val();
     var currency1 = userInput.selectedCurrency1;
     var currency2 = userInput.selectedCurrency2;
@@ -112,7 +112,9 @@ $jq("select[name=currency1]").change(function () {
     $jq("#ltcLogo").css({'display': 'none'});
     $jq("#ethLogo").css({'display': 'none'});
     $jq("#zecLogo").css({'display': 'none'});
-    $jq("#xmrLogo").css({'display': 'none'});
+    $jq("#xmrLogo").css({'display': 'none'})
+    $jq("#usdLogo").css({'display': 'none'});
+    $jq("#eurLogo").css({'display': 'none'});
     if (userInput.selectedCurrency1 == "BTC") {
         $jq("#value2").val(price.btc);
         $jq("#btcLogo").css({'display': 'block'});
@@ -131,6 +133,13 @@ $jq("select[name=currency1]").change(function () {
     } else if (userInput.selectedCurrency1 == "LTC") {
         $jq("#value2").val(price.ltc);
         $jq("#ltcLogo").css({'display': 'block'});
+    } else if (userInput.selectedCurrency2 == "USD") {
+        //  $jq("#value1").val(price.ltc);
+        $jq("#usdLogo").css({'display': 'block'});
+    }
+    else if (userInput.selectedCurrency2 == "EUR") {
+        //  $jq("#value1").val(price.ltc);
+        $jq("#eurLogo").css({'display': 'block'});
     }
     changedFirstCurrency();
 });
@@ -143,6 +152,7 @@ $jq("select[name=currency2]").change(function () {
     $jq("#zecLogo2").css({'display': 'none'});
     $jq("#xmrLogo2").css({'display': 'none'});
     $jq("#usdLogo2").css({'display': 'none'});
+    $jq("#eurLogo2").css({'display': 'none'});
     if (userInput.selectedCurrency2 == "BTC") {
         //   $jq("#value1").val(price.btc);
         $jq("#btcLogo2").css({'display': 'block'});
@@ -165,10 +175,14 @@ $jq("select[name=currency2]").change(function () {
         //  $jq("#value1").val(price.ltc);
         $jq("#usdLogo2").css({'display': 'block'});
     }
+    else if (userInput.selectedCurrency2 == "EUR") {
+        //  $jq("#value1").val(price.ltc);
+        $jq("#eurLogo2").css({'display': 'block'});
+    }
     changedSecondCurrency();
 });
 
-function calculate(val, currency1, currency2){
+function calculate(val, currency1, currency2) {
     if (currency1 == "BTC") {
         var c1 = price.btc;
     } else if (currency1 == "ETH") {
@@ -181,8 +195,8 @@ function calculate(val, currency1, currency2){
         var c1 = price.ltc;
     } else if (currency1 == "USD") {
         var c1 = 1;
-    } 
-    
+    }
+
     if (currency2 == "BTC") {
         var c2 = price.btc;
     } else if (currency2 == "ETH") {
@@ -195,6 +209,6 @@ function calculate(val, currency1, currency2){
         var c2 = price.ltc;
     } else if (currency2 == "USD") {
         var c2 = 1;
-    }    
+    }
     return (val * c1 / c2);
 }

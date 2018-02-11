@@ -32,13 +32,16 @@ h2{
     cursor: default;
 }
 
-#btcLogo1, #ltcLogo1, #ethLogo1, #zecLogo1, #xmrLogo1, #btcLogo2, #ltcLogo2, #ethLogo2, #zecLogo2, #xmrLogo2 {
+#btcLogo1, #ltcLogo1, #ethLogo1, #zecLogo1, #xmrLogo1, #btcLogo2, #ltcLogo2, #ethLogo2, #zecLogo2, #xmrLogo2, #eurLogo, #eurLogo2, #usdLogo {
     display: none;
 }
 
-#usdLogo2{
+#usdLogo2, #eurLogo2{
     width: 36px;
 }
-#usdI{
+#usdI, #usdI2, #eurI, #eurI2{
     height: inherit;
+}
+#converterInfo{
+    float: right;
 }

@@ -131,19 +131,21 @@
     <div class="container">
         <div class="row">
             <div id="converterHeading" class="col-sm-12">
-                <h2>Converter &nbsp;<i class="fas fa-sync "></i></h2>
+                <h2>Converter &nbsp;<i class="fas fa-sync "></i>  <i class="fa fa-info-circle info fa-2x" id="converterInfo"
+                                                                     title="Converter uses cryptocurrency values from CoinMarketCap."></i></h2>
+
             </div>
 
             <div id="converter">
                 <form class="form-group">
                     <div class="form-group form-inline">
-                        <i class="fa fa-info-circle info"
-                           title="Coin value uses value of current coin as show on Coin market cap."></i>&nbsp;
                         <span id="coinIcon"><img class="imgIcon" id="btcLogo" src="other/BTC.svg" alt="BTC Logo">
                             <img class="imgIcon" src="other/LTC.svg" id="ltcLogo" alt="LTC Logo">
                             <img class="imgIcon" src="other/ETH.svg" id="ethLogo" alt="ETH Logo">
                             <img class="imgIcon" src="other/ZEC-alt.svg" id="zecLogo" alt="ZEC Logo">
                             <img class="imgIcon" src="other/XMR.svg" id="xmrLogo" alt="XMR Logo">
+                            <div id="usdLogo"> <i id="usdI" class="fas fa-dollar-sign imgIcon fa-2x"></i></div>
+                            <div id="eurLogo"> <i id="eurI" class="fas fa-euro-sign imgIcon fa-2x"></i></div>
                         </span>
 
                         <select name='currency1' class="form-control form-control-sm">
@@ -152,12 +154,15 @@
                             <option value='LTC'>LTC</option>
                             <option value='ZEC'>ZEC</option>
                             <option value='XMR'>XMR</option>
+                            <option value='USD'>USD</option>
+                            <option value='EUR'>EUR</option>
                         </select>
                         <input id="value1" name='value' type='number' step="0.000000001"
                                class="form-control form-control-sm" value="1"/>
                         <div id="equalsSign"><i class="fas fa-exchange-alt"> </i></div>
                         <select name='currency2' class="form-control form-control-sm">
                             <option value='USD'>USD</option>
+                            <option value='EUR'>EUR</option>
                             <option value='BTC'>BTC</option>
                             <option value='ETH'>ETH</option>
                             <option value='LTC'>LTC</option>
@@ -167,7 +172,8 @@
                         <input id="value2" name='value' type='number' step="0.000000001"
                                class="form-control form-control-sm"/>
                         <span id="coinIcon2">
-                            <div id="usdLogo2"> <i id="usdI" class="fas fa-dollar-sign imgIcon fa-2x"></i></div>
+                            <div id="usdLogo2"> <i id="usdI2" class="fas fa-dollar-sign imgIcon fa-2x"></i></div>
+                            <div id="eurLogo2"> <i id="eurI2" class="fas fa-euro-sign imgIcon fa-2x"></i></div>
                             <img class="imgIcon" id="btcLogo2" src="other/BTC.svg" alt="BTC Logo">
                             <img class="imgIcon" src="other/LTC.svg" id="ltcLogo2" alt="LTC Logo">
                             <img class="imgIcon" src="other/ETH.svg" id="ethLogo2" alt="ETH Logo">

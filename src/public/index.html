@@ -32,7 +32,7 @@
           content="An easy to use cryptocurrency calculator used to calculate Bitcoin, Ethereum ,Litecoin, zCash and Monero miner's potential profits in USD. The calculator fetches price and network data from the internet and only requires the hash rate (speed of mining) from the user. A chart projecting future profits, coins mined or return of investment is created dynamically and displayed instantly.">
     <meta name="keywords"
           content="Mining,Profitability,Calculator,Cryptocurrency,Bitcoin,Ethereum,Litecoin,zCash,Monero,Crypstercalc">
-          <meta property="og:image" content="https://www.crypstercalc.com/other/facebook_thumbnail"/>
+    <meta property="og:image" content="https://www.crypstercalc.com/other/facebook_thumbnail"/>
     <meta name="author" content="Aljaž Klaneček, Lan Prijatelj">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
@@ -47,6 +47,9 @@
 
         <ul class="drawer-menu">
             <img src="/other/iconmonstr-calculator-1.svg" alt="calcPicture" id="calcImg">
+            <h3 id="menuHeading">CrypsterCalc</h3>
+            <li id="menuCalculator"><a class="drawer-menu-item no_outline" href="#">Calculator</a></li>
+            <li><a class="drawer-menu-item no_outline" href="/converter">Converter</a></li>
 
             <li><a class="drawer-menu-item my_popup_open no_outline" href="#">Wiki</a></li>
             <li class="drawer-dropdown">
@@ -134,10 +137,10 @@
                     <form id='calcMain' class="form-group">
                         <div class="form-group  form-inline  float-right">
                             <span id="coinIcon"><img class="imgIcon" id="btcLogo" src="other/BTC.svg" alt="BTC Logo">
-                            <img class="imgIcon" src="other/LTC.svg" id="ltcLogo"  alt="LTC Logo">
-                            <img class="imgIcon" src="other/ETH.svg" id="ethLogo"  alt="ETH Logo">
-                            <img class="imgIcon" src="other/ZEC-alt.svg" id="zecLogo"  alt="ZEC Logo">
-                            <img class="imgIcon" src="other/XMR.svg" id="xmrLogo"  alt="XMR Logo">
+                            <img class="imgIcon" src="other/LTC.svg" id="ltcLogo" alt="LTC Logo">
+                            <img class="imgIcon" src="other/ETH.svg" id="ethLogo" alt="ETH Logo">
+                            <img class="imgIcon" src="other/ZEC-alt.svg" id="zecLogo" alt="ZEC Logo">
+                            <img class="imgIcon" src="other/XMR.svg" id="xmrLogo" alt="XMR Logo">
                             </span>
                             <label class="col-form-label"> Select cryptocurrency:&nbsp; </label>
                             <select id='currency' name='currency' class="form-control form-control-sm">
@@ -163,7 +166,7 @@
                                    class="form-control form-control-sm"/>
                         </div>
                         <div class="form-group form-inline  float-right">
-                            <i class="fa fa-info-circle info"
+                            <i class="fa fa-info-circle fa-2x info "
                                title="Coin value has a preset value of current coin value as show on Coin market cap."></i>&nbsp;
                             <label class="col-form-label">Coin value($): &nbsp;</label>
                             <input id="value" name='value' type='number' step="0.00001"
@@ -315,7 +318,7 @@
                         </b>
                     </p>
                 </div>
-            </div>            
+            </div>
         </div>
     </div>
     <div id="ad">
@@ -335,7 +338,8 @@
             }</script>
             <a onclick="shapeshift_click(this, event);"
                href="https://shapeshift.io/shifty.html?destination=0x92734e2523ac2Bf66EC3e49E1bd679a8F1f31E5E&amp;output=ETH&amp;amount=1">
-                <img id="donateButton" alt="donateButton" src="https://shapeshift.io/images/shifty/small_light_ss.png" class="ss-button">
+                <img id="donateButton" alt="donateButton" src="https://shapeshift.io/images/shifty/small_light_ss.png"
+                     class="ss-button">
             </a>
         </div>
     </div>
@@ -364,6 +368,7 @@
   ],
   "logo": "https://www.crypstercalc.com/other/CrypsterLogo_onWhite.jpg"
 }
+
 
 </script>
 <script async src="//appsha1.cointraffic.io/js/?wkey=Fk3pYX"></script>
