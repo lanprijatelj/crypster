@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px');
+
+
+
+#converterHeading{
+    font-family: 'Slabo 27px', serif;
+    margin-left:43%;
+}
+
+.form-control, #equalsSign{
+    margin: 0.2em;
+}
+
+#donate{
+    position: fixed;
+    bottom: 1rem;
+}
+
+#converter{
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#menuConverter{
+    background-color: black;
+}
+#menuConverter a{
+    color: whitesmoke;
+    text-decoration: none;
+    cursor: default;
+}
+
+#btcLogo1, #ltcLogo1, #ethLogo1, #zecLogo1, #xmrLogo1, #btcLogo2, #ltcLogo2, #ethLogo2, #zecLogo2, #xmrLogo2 {
+    display: none;
+}
+
+#usdLogo2{
+    width: 36px;
+}
+#usdI{
+    height: inherit;
+}

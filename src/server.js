@@ -10,13 +10,24 @@ app.use(sslRedirect());
 app.get('/', function (request, response) {
   response.sendFile(__dirname + '/public/index.html');
 });
+app.get('/converter', function (request, response) {
+    response.sendFile(__dirname + '/public/converter.html');
+});
 
 app.get('/styles', function (request, response) {
   response.sendFile(__dirname + '/public/styles.css');
 });
+app.get('/stylesConverter', function (request, response) {
+    response.sendFile(__dirname + '/public/stylesConverter.css');
+});
 app.get('/script', function (request, response) {
   response.sendFile(__dirname + '/public/script.js');
 });
+
+app.get('/scriptConverter', function (request, response) {
+    response.sendFile(__dirname + '/public/scriptConverter.js');
+});
+
 
 app.get('/favicon', function (request, response) {
   response.sendFile(__dirname + '/public/favicon.ico');
