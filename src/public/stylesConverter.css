@@ -36,8 +36,14 @@ h2{
     display: none;
 }
 
+#usdLogo2, #eurLogo2, #usdLogo, #eurLogo{
+    width: min-content;
+}
 #usdLogo2, #eurLogo2{
-    width: 36px;
+    margin-right: 16px;
+}
+#usdLogo, #eurLogo{
+    margin-left: 16px;
 }
 #usdI, #usdI2, #eurI, #eurI2{
     height: inherit;

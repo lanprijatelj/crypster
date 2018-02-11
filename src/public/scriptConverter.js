@@ -19,6 +19,10 @@ $jq(window).on("load", function () {
         }
     });
 
+    $jq.post("/exchRate").done(function (response) {
+        price.eur = response.rate;              
+    });
+
 
     $jq('.drawer').drawer();
 
@@ -93,7 +97,7 @@ $jq("#value1").keyup(function () {
     $jq("#value2").val(result);
 });
 
-$jq("#value2").change(function () {
+$jq("#value2").keyup(function () {
     var val2 = $jq("#value2").val();
     var currency1 = userInput.selectedCurrency1;
     var currency2 = userInput.selectedCurrency2;
@@ -133,11 +137,11 @@ $jq("select[name=currency1]").change(function () {
     } else if (userInput.selectedCurrency1 == "LTC") {
         $jq("#value2").val(price.ltc);
         $jq("#ltcLogo").css({'display': 'block'});
-    } else if (userInput.selectedCurrency2 == "USD") {
+    } else if (userInput.selectedCurrency1 == "USD") {
         //  $jq("#value1").val(price.ltc);
         $jq("#usdLogo").css({'display': 'block'});
     }
-    else if (userInput.selectedCurrency2 == "EUR") {
+    else if (userInput.selectedCurrency1 == "EUR") {
         //  $jq("#value1").val(price.ltc);
         $jq("#eurLogo").css({'display': 'block'});
     }
@@ -195,6 +199,8 @@ function calculate(val, currency1, currency2) {
         var c1 = price.ltc;
     } else if (currency1 == "USD") {
         var c1 = 1;
+    } else if (currency1 == "EUR") {
+        var c1 = price.eur;
     }
 
     if (currency2 == "BTC") {
@@ -209,6 +215,8 @@ function calculate(val, currency1, currency2) {
         var c2 = price.ltc;
     } else if (currency2 == "USD") {
         var c2 = 1;
+    } else if (currency2 == "EUR") {
+        var c2 = price.eur;
     }
     return (val * c1 / c2);
 }

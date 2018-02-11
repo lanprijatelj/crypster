@@ -482,5 +482,4 @@ function sendParameters() {
     $jq(".y :nth-child(3)").html((net.year + costs.Y).toFixed(2));
     $jq(".y :nth-child(4)").html((costs.Y).toFixed(2));
     $jq(".y :nth-child(5)").html((net.year).toFixed(2));
-
 }
