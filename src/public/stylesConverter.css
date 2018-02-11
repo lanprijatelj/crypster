@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Slabo+27px');
 
-
+h2{
+    text-align: center;
+}
 
 #converterHeading{
-    font-family: 'Slabo 27px', serif;
-    margin-left:43%;
+    font-family: 'Slabo 27px', serif;    
 }
 
 .form-control, #equalsSign{

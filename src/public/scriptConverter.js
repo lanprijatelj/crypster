@@ -3,8 +3,7 @@ var userInput = {};
 
 var $jq = jQuery.noConflict();
 
-$jq(window).on("load", function () {
-    addListeners();
+$jq(window).on("load", function () {   
     userInput.selectedCurrency1 = $jq("select[name=currency1]").val();
     userInput.selectedCurrency2 = $jq("select[name=currency2]").val();
 
@@ -70,6 +69,38 @@ $jq(document).scroll(function () {
     }
 });
 
+function changedFirstCurrency() {
+    var val1 = $jq("#value1").val();    
+    var currency1 = userInput.selectedCurrency1;
+    var currency2 = userInput.selectedCurrency2;
+    var result = calculate(val1, currency1, currency2);
+    $jq("#value2").val(result);
+}
+
+function changedSecondCurrency() {    
+    var val2 = $jq("#value2").val();
+    var currency1 = userInput.selectedCurrency1;
+    var currency2 = userInput.selectedCurrency2;
+    var result = calculate(val2, currency2, currency1);
+    $jq("#value1").val(result);
+}
+
+$jq("#value1").keyup(function(){
+    var val1 = $jq("#value1").val();    
+    var currency1 = userInput.selectedCurrency1;
+    var currency2 = userInput.selectedCurrency2;
+    var result = calculate(val1, currency1, currency2);
+    $jq("#value2").val(result);
+});
+
+$jq("#value2").change(function(){
+    var val2 = $jq("#value2").val();
+    var currency1 = userInput.selectedCurrency1;
+    var currency2 = userInput.selectedCurrency2;
+    var result = calculate(val2, currency2, currency1);
+    $jq("#value1").val(result);
+});
+
 
 $jq(function () {
     $jq('[data-toggle="tooltip"]').tooltip()
@@ -101,6 +132,7 @@ $jq("select[name=currency1]").change(function () {
         $jq("#value2").val(price.ltc);
         $jq("#ltcLogo").css({'display': 'block'});
     }
+    changedFirstCurrency();
 });
 
 $jq("select[name=currency2]").change(function () {
@@ -133,13 +165,36 @@ $jq("select[name=currency2]").change(function () {
         //  $jq("#value1").val(price.ltc);
         $jq("#usdLogo2").css({'display': 'block'});
     }
+    changedSecondCurrency();
 });
 
-
-function addListeners() {
-
-}
-
-function sendParameters() {
-
+function calculate(val, currency1, currency2){
+    if (currency1 == "BTC") {
+        var c1 = price.btc;
+    } else if (currency1 == "ETH") {
+        var c1 = price.eth;
+    } else if (currency1 == "ZEC") {
+        var c1 = price.zec;
+    } else if (currency1 == "XMR") {
+        var c1 = price.xmr;
+    } else if (currency1 == "LTC") {
+        var c1 = price.ltc;
+    } else if (currency1 == "USD") {
+        var c1 = 1;
+    } 
+    
+    if (currency2 == "BTC") {
+        var c2 = price.btc;
+    } else if (currency2 == "ETH") {
+        var c2 = price.eth;
+    } else if (currency2 == "ZEC") {
+        var c2 = price.zec;
+    } else if (currency2 == "XMR") {
+        var c2 = price.xmr;
+    } else if (currency2 == "LTC") {
+        var c2 = price.ltc;
+    } else if (currency2 == "USD") {
+        var c2 = 1;
+    }    
+    return (val * c1 / c2);
 }
