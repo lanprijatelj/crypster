@@ -294,7 +294,7 @@ app.post('/price', function (req, res) {
 });
 
 app.post('/exchRate', function (req, res) {
-  var querry = "https://api.fixer.io/latest?base=USD";
+  var querry = "https://api.fixer.io/latest";
   var podatki = "";
   var odg = {};
   request({
@@ -311,7 +311,7 @@ app.post('/exchRate', function (req, res) {
   }).on('end', function () {
     if (podatki[0] != "<") {
       var odgovor = JSON.parse(podatki);   
-      odg.rate = odgovor.rates.EUR;
+      odg.rate = odgovor.rates.USD;
       res.send(odg);
     }
   });

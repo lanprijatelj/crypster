@@ -330,16 +330,25 @@ input[type=number] {
 }
 
 /*-----------Ads--------------*/
-#ad{
+#ad1{
     position: absolute;
     top: 4em;
     right: 5px;
-    overflow: hidden;
 
 
 }
+#ad2{
+    position: absolute;
+    top: 4em;
+    left: 5px;
+}
+@media screen and (max-width:760px) {
+    #adHorizontal {
+        display: none;
+    }
+}
 @media screen and (max-width:1300px){
-    #ad{
+    #ad1{
         display: none;
     }
 }

@@ -73,6 +73,12 @@ $jq(document).scroll(function () {
     }
 });
 
+setTimeout(function () {
+    $jq('#welcomeMessage').css({
+        "border-style": 'hidden'
+    });
+}, 4400);
+
 function changedFirstCurrency() {
     var val1 = $jq("#value1").val();
     var currency1 = userInput.selectedCurrency1;

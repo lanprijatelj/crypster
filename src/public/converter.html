@@ -129,7 +129,7 @@
 
 <main role="main">
     <div class="container">
-        <div class="row">
+        <div class="row" id="converterMain">
             <div id="converterHeading" class="col-sm-12">
                 <h2>Converter &nbsp;<i class="fas fa-sync "></i>  <i class="fa fa-info-circle info fa-2x" id="converterInfo"
                                                                      title="Converter uses cryptocurrency values from CoinMarketCap."></i></h2>
@@ -148,7 +148,7 @@
                             <div id="eurLogo"> <i id="eurI" class="fas fa-euro-sign imgIcon fa-2x"></i></div>
                         </span>
 
-                        <select name='currency1' class="form-control form-control-sm">
+                        <select id="currency1" name='currency1' class="form-control form-control-sm">
                             <option value='BTC'>BTC</option>
                             <option value='ETH'>ETH</option>
                             <option value='LTC'>LTC</option>
@@ -160,7 +160,7 @@
                         <input id="value1" name='value' type='number' step="0.000000001"
                                class="form-control form-control-sm" value="1"/>
                         <div id="equalsSign"><i class="fas fa-exchange-alt"> </i></div>
-                        <select name='currency2' class="form-control form-control-sm">
+                        <select id="currency2" name='currency2'  class="form-control form-control-sm">
                             <option value='USD'>USD</option>
                             <option value='EUR'>EUR</option>
                             <option value='BTC'>BTC</option>
@@ -188,8 +188,11 @@
 
 
         </div>
+        <div id="adHorizontal">
+            <span id="ct_caAbB18"></span>
+        </div>
     </div>
-    <div id="ad">
+    <div id="ad1">
         <span id="ct_cBhrGqy"></span>
     </div>
 </main>
