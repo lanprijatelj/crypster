@@ -10,13 +10,24 @@ app.use(sslRedirect());
 app.get('/', function (request, response) {
   response.sendFile(__dirname + '/public/index.html');
 });
+app.get('/converter', function (request, response) {
+    response.sendFile(__dirname + '/public/converter.html');
+});
 
 app.get('/styles', function (request, response) {
   response.sendFile(__dirname + '/public/styles.css');
 });
+app.get('/stylesConverter', function (request, response) {
+    response.sendFile(__dirname + '/public/stylesConverter.css');
+});
 app.get('/script', function (request, response) {
   response.sendFile(__dirname + '/public/script.js');
 });
+
+app.get('/scriptConverter', function (request, response) {
+    response.sendFile(__dirname + '/public/scriptConverter.js');
+});
+
 
 app.get('/favicon', function (request, response) {
   response.sendFile(__dirname + '/public/favicon.ico');
@@ -277,6 +288,30 @@ app.post('/price', function (req, res) {
       odg.valueBTC = -1;
       odg.valueETH = -1;
       odg.valueLTC = -1;
+      res.send(odg);
+    }
+  });
+});
+
+app.post('/exchRate', function (req, res) {
+  var querry = "https://api.fixer.io/latest";
+  var podatki = "";
+  var odg = {};
+  request({
+    method: 'GET',
+    uri: querry,
+    encoding: null
+  }, function (error, response, body) {
+  }).on('data', function (data) {
+    podatki += data;
+  }).on('error', function (error) {
+    console.log(error);
+    odg.rate = -1;    
+    res.send(odg);
+  }).on('end', function () {
+    if (podatki[0] != "<") {
+      var odgovor = JSON.parse(podatki);   
+      odg.rate = odgovor.rates.USD;
       res.send(odg);
     }
   });

@@ -27,12 +27,16 @@ h1 {
     margin: 0;
 }
 
+#menuHeading{
+    font-family: 'Slabo 27px', serif;
+    margin: 0.5rem;
+    font-size: 1.8em;
+    margin-bottom: 1.7rem;
+}
 #calcImg {
     float: right;
-    padding: 1em;
-    height: 6em;
-    padding-right: 3em;
-
+    padding-right: 1em;
+    height: 3em;
 }
 #breakEven{
     margin-left: 1em;
@@ -138,6 +142,15 @@ input[type=number] {
 
 /* side menu  -------------------------------------------------------------------------- */
 
+#menuCalculator{
+    background-color: black;
+}
+#menuCalculator a{
+    color: whitesmoke;
+    text-decoration: none;
+    cursor: default;
+}
+
 .drawer-nav, .drawer-dropdown-menu{
     background-image: url("other/dust_scratches.png");
 }
@@ -210,9 +223,13 @@ input[type=number] {
     width: min-content;
     margin-bottom: 0.5em;
 }
-#coinIcon{
+#coinIcon {
     margin-right: 0.5em;
 }
+#coinIcon2{
+    margin-left: 0.5em;
+}
+
 .imgIcon{
     height: 2.25em;
 }
@@ -313,16 +330,26 @@ input[type=number] {
 }
 
 /*-----------Ads--------------*/
-#ad{
+#ad1{
     position: absolute;
     top: 4em;
     right: 5px;
-    overflow: hidden;
 
 
 }
-@media screen and (max-width:1300px){
-    #ad{
+#ad2{
+    position: absolute;
+    top: 4em;
+    left: 5px;
+}
+@media screen and (max-width:760px) {
+    #adHorizontal {
         display: none;
     }
 }
+@media screen and (max-width:1300px){
+    #ad1{
+        display: none;
+    }
+}
+
