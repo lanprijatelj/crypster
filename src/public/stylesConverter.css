@@ -40,16 +40,16 @@ h2{
     width: min-content;
 }
 #usdLogo2, #eurLogo2{
-    margin-right: 16px;
+    margin-left: 16px;
 }
 #usdLogo, #eurLogo{
-    margin-left: 16px;
+    margin-right: 16px;
 }
 #usdI, #usdI2, #eurI, #eurI2{
     height: inherit;
 }
-#converterInfo{
-    float: right;
+#infoConverter{
+    margin-left: 95%;
 }
 
 #adHorizontal{
@@ -58,6 +58,12 @@ h2{
     width: max-content;
     margin-top: 15em;
 
+}
+#syncSign{
+    margin-left: auto;
+    margin-right: auto;
+    width: min-content;
+    margin-bottom: 0.5em;
 }
 
 
@@ -98,10 +104,12 @@ h2{
        width:20%;
    }
     #currency1{
-        width: 20%;
+        width: 15%;
     }
     #currency2{
-        width: 20%;
+        width: 15%;
     }
-
+    #donate{
+       display: none;
+    }
 }
