@@ -22,9 +22,9 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="shortcut icon" href="/favicon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.bootstrap3.min.css">
     <link href="/styles" rel="stylesheet">
 
     <title>Cryptocurrency Mining Calculator - Crypster Calc</title>
@@ -232,20 +232,30 @@
                             <input name='invest' type='number' value="0" step="0.01"
                                    class="form-control form-control-sm"/>
 
-                        </div>
-                        <div class="form-group form-inline  float-right">
-                            <label id="tFrame" class="col-form-label">
-                                Time Frame (months):&nbsp; </label>
-                            <input name='time' type='number' value="12" align="right"
-                                   class="form-control form-control-sm"/>
-                        </div>
-                        <div class="col-xs-12">
-                            <button id="resetButton" type="button"
-                                    class="btn btn-outline-primary btn-sm float-right no_outline">
-                                Reset Values
-                            </button>
-                        </div>
-                    </form>
+                            </div>
+                            <div class="form-group form-inline  float-right">
+                                <label id="tFrame" class="col-form-label">
+                                    Time Frame (months):&nbsp; </label>
+                                <input name='time' type='number' value="12" align="right" class="form-control form-control-sm" />
+                            </div>
+                            <div class="form-group form-inline  float-right">
+                                <label class="col-form-label">Mining equipment:&nbsp; </label>
+                                <select id="equipment" class="form-control form-control-sm" >
+                                    <option value="">Select mining equipment...</option>
+                                    <optgroup label="GPUs" id="gpus">
+                                    </optgroup>
+                                    <optgroup label="ASICs" id="asics">
+                                    </optgroup>
+                                    <optgroup label="Rigs" id="rigs">
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="col-xs-12">
+                                <button id="resetButton" type="button" class="btn btn-outline-primary btn-sm float-right no_outline">
+                                    Reset Values
+                                </button>
+                            </div>
+                        </form>
 
                 </div>
             </div>
@@ -345,10 +355,10 @@
     </div>
 </footer>
 
-<script src="https://unpkg.com/tippy.js@2.1.1/dist/tippy.all.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    <script src="https://unpkg.com/tippy.js@2.1.1/dist/tippy.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- jquery & iScroll -->
