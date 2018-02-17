@@ -4,6 +4,7 @@ var userInput = {};
 var results = {};
 var moneroInfo = {};
 var $jq = jQuery.noConflict();
+var cardInfo = {};
 
 function calculateCoinsMinedBTC(input) {
     if (input.hashrateUnit == "TH/s") {
@@ -237,6 +238,32 @@ $jq(window).on("load", function () {
         if (userInput.selectedCurrency == "BTC") {
             $jq("#value").val(price.btc);
         }
+    });
+
+    $jq.post("/cards").done(function (response) {
+        var data = "";
+        cardInfo.cards = response.cards;
+        cardInfo.ASIC = response.ASIC;
+        cardInfo.rigs = response.rigs;
+        console.log(cardInfo.ASIC);
+        for(var i = 0; i < cardInfo.rigs.length; i++){
+            data += "<option value='" + cardInfo.rigs[i].Name + "'>" + cardInfo.rigs[i].Name + "</option>";
+        }
+        $jq("#rigs").append(data);
+        data = "";
+        for(var i = 0; i < cardInfo.ASIC.length; i++){
+            data += "<option value='" + cardInfo.ASIC[i].Name + "'>" + cardInfo.ASIC[i].Name + "</option>";
+        }
+        $jq("#asics").append(data);
+        data = "";
+        for(var i = 0; i < cardInfo.cards.length; i++){
+            data += "<option value='" + cardInfo.cards[i].Name + "'>" + cardInfo.cards[i].Name + "</option>";
+        }
+        $jq("#gpus").append(data);
+        $jq('#equipment').selectize({
+            sortField: 'text',
+            lockOptgroupOrder: 'True'
+        });
     });
 
     drawChart(12, 0, 0);
