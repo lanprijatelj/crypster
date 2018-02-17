@@ -1,18 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Slabo+27px');
 
-html, body{    
+html, body {
     font-family: 'Roboto', sans-serif;
     height: 100vh;
-    width: 100%;       
+    width: 100%;
     background: #1D976C; /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #93F9B9, #1D976C); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #93F9B9, #1d976c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background-image: url("other/dust_scratches.png");
 }
 
-footer{     
+footer {
     width: 100%;
-    padding-right: 2em;    
+    padding-right: 2em;
 }
 
 .container {
@@ -27,26 +27,30 @@ h1 {
     margin: 0;
 }
 
-#menuHeading{
+#menuHeading {
     font-family: 'Slabo 27px', serif;
     margin: 0.5rem;
     font-size: 1.8em;
     margin-bottom: 1.7rem;
 }
+
 #calcImg {
     float: right;
     padding-right: 1em;
     height: 3em;
 }
-#breakEven{
+
+#breakEven {
     margin-left: 1em;
 }
-#donate{
+
+#donate {
     margin-left: 1em;
     margin-bottom: 1em;
     padding: 0;
 }
-#donateButton{
+
+#donateButton {
     max-width: 165px;
 }
 
@@ -59,10 +63,9 @@ h1 {
     margin-left: 100em;
 }
 
-.sols{
+.sols {
     display: none;
 }
-
 
 /* Typewritter--------------------------------------------------------------------------------------*/
 
@@ -85,6 +88,7 @@ h3 {
     blink-caret .75s step-end infinite;
 
 }
+
 /* The typing effect */
 @keyframes typing {
     from {
@@ -109,7 +113,7 @@ h3 {
 @media screen and (max-width: 480px) {
     #tableResults {
         display: table;
-    }    
+    }
 }
 
 #tableResults {
@@ -125,7 +129,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 input[type=number] {
-    -moz-appearance:textfield;
+    -moz-appearance: textfield;
 }
 
 #infoChart {
@@ -139,21 +143,22 @@ input[type=number] {
     font-size: 0.6em;
 }
 
-
 /* side menu  -------------------------------------------------------------------------- */
 
-#menuCalculator{
+#menuCalculator {
     background-color: black;
 }
-#menuCalculator a{
+
+#menuCalculator a {
     color: whitesmoke;
     text-decoration: none;
     cursor: default;
 }
 
-.drawer-nav, .drawer-dropdown-menu{
+.drawer-nav, .drawer-dropdown-menu {
     background-image: url("other/dust_scratches.png");
 }
+
 .panel {
     position: fixed;
     left: -20em; /*left or right and the width of your navigation panel*/
@@ -164,128 +169,137 @@ input[type=number] {
     padding: 1em;
 }
 
-#menuAbout{
- padding: 1em;
- bottom:0;
- position: fixed;
+#menuAbout {
+    padding: 1em;
+    bottom: 0;
+    position: fixed;
 }
 
-.no_outline{
+.no_outline {
     outline: none;
 }
-#crtice{
+
+#crtice {
     outline: none;
 }
 
 /*WIKI*/
-@media screen and (max-height:400px) {
-    #menuText{
+@media screen and (max-height: 400px) {
+    #menuText {
         height: 11em;
         overflow: scroll;
     }
 }
 
-
-
-
 /*-----------POPOUP -----------------------------------------------------------------------*/
 #fadeandscale {
     transform: scale(0.6);
 }
+
 .popup_visible #fadeandscale {
     transform: scale(1);
 }
 
-#wikiSource{
+#wikiSource {
     font-size: 0.8em;
     color: slategrey;
 }
-#wikiSource :hover{
+
+#wikiSource :hover {
     text-decoration: none;
 }
 
-#my_popup{
+#my_popup {
     color: azure;
     width: 50%;
     margin-top: -2000px
 }
-#closePopup{
+
+#closePopup {
     float: right;
     margin-bottom: 0.5em;
     cursor: pointer;
 }
 
-#currency{
+#currency {
     width: min-content;
 }
 
-#hashRateUnit{
+#hashRateUnit {
     width: min-content;
     margin-bottom: 0.5em;
 }
+
 #coinIcon {
     margin-right: 0.5em;
 }
-#coinIcon2{
+
+#coinIcon2 {
     margin-left: 0.5em;
 }
 
-.imgIcon{
+.imgIcon {
     height: 2.25em;
 }
+
 #btcLogo, #ltcLogo, #ethLogo, #zecLogo, #xmrLogo {
     display: none;
 }
 
-
 /*-----------TABLET VIEW -------------------------------------------*/
-@media screen and (min-width: 767px) and (max-width:993px) {
-   .form-group .form-group input{
+@media screen and (min-width: 767px) and (max-width: 993px) {
+    .form-group .form-group input {
         width: 120px;
     }
+
     .form-group .form-group .smallerInput {
         width: 60px;
     }
-    #my_popup{
+
+    #my_popup {
         width: 90%;
         padding: 1em;
     }
 }
 
-
-
 /*-----------TABLET LANDSCAPE VIEW -----------------------------*/
-@media screen and (min-width: 800px) and (max-width:1025px) {
+@media screen and (min-width: 800px) and (max-width: 1025px) {
 
-    #my_popup{
+    #my_popup {
         width: 80%;
         padding: 1em;
     }
+
     .form-group {
         margin-bottom: 0;
     }
-    #resetButton{
+
+    #resetButton {
         margin-top: 0.5em;
     }
-    .imgIcon{
+
+    .imgIcon {
         margin-bottom: 0.5em;
     }
 }
 
 /*-----------MOBILE LANDSCAPE-------------------------------------------*/
-@media screen and (min-width:480px) and (max-width:767px) {
-    .form-group .form-group input{
+@media screen and (min-width: 480px) and (max-width: 767px) {
+    .form-group .form-group input {
         width: 200px;
     }
+
     .form-group .form-group .smallerInput {
         width: 60px;
     }
-    #my_popup{
+
+    #my_popup {
         width: 90%;
         padding: 1em;
     }
 
 }
+
 /*-----------MOBILE VIEW -----------------------------------------*/
 @media screen and (max-width: 480px) {
 
@@ -293,62 +307,80 @@ input[type=number] {
         display: table;
         margin-left: 0;
     }
-    #chartBox{
+
+    #chartBox {
         margin-top: 1em;
     }
 
-    #resetButton{
+    #resetButton {
         margin: 0;
         margin-top: 0.5em;
     }
-    #currency{
+
+    #currency {
         margin-bottom: 0.5em;
     }
-    #donate{
+
+    #donate {
         margin-top: 1.5em;
     }
-    .float-right{
+
+    .float-right {
         float: none !important;
     }
-    #calcImg{
+
+    #calcImg {
         margin-top: 0;
     }
-    #my_popup{
+
+    #my_popup {
         width: 100%;
         padding: 2em;
     }
+
     .form-group {
         margin-bottom: 0;
     }
-    .imgIcon{
+
+    .imgIcon {
         margin-bottom: 0.5em;
     }
-    #breakEven{
+
+    #breakEven {
         margin-left: 30%;
+    }
+
+    @media screen and (max-height: 750px) {
+        #menuText {
+            height: 20em;
+            overflow: scroll;
+        }
     }
 
 }
 
 /*-----------Ads--------------*/
-#ad1{
+#ad1 {
     position: absolute;
     top: 4em;
     right: 5px;
 
-
 }
-#ad2{
+
+#ad2 {
     position: absolute;
     top: 4em;
     left: 5px;
 }
-@media screen and (max-width:760px) {
+
+@media screen and (max-width: 760px) {
     #adHorizontal {
         display: none;
     }
 }
-@media screen and (max-width:1300px){
-    #ad1{
+
+@media screen and (max-width: 1300px) {
+    #ad1 {
         display: none;
     }
 }
