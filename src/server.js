@@ -5,7 +5,8 @@ const request = require('request');
 const sslRedirect = require('heroku-ssl-redirect');
 var PORT = process.env.PORT || 8080;
 
-app.use(sslRedirect());
+app.use(sslRedirect(['production'], 301));
+
 
 app.get('/', function (request, response) {
   response.sendFile(__dirname + '/public/index.html');
