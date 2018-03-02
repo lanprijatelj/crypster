@@ -36,15 +36,13 @@ app.get('/other/dust_scratches.png', function (request, response) {
   response.sendFile(__dirname + '/public/other/dust_scratches.png');
 });
 
-app.get('/other/iconmonstr-calculator-1.svg', function (request, response) {
-  response.sendFile(__dirname + '/public/other/iconmonstr-calculator-1.svg');
-});
-app.get('/other/LogoPrototype1.png', function (request, response) {
-  response.sendFile(__dirname + '/public/other/LogoPrototype1.png');
+
+app.get('/other/LogoShort.png', function (request, response) {
+    response.sendFile(__dirname + '/public/other/LogoShort.png');
 });
 
-app.get('/other/LogoPrototype1_fullTransperent.png', function (request, response) {
-  response.sendFile(__dirname + '/public/other/LogoPrototype1_fullTransperent.png');
+app.get('/other/LogoNav.png', function (request, response) {
+    response.sendFile(__dirname + '/public/other/LogoNav.png');
 });
 
 app.get('/other/CrypsterLogo_onWhite.jpg', function (request, response) {
@@ -71,11 +69,16 @@ app.get('/other/ZEC-alt.svg', function (request, response) {
 app.get('/other/XMR.svg', function (request, response) {
     response.sendFile(__dirname + '/public/other/XMR.svg');
 });
-
-
+app.get('/other/LogoOnly.png', function (request, response) {
+    response.sendFile(__dirname + '/public/other/LogoOnly.png');
+});
 app.get('/other/facebook_thumbnail', function (request, response) {
   response.sendFile(__dirname + '/public/other/facebook_thumbnail.png');
 });
+app.get('/other/MyriadProRegular.ttf', function (request, response) {
+    response.sendFile(__dirname + '/public/other/MyriadProRegular.ttf');
+});
+
 
 
 

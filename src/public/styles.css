@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Slabo+27px');
 
+@font-face {
+    font-family: "MyriadProRegular";
+    src: url(/other/MyriadProRegular.ttf) format("truetype");
+}
+
+
 html, body {
     font-family: 'Roboto', sans-serif;
     height: 100vh;
@@ -16,7 +22,7 @@ footer {
 }
 
 .container {
-    border-top: 2px solid black;
+    border-top: 2px solid #989998;
     padding-top: 2em;
 }
 
@@ -66,6 +72,14 @@ h1 {
 .sols {
     display: none;
 }
+#logoMain{
+    margin: 0.5em;
+    width: 20%;
+    margin-left: 40%;
+}
+.fillTurkis{
+    color: #41929C;
+}
 
 /* Typewritter--------------------------------------------------------------------------------------*/
 
@@ -79,14 +93,15 @@ h3 {
 }
 
 #welcomeMessage {
-    width: 21em;
+    width: 22em;
     overflow: hidden; /* Ensures the content is not revealed until the animation */
     border-right: .15em solid; /* The typwriter cursor */
     white-space: nowrap; /* Keeps the content on a single line */
     margin: 0 auto; /* Gives that scrolling effect as the typing happens */
     animation: typing 3s steps(40, end),
     blink-caret .75s step-end infinite;
-
+    font-family: MyriadProRegular;
+    color: #989998;
 }
 
 /* The typing effect */
@@ -105,7 +120,7 @@ h3 {
         border-color: transparent
     }
     50% {
-        border-color: black;
+        border-color: #989998;
     }
 }
 
@@ -143,10 +158,18 @@ input[type=number] {
     font-size: 0.6em;
 }
 
+.table .thead-dark th{
+    background-color: #41929C;
+    border-color: #41929C;
+}
 /* side menu  -------------------------------------------------------------------------- */
-
+#CrypsterCalcNav{
+    width: 95%;
+    margin: 0.5em;
+    margin-bottom: 1em;
+}
 #menuCalculator {
-    background-color: black;
+    background-color: #41929C;
 }
 
 #menuCalculator a {
