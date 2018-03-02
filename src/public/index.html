@@ -22,9 +22,11 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="shortcut icon" href="/favicon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.bootstrap3.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.bootstrap3.min.css">
     <link href="/styles" rel="stylesheet">
 
     <title>Cryptocurrency Mining Calculator - Crypster Calc</title>
@@ -81,9 +83,11 @@
             <br>
             <a href="https://www.linkedin.com/in/lan-prijatelj-b76483158/" target="_blank" class="fillTurkis"> <i
                     class="fab fa-linkedin "></i></a>
-            <a href="https://www.linkedin.com/in/alja%C5%BE-klane%C4%8Dek-a18595131/" target="_blank" class="fillTurkis"><i
+            <a href="https://www.linkedin.com/in/alja%C5%BE-klane%C4%8Dek-a18595131/" target="_blank"
+               class="fillTurkis"><i
                     class="fab fa-linkedin "></i></a>
-            <a href="https://www.facebook.com/crypstercalc/" target="_blank" class="fillTurkis"><i class="fab fa-facebook-square "></i></a>
+            <a href="https://www.facebook.com/crypstercalc/" target="_blank" class="fillTurkis"><i
+                    class="fab fa-facebook-square "></i></a>
         </div>
     </nav>
 </header>
@@ -124,7 +128,7 @@
 
 </div>
 <div id="mainHeading">
-<img src="/other/LogoShort.png" alt="Logo Crypster" id="logoMain" >
+    <img src="/other/LogoShort.png" alt="Logo Crypster" id="logoMain">
 </div>
 <div class="d-none d-sm-block">
     <h3 id="welcomeMessage">The World's most comprehensive mining calculator.</h3>
@@ -180,68 +184,77 @@
                             <input id="diff" name='diff' type='number' step="0.000001"
                                    class="form-control form-control-sm"/>
                         </div>
-                        <div class="form-group form-inline float-right">
-                            <label class="col-form-label">
-                                Block reward:&nbsp;</label>
-                            <input name='reward' type='number' value="12.5" step="0.000001"
-                                   class="form-control form-control-sm"/>
-                        </div>
-                        <div class="form-group form-inline float-right">
-                            <label class="col-form-label">
-                                Power consumption (W):&nbsp;</label>
-                            <input name='power' type='number' value="0" step="0.00001"
-                                   class="form-control  form-control-sm"/>
-                        </div>
-                        <div class="form-group form-inline  float-right">
-                            <label class="col-form-label">
-                                Power cost ($/kWh):&nbsp;</label>
-                            <input name='powerCost' type='number' value="0.1" step="0.00001"
-                                   class="form-control form-control-sm"/>
-                        </div>
-                        <div class="form-group form-inline  float-right">
-                            <label class="col-form-label">
-                                Pool fee (%):&nbsp;</label>
-                            <input name='fee' type='number' value="1" step="0.00001"
-                                   class="form-control form-control-sm"/>
-                        </div>
-                        <div class="form-group form-inline  float-right">
-                            <label class="col-form-label">
-                                Reject rate (%):&nbsp; </label>
-                            <input name='reject' type='number' value="1" step="0.00001"
-                                   class="form-control form-control-sm"/>
-                        </div>
-                        <div class="form-group form-inline  float-right">
-                            <i class="fa fa-question-circle info"
-                               title="The difficulty change is the rate at which the network difficulty is changing every month. Diff change is used for the estimated future profits graph and break even analysis. Typically in crypto, network difficulty tends to increase over time, meaning a miner will generate less crypto with the same hardware. Accounting for this changing difficulty is essential to generate long term profitability predictions. "></i>&nbsp;
-                            <label class="col-form-label">Difficulty change (%/month):&nbsp;</label>
-                            <input name='diffChange' type='number' value="15"
-                                   class="form-control form-control-sm smallerInput"/>
-
-                        </div>
-                        <div class="form-group form-inline  float-right">
-                            <i class="fa fa-question-circle info"
-                               title="The Coin value change is your predicted change of price every month. Coin value change is used for the estimated future profits graph and break even analysis. We are used to very volatile markets in crypto space so be careful with your estimates as your calculations may vary drastically. It is essential to account coin price change if we wish to have accurate calculations and generate long term profitability predictions."></i>&nbsp;
-                            <label class="col-form-label">
-                                Coin value change (%/month):&nbsp;</label>
-                            <input name='CoinValueChange' type='number' value="0" step="0.00001"
-                                   class="form-control form-control-sm smallerInput"/>
-
-                        </div>
                         <div class="form-group form-inline  float-right">
                             <label class="col-form-label">
                                 Investment($):&nbsp; </label>
                             <input name='invest' type='number' value="0" step="0.01"
                                    class="form-control form-control-sm"/>
 
+                        </div>
+                        <div class="form-group form-inline  float-right">
+                            <label id="tFrame" class="col-form-label">
+                                Time Frame (months):&nbsp; </label>
+                            <input name='time' type='number' value="12" align="right"
+                                   class="form-control form-control-sm"/>
+                        </div>
+
+                        <div class="form-group form-inline  advancedDiv">
+                            <div id="advancedAwrapper">
+                                <a id="advancedA" href="#">Advanced options</a><i class="fas fa-angle-down"></i>
+                            </div>
+                        </div>
+
+                        <div id="advancedOptions">
+
+                            <div class="form-group form-inline float-right">
+                                <label class="col-form-label">
+                                    Block reward:&nbsp;</label>
+                                <input name='reward' type='number' value="12.5" step="0.000001"
+                                       class="form-control form-control-sm"/>
+                            </div>
+                            <div class="form-group form-inline float-right">
+                                <label class="col-form-label">
+                                    Power consumption (W):&nbsp;</label>
+                                <input name='power' type='number' value="0" step="0.00001"
+                                       class="form-control  form-control-sm"/>
                             </div>
                             <div class="form-group form-inline  float-right">
-                                <label id="tFrame" class="col-form-label">
-                                    Time Frame (months):&nbsp; </label>
-                                <input name='time' type='number' value="12" align="right" class="form-control form-control-sm" />
+                                <label class="col-form-label">
+                                    Power cost ($/kWh):&nbsp;</label>
+                                <input name='powerCost' type='number' value="0.1" step="0.00001"
+                                       class="form-control form-control-sm"/>
+                            </div>
+                            <div class="form-group form-inline  float-right">
+                                <label class="col-form-label">
+                                    Pool fee (%):&nbsp;</label>
+                                <input name='fee' type='number' value="1" step="0.00001"
+                                       class="form-control form-control-sm"/>
+                            </div>
+                            <div class="form-group form-inline  float-right">
+                                <label class="col-form-label">
+                                    Reject rate (%):&nbsp; </label>
+                                <input name='reject' type='number' value="1" step="0.00001"
+                                       class="form-control form-control-sm"/>
+                            </div>
+                            <div class="form-group form-inline  float-right">
+                                <i class="fa fa-question-circle info"
+                                   title="The difficulty change is the rate at which the network difficulty is changing every month. Diff change is used for the estimated future profits graph and break even analysis. Typically in crypto, network difficulty tends to increase over time, meaning a miner will generate less crypto with the same hardware. Accounting for this changing difficulty is essential to generate long term profitability predictions. "></i>&nbsp;
+                                <label class="col-form-label">Difficulty change (%/month):&nbsp;</label>
+                                <input name='diffChange' type='number' value="0"
+                                       class="form-control form-control-sm smallerInput"/>
+
+                            </div>
+                            <div class="form-group form-inline  float-right">
+                                <i class="fa fa-question-circle info"
+                                   title="The Coin value change is your predicted change of price every month. Coin value change is used for the estimated future profits graph and break even analysis. We are used to very volatile markets in crypto space so be careful with your estimates as your calculations may vary drastically. It is essential to account coin price change if we wish to have accurate calculations and generate long term profitability predictions."></i>&nbsp;
+                                <label class="col-form-label">
+                                    Coin value change (%/month):&nbsp;</label>
+                                <input name='CoinValueChange' type='number' value="0" step="0.00001"
+                                       class="form-control form-control-sm smallerInput"/>
                             </div>
                             <div class="form-group form-inline  float-right">
                                 <label class="col-form-label">Mining equipment:&nbsp; </label>
-                                <select id="equipment" class="form-control form-control-sm" >
+                                <select id="equipment" class="form-control form-control-sm" name='hardware'>
                                     <option value="">Select mining equipment...</option>
                                     <optgroup label="GPUs" id="gpus">
                                     </optgroup>
@@ -251,12 +264,15 @@
                                     </optgroup>
                                 </select>
                             </div>
-                            <div class="col-xs-12">
-                                <button id="resetButton" type="button" class="btn btn-outline-primary btn-sm float-right no_outline">
-                                    Reset Values
-                                </button>
-                            </div>
-                        </form>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <button id="resetButton" type="button"
+                                    class="btn btn-outline-primary btn-sm float-right no_outline">
+                                Reset Values
+                            </button>
+                        </div>
+                    </form>
 
                 </div>
             </div>
@@ -332,6 +348,7 @@
             </div>
         </div>
     </div>
+
     <div id="ad1">
         <span id="ct_cBhrGqy"></span>
     </div>
@@ -356,10 +373,11 @@
     </div>
 </footer>
 
-    <script src="https://unpkg.com/tippy.js@2.1.1/dist/tippy.all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+<script src="https://unpkg.com/tippy.js@2.1.1/dist/tippy.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- jquery & iScroll -->
@@ -379,6 +397,7 @@
   ],
   "logo": "https://www.crypstercalc.com/other/CrypsterLogo_onWhite.jpg"
 }
+
 
 
 </script>

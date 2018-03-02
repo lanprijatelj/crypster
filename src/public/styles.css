@@ -80,6 +80,26 @@ h1 {
 .fillTurkis{
     color: #41929C;
 }
+.advancedDiv{
+    width: 100%;
+}
+#advancedA{
+    margin-right: 0.5em;
+    font-weight: bold;
+    text-decoration: none;
+    color: inherit;
+}
+#advancedAwrapper{
+    cursor: pointer;
+    margin-left: 70%;
+}
+#advancedOptions{
+    display: none;
+}
+
+.form-inline{
+    margin-bottom: 0.3em;
+}
 
 /* Typewritter--------------------------------------------------------------------------------------*/
 

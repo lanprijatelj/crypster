@@ -300,6 +300,12 @@ $jq(window).on("load", function () {
 
       $jq("#my_popup").css({"margin-top": "0"});
       $jq("#btcLogo").css({'display': 'block'});
+
+
+    $jq( "#advancedAwrapper" ).click(function() {
+        $jq("#advancedOptions").slideToggle();
+    });
+
 });
 
 /*resposive design-----------------------------------*/
@@ -383,8 +389,15 @@ $jq("select[name=currency]").change(function () {
 $jq("#resetButton").click(function () {
     userInput.selectedCurrency = $jq("select[name=currency]").val();
     $jq("input[name=CoinValueChange]").val("0");
-    $jq("input[name=diffChange]").val("15");
-    $jq("input[name=hashrate]").val("");
+    $jq("input[name=diffChange]").val("0");
+    $jq("input[name=fee]").val("1");
+    $jq("input[name=powerCost]").val("0.1");
+    $jq("input[name=reject]").val("1");
+    $jq("input[name=power]").val("0");
+    $jq("input[name=invest]").val("0");
+    $jq("input[name=time]").val("12");
+    $jq("input[name=hardware]").val("");
+
     if (userInput.selectedCurrency == "BTC") {
         $jq("#hashrate").val("");
         $jq("#valuta").text("BTC");
