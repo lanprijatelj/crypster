@@ -72,6 +72,15 @@ app.get('/other/XMR.svg', function (request, response) {
 app.get('/other/LogoOnly.png', function (request, response) {
     response.sendFile(__dirname + '/public/other/LogoOnly.png');
 });
+app.get('/other/LogoSign.png', function (request, response) {
+    response.sendFile(__dirname + '/public/other/LogoSign.png');
+});
+app.get('/other/LogoImg.png', function (request, response) {
+    response.sendFile(__dirname + '/public/other/LogoImg.png');
+});
+app.get('/other/LogoImgOpacity.png', function (request, response) {
+    response.sendFile(__dirname + '/public/other/LogoImgOpacity.png');
+});
 app.get('/other/facebook_thumbnail', function (request, response) {
   response.sendFile(__dirname + '/public/other/facebook_thumbnail.png');
 });

@@ -13,7 +13,8 @@ html, body {
     background: #1D976C; /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #93F9B9, #1D976C); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #93F9B9, #1d976c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background-image: url("other/dust_scratches.png");
+    background: url("other/LogoImgOpacity.png") no-repeat center, url("other/dust_scratches.png");
+    background-size: 80%;
 }
 
 footer {
@@ -55,6 +56,12 @@ h1 {
     margin-bottom: 1em;
     padding: 0;
 }
+@media screen and (min-width: 1025px)  {
+    #donate{
+        position: fixed;
+        bottom: 0;
+    }
+}
 
 #donateButton {
     max-width: 165px;
@@ -74,8 +81,9 @@ h1 {
 }
 #logoMain{
     margin: 0.5em;
-    width: 20%;
-    margin-left: 40%;
+    margin-top: 1.5em;
+    width: 40%;
+    margin-left: 30%;
 }
 .fillTurkis{
     color: #41929C;
@@ -94,7 +102,7 @@ h1 {
     margin-left: 70%;
 }
 #advancedOptions{
-    display: none;
+
 }
 
 .form-inline{
@@ -182,6 +190,11 @@ input[type=number] {
     background-color: #41929C;
     border-color: #41929C;
 }
+tbody, thead{
+    border: 1px solid #989998;
+}
+
+
 /* side menu  -------------------------------------------------------------------------- */
 #CrypsterCalcNav{
     width: 95%;
@@ -224,6 +237,15 @@ input[type=number] {
 
 #crtice {
     outline: none;
+}
+
+.selectize-dropdown-content{
+    max-height: 12em !important;
+
+}
+#equipment-selectized{
+    min-width: 150px;
+
 }
 
 /*WIKI*/
@@ -302,6 +324,13 @@ input[type=number] {
     #my_popup {
         width: 90%;
         padding: 1em;
+    }
+
+}
+@media screen and (min-width: 767px) and (max-width: 993px) and (min-height: 500px) {
+    #donate{
+        position: fixed;
+        bottom: 0;
     }
 }
 
@@ -391,6 +420,18 @@ input[type=number] {
 
     #breakEven {
         margin-left: 30%;
+    }
+    #advancedAwrapper{
+        margin: 0;
+        margin-top: 0.3em;
+        margin-bottom: 0.3em;
+    }
+    #advancedOptions{
+        display: none;
+    }
+    #logoMain{
+        width: 80%;
+        margin-left: 10%;
     }
 
     @media screen and (max-height: 750px) {

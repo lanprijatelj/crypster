@@ -304,6 +304,15 @@ $jq(window).on("load", function () {
 
     $jq( "#advancedAwrapper" ).click(function() {
         $jq("#advancedOptions").slideToggle();
+        if($jq("#advancedArrow").hasClass("fa-angle-up")){
+            $jq("#advancedArrow").removeClass("fa-angle-up");
+            $jq("#advancedArrow").addClass("fa-angle-down");
+        }else if($jq("#advancedArrow").hasClass("fa-angle-down")){
+            $jq("#advancedArrow").removeClass("fa-angle-down");
+            $jq("#advancedArrow").addClass("fa-angle-up");
+        }
+
+
     });
 
 });
