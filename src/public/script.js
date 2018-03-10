@@ -262,10 +262,37 @@ $jq(window).on("load", function () {
         $jq("#gpus").append(data);
         $jq('#equipment').selectize({
             sortField: 'text',
-            lockOptgroupOrder: 'True'
+            lockOptgroupOrder: 'True',
+            onChange: function(value){
+                for(var key in cardInfo){
+                    for(var i = 0; i < cardInfo[key].length; i++){                        
+                        if (cardInfo[key][i].Name == value){
+                            var currentEqupment = cardInfo[key][i];
+                            console.log(currentEqupment);
+                            if(currentEqupment.PowerConsumption.substring(currentEqupment.PowerConsumption.length - 1, currentEqupment.PowerConsumption.length) == "w"){                                
+                                $jq("input[name=power]").val(currentEqupment.PowerConsumption.substring(0, currentEqupment.PowerConsumption.length - 1));
+                            }else{
+                                $jq("input[name=power]").val(currentEqupment.PowerConsumption);
+                            }                            
+                            $jq("input[name=invest]").val(currentEqupment.Cost);
+                            if($jq("#hashRateUnit").val() == "TH/s"){
+                                $jq("#hashrate").val(currentEqupment.HashesPerSecond / Math.pow(10, 12));                                
+                            }else if($jq("#hashRateUnit").val() == "GH/s"){
+                                $jq("#hashrate").val(currentEqupment.HashesPerSecond / Math.pow(10, 9));                                
+                            }else if($jq("#hashRateUnit").val() == "MH/s"){
+                                $jq("#hashrate").val(currentEqupment.HashesPerSecond / Math.pow(10, 6));                                
+                            }else if($jq("#hashRateUnit").val() == "kH/s"){
+                                $jq("#hashrate").val(currentEqupment.HashesPerSecond / Math.pow(10, 3));                                
+                            }else if($jq("#hashRateUnit").val() == "H/s"){
+                                $jq("#hashrate").val(currentEqupment.HashesPerSecond);                                
+                            }       
+                            sendParameters()                                                  
+                        }
+                    }
+                }
+            }
         });
-    });
-
+    });    
     drawChart(12, 0, 0);
 
     $jq('.drawer').drawer();
