@@ -5,6 +5,7 @@ var results = {};
 var moneroInfo = {};
 var $jq = jQuery.noConflict();
 var cardInfo = {};
+var selectizeValue;
 
 function calculateCoinsMinedBTC(input) {
     if (input.hashrateUnit == "TH/s") {
@@ -41,11 +42,11 @@ function calculateCoinsMinedLTC(input) {
         var hashrate = input.hashrate * Math.pow(10, 3);
     }
     return (input.reward * hashrate) / (49.7 * input.diff) / 86400;
-} 
+}
 
 function calculateCoinsMinedZEC(input) {
     if (input.hashrateUnit == "Sols/s") {
-        var hashrate = input.hashrate ;
+        var hashrate = input.hashrate;
     } else if (input.hashrateUnit == "kSols/s") {
         var hashrate = input.hashrate * 1000;
     }
@@ -54,14 +55,14 @@ function calculateCoinsMinedZEC(input) {
 
 function calculateCoinsMinedXMR(input) {
     if (input.hashrateUnit == "H/s") {
-        var hashrate = input.hashrate ;
+        var hashrate = input.hashrate;
     } else if (input.hashrateUnit == "kH/s") {
         var hashrate = input.hashrate * 1000;
     }
     else if (input.hashrateUnit == "MH/s") {
         var hashrate = input.hashrate * 1000000;
     }
-    return ( (hashrate * (1 - (input.fee / 100)) * (1 - (input.reject / 100))) * moneroInfo.blockReward) / (moneroInfo.difficulty);
+    return ((hashrate * (1 - (input.fee / 100)) * (1 - (input.reject / 100))) * moneroInfo.blockReward) / (moneroInfo.difficulty);
 }
 
 function calculateProfitPerTimeFrame(miningProfit, diffChange, timeFrame) {
@@ -203,6 +204,37 @@ function drawChart(timeFrame, dataMined, dataROI) {
     });
 }
 
+function fillFormWithCardInfo(value) {
+    if (value) {      
+        for (var key in cardInfo) {
+            for (var i = 0; i < cardInfo[key].length; i++) {
+                if (cardInfo[key][i].Name == value) {
+                    var currentEqupment = cardInfo[key][i];
+                    console.log(currentEqupment);
+                    if (currentEqupment.PowerConsumption.substring(currentEqupment.PowerConsumption.length - 1, currentEqupment.PowerConsumption.length) == "w") {
+                        $jq("input[name=power]").val(currentEqupment.PowerConsumption.substring(0, currentEqupment.PowerConsumption.length - 1));
+                    } else {
+                        $jq("input[name=power]").val(currentEqupment.PowerConsumption);
+                    }
+                    $jq("input[name=invest]").val(currentEqupment.Cost);
+                    if ($jq("#hashRateUnit").val() == "TH/s") {
+                        $jq("#hashrate").val(currentEqupment.HashesPerSecond / Math.pow(10, 12));
+                    } else if ($jq("#hashRateUnit").val() == "GH/s") {
+                        $jq("#hashrate").val(currentEqupment.HashesPerSecond / Math.pow(10, 9));
+                    } else if ($jq("#hashRateUnit").val() == "MH/s") {
+                        $jq("#hashrate").val(currentEqupment.HashesPerSecond / Math.pow(10, 6));
+                    } else if ($jq("#hashRateUnit").val() == "kH/s") {
+                        $jq("#hashrate").val(currentEqupment.HashesPerSecond / Math.pow(10, 3));
+                    } else if ($jq("#hashRateUnit").val() == "H/s") {
+                        $jq("#hashrate").val(currentEqupment.HashesPerSecond);
+                    }
+                    sendParameters();
+                }
+            }
+        }
+    }
+}
+
 $jq(window).on("load", function () {
     addListeners();
     userInput.selectedCurrency = $jq("select[name=currency]").val();
@@ -221,11 +253,11 @@ $jq(window).on("load", function () {
     });
 
     $jq.post("/diffZEC").done(function (response) {
-        difficulty.zec = Math.round(response.difficultyZEC);        
+        difficulty.zec = Math.round(response.difficultyZEC);
     });
 
     $jq.post("/moneroInfo").done(function (response) {
-        moneroInfo = response;        
+        moneroInfo = response;
     });
 
     $jq.post("/price").done(function (response) {
@@ -245,54 +277,29 @@ $jq(window).on("load", function () {
         cardInfo.cards = response.cards;
         cardInfo.ASIC = response.ASIC;
         cardInfo.rigs = response.rigs;
-        console.log(cardInfo.ASIC);
-        for(var i = 0; i < cardInfo.rigs.length; i++){
+        for (var i = 0; i < cardInfo.rigs.length; i++) {
             data += "<option value='" + cardInfo.rigs[i].Name + "'>" + cardInfo.rigs[i].Name + "</option>";
         }
         $jq("#rigs").append(data);
         data = "";
-        for(var i = 0; i < cardInfo.ASIC.length; i++){
+        for (var i = 0; i < cardInfo.ASIC.length; i++) {
             data += "<option value='" + cardInfo.ASIC[i].Name + "'>" + cardInfo.ASIC[i].Name + "</option>";
         }
         $jq("#asics").append(data);
         data = "";
-        for(var i = 0; i < cardInfo.cards.length; i++){
+        for (var i = 0; i < cardInfo.cards.length; i++) {
             data += "<option value='" + cardInfo.cards[i].Name + "'>" + cardInfo.cards[i].Name + "</option>";
         }
         $jq("#gpus").append(data);
         $jq('#equipment').selectize({
             sortField: 'text',
             lockOptgroupOrder: 'True',
-            onChange: function(value){
-                for(var key in cardInfo){
-                    for(var i = 0; i < cardInfo[key].length; i++){                        
-                        if (cardInfo[key][i].Name == value){
-                            var currentEqupment = cardInfo[key][i];
-                            console.log(currentEqupment);
-                            if(currentEqupment.PowerConsumption.substring(currentEqupment.PowerConsumption.length - 1, currentEqupment.PowerConsumption.length) == "w"){                                
-                                $jq("input[name=power]").val(currentEqupment.PowerConsumption.substring(0, currentEqupment.PowerConsumption.length - 1));
-                            }else{
-                                $jq("input[name=power]").val(currentEqupment.PowerConsumption);
-                            }                            
-                            $jq("input[name=invest]").val(currentEqupment.Cost);
-                            if($jq("#hashRateUnit").val() == "TH/s"){
-                                $jq("#hashrate").val(currentEqupment.HashesPerSecond / Math.pow(10, 12));                                
-                            }else if($jq("#hashRateUnit").val() == "GH/s"){
-                                $jq("#hashrate").val(currentEqupment.HashesPerSecond / Math.pow(10, 9));                                
-                            }else if($jq("#hashRateUnit").val() == "MH/s"){
-                                $jq("#hashrate").val(currentEqupment.HashesPerSecond / Math.pow(10, 6));                                
-                            }else if($jq("#hashRateUnit").val() == "kH/s"){
-                                $jq("#hashrate").val(currentEqupment.HashesPerSecond / Math.pow(10, 3));                                
-                            }else if($jq("#hashRateUnit").val() == "H/s"){
-                                $jq("#hashrate").val(currentEqupment.HashesPerSecond);                                
-                            }       
-                            sendParameters()                                                  
-                        }
-                    }
-                }
+            onChange: function (value) {
+                selectizeValue = value;
+                fillFormWithCardInfo(value);
             }
         });
-    });    
+    });
     drawChart(12, 0, 0);
 
     $jq('.drawer').drawer();
@@ -300,13 +307,17 @@ $jq(window).on("load", function () {
     $jq('#my_popup').popup({
         opacity: 0.8,
         transition: 'all 0.5s',
-        onopen: function() {
-            $jq("main,h1,h3").css({"filter":"blur(5px)",
-            "-webkit-filter":"blur(5px)"});
+        onopen: function () {
+            $jq("main,h1,h3").css({
+                "filter": "blur(5px)",
+                "-webkit-filter": "blur(5px)"
+            });
         },
-        onclose: function() {
-            $jq("main,h1,h3").css({"filter":"blur(0px)",
-                "-webkit-filter":"blur(0px)"});
+        onclose: function () {
+            $jq("main,h1,h3").css({
+                "filter": "blur(0px)",
+                "-webkit-filter": "blur(0px)"
+            });
         }
     });
 
@@ -325,16 +336,16 @@ $jq(window).on("load", function () {
         arrow: true
     });
 
-      $jq("#my_popup").css({"margin-top": "0"});
-      $jq("#btcLogo").css({'display': 'block'});
+    $jq("#my_popup").css({ "margin-top": "0" });
+    $jq("#btcLogo").css({ 'display': 'block' });
 
 
-    $jq( "#advancedAwrapper" ).click(function() {
+    $jq("#advancedAwrapper").click(function () {
         $jq("#advancedOptions").slideToggle();
-        if($jq("#advancedArrow").hasClass("fa-angle-up")){
+        if ($jq("#advancedArrow").hasClass("fa-angle-up")) {
             $jq("#advancedArrow").removeClass("fa-angle-up");
             $jq("#advancedArrow").addClass("fa-angle-down");
-        }else if($jq("#advancedArrow").hasClass("fa-angle-down")){
+        } else if ($jq("#advancedArrow").hasClass("fa-angle-down")) {
             $jq("#advancedArrow").removeClass("fa-angle-down");
             $jq("#advancedArrow").addClass("fa-angle-up");
         }
@@ -350,7 +361,7 @@ $jq(document).scroll(function () {
     var y = $jq(this).scrollTop();
     if (y > 50 && $jq(window).width() < 480) {
         $jq('#crtice').fadeIn();
-    } else if($jq(window).width() < 480){
+    } else if ($jq(window).width() < 480) {
         $jq('#crtice').fadeOut();
     }
 });
@@ -370,56 +381,57 @@ $jq(function () {
 
 $jq("select[name=currency]").change(function () {
     userInput.selectedCurrency = $jq("select[name=currency]").val();
-    $jq("input[name=hashrate]").val(""); 
-    $jq("#BE").text("0"); 
-    $jq(".sols").css({"display" : "none"}); 
-    $jq(".hashes").css({"display" : "block"});
-    $jq(".slowHashrate").css({"display" : "none"});
-    $jq("#btcLogo").css({'display': 'none'});
-    $jq("#ltcLogo").css({'display': 'none'});
-    $jq("#ethLogo").css({'display': 'none'});
-    $jq("#zecLogo").css({'display': 'none'});
-    $jq("#xmrLogo").css({'display': 'none'});
+    $jq("input[name=hashrate]").val("");
+    $jq("#BE").text("0");
+    $jq(".sols").css({ "display": "none" });
+    $jq(".hashes").css({ "display": "block" });
+    $jq(".slowHashrate").css({ "display": "none" });
+    $jq("#btcLogo").css({ 'display': 'none' });
+    $jq("#ltcLogo").css({ 'display': 'none' });
+    $jq("#ethLogo").css({ 'display': 'none' });
+    $jq("#zecLogo").css({ 'display': 'none' });
+    $jq("#xmrLogo").css({ 'display': 'none' });
     if (userInput.selectedCurrency == "BTC") {
         $jq("#valuta").text("BTC");
         $jq("#value").val(price.btc);
         $jq("input[name=reward]").val("12.5");
         $jq("#diff").val(difficulty.btc);
         $jq("#hashRateUnit").val("TH/s");
-        $jq("#btcLogo").css({'display': 'block'});
+        $jq("#btcLogo").css({ 'display': 'block' });
     } else if (userInput.selectedCurrency == "ETH") {
         $jq("#valuta").text("ETH");
         $jq("input[name=reward]").val("3");
         $jq("#value").val(price.eth);
         $jq("#diff").val(difficulty.eth);
         $jq("#hashRateUnit").val("MH/s");
-        $jq("#ethLogo").css({'display': 'block'});
+        $jq("#ethLogo").css({ 'display': 'block' });
     } else if (userInput.selectedCurrency == "ZEC") {
         $jq("#valuta").text("ZEC");
         $jq("input[name=reward]").val("10");
         $jq("#value").val(price.zec);
-        $jq("#diff").val(difficulty.zec); 
-        $jq(".hashes").css({"display" : "none"});       
-        $jq(".sols").css({"display" : "block"});
+        $jq("#diff").val(difficulty.zec);
+        $jq(".hashes").css({ "display": "none" });
+        $jq(".sols").css({ "display": "block" });
         $jq("#hashRateUnit").val("Sols/s");
-        $jq("#zecLogo").css({'display': 'block'});
+        $jq("#zecLogo").css({ 'display': 'block' });
     } else if (userInput.selectedCurrency == "XMR") {
         $jq("#valuta").text("XMR");
         $jq("input[name=reward]").val(moneroInfo.blockReward.toFixed(4));
         $jq("#value").val(price.xmr);
         $jq("#diff").val(moneroInfo.difficulty);
-        $jq(".hashes").css({"display" : "none"});                
-        $jq(".slowHashrate").css({"display" : "block"});
+        $jq(".hashes").css({ "display": "none" });
+        $jq(".slowHashrate").css({ "display": "block" });
         $jq("#hashRateUnit").val("kH/s");
-        $jq("#xmrLogo").css({'display': 'block'});
+        $jq("#xmrLogo").css({ 'display': 'block' });
     } else {
         $jq("#valuta").text("LTC");
         $jq("#value").val(price.ltc);
         $jq("input[name=reward]").val("25");
         $jq("#diff").val(difficulty.ltc);
         $jq("#hashRateUnit").val("MH/s");
-        $jq("#ltcLogo").css({'display': 'block'});
+        $jq("#ltcLogo").css({ 'display': 'block' });
     }
+    fillFormWithCardInfo(selectizeValue);
 });
 
 $jq("#resetButton").click(function () {
