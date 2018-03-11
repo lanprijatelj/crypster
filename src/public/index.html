@@ -200,7 +200,8 @@
 
                         <div class="form-group form-inline  advancedDiv">
                             <div id="advancedAwrapper">
-                                <a id="advancedA" href="#">Advanced options</a><i class="fas fa-angle-up" id="advancedArrow"></i>
+                                <a id="advancedA" href="#">Advanced options</a><i class="fas fa-angle-up"
+                                                                                  id="advancedArrow"></i>
                             </div>
                         </div>
 
@@ -252,8 +253,13 @@
                                 <input name='CoinValueChange' type='number' value="0" step="0.00001"
                                        class="form-control form-control-sm smallerInput"/>
                             </div>
-                            <div class="form-group form-inline  float-right">
-                                <select id="equipment" class="form-control form-control-sm" name='hardware'>
+                            <div id="cards">
+                                <div class="form-group form-inline  float-right">
+                                <input name='numCards' type='number' value="1" step="1"
+                                       class="form-control form-control-sm smallerInput numCardsHW"/>
+                                <i class="fas fa-times"></i>
+                                <select id="equipment" class="form-control form-control-sm smallerInput"
+                                        name='hardware'>
                                     <option value="">Mining equipment...</option>
                                     <optgroup label="GPUs" id="gpus">
                                     </optgroup>
@@ -263,6 +269,12 @@
                                     </optgroup>
                                 </select>
                             </div>
+                            </div>
+
+                            <div id="addCards" style="width: 100%" class="form-group form-inline">
+                                <i class="far fa-plus-square"></i>
+                            </div>
+
                         </div>
 
                         <div class="col-xs-12">
@@ -397,6 +409,7 @@
   ],
   "logo": "https://www.crypstercalc.com/other/CrypsterLogo_onWhite.jpg"
 }
+
 
 
 

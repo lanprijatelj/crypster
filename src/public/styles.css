@@ -247,6 +247,13 @@ tbody, thead{
     min-width: 150px;
 
 }
+.numCardsHW{
+    width: 3em !important;
+}
+.fa-times{
+    margin: 0.3em;
+}
+
 
 /*WIKI*/
 @media screen and (max-height: 400px) {
@@ -310,6 +317,7 @@ tbody, thead{
 #btcLogo, #ltcLogo, #ethLogo, #zecLogo, #xmrLogo {
     display: none;
 }
+
 
 /*-----------TABLET VIEW -------------------------------------------*/
 @media screen and (min-width: 767px) and (max-width: 993px) {
