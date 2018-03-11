@@ -6,23 +6,9 @@ var moneroInfo = {};
 var $jq = jQuery.noConflict();
 var cardInfo = {};
 var selectizeValue;
-var selectHW;
-var htmlCodeCard = '<div class="form-group form-inline  float-right">\n' +
-    '                                    <input name=\'numCards\' type=\'number\' value="1" step="1"\n' +
-    '                                           class="form-control form-control-sm smallerInput numCardsHW"/>\n' +
-    '                                    <i class="fas fa-times"></i>\n' +
-    '                                    <select id="equipment" class="form-control form-control-sm smallerInput"\n' +
-    '                                            name=\'hardware\'>\n' +
-    '                                        <option value="">Mining equipment...</option>\n' +
-    '                                        <optgroup label="GPUs" id="gpus">\n' +
-    '                                        </optgroup>\n' +
-    '                                        <optgroup label="ASICs" id="asics">\n' +
-    '                                        </optgroup>\n' +
-    '                                        <optgroup label="Rigs" id="rigs">\n' +
-    '                                        </optgroup>\n' +
-    '                                    </select>\n' +
-    '                                </div>';
-
+var selectHW = [];
+var currentQuantityID = "#q1";
+var currentCardID = "#c1";
 
 function calculateCoinsMinedBTC(input) {
     if (input.hashrateUnit == "TH/s") {
@@ -222,37 +208,47 @@ function drawChart(timeFrame, dataMined, dataROI) {
 }
 
 function fillFormWithCardInfo(value) {
-    var numOfCards = $jq(".numCardsHW").val();
-
-    if (value) {      
+    var numOfCards = 0;
+    var numberOfAddedCards = parseInt(currentQuantityID.slice(2));
+    var powerConsumption = 0;
+    var hashrate = 0;
+    var investment = 0;
+    var selectedCardSelector = "#c1";
+    var cardQuantitySelector = "#q1";
+    for (var l = 0; l < numberOfAddedCards; l++) {
+        selectedCardSelector = "#c" + l;
+        cardQuantitySelector = "#q" + l;
+        numOfCards = $jq(cardQuantitySelector).val();
         for (var key in cardInfo) {
             for (var i = 0; i < cardInfo[key].length; i++) {
-                if (cardInfo[key][i].Name == value) {
+                if (cardInfo[key][i].Name == $(selectedCardSelector).getValue()) {
                     var currentEqupment = cardInfo[key][i];
-                    console.log(currentEqupment);
                     if (currentEqupment.PowerConsumption.substring(currentEqupment.PowerConsumption.length - 1, currentEqupment.PowerConsumption.length) == "w") {
-                        $jq("input[name=power]").val(currentEqupment.PowerConsumption.substring(0, currentEqupment.PowerConsumption.length - 1)*numOfCards);
+                        powerConsumption += currentEqupment.PowerConsumption.substring(0, currentEqupment.PowerConsumption.length - 1) * numOfCards;
                     } else {
-                        $jq("input[name=power]").val(currentEqupment.PowerConsumption)*numOfCards;
+                        powerConsumption += currentEqupment.PowerConsumption * numOfCards;
                     }
-                    $jq("input[name=invest]").val(currentEqupment.Cost)*numOfCards;
-                   /* console.log()*/
+                    powerConsumption += currentEqupment.Cost * numOfCards;
+                    /* console.log()*/
                     if ($jq("#hashRateUnit").val() == "TH/s") {
-                        $jq("#hashrate").val((currentEqupment.HashesPerSecond / Math.pow(10, 12))*numOfCards);
+                        hashrate += (currentEqupment.HashesPerSecond / Math.pow(10, 12)) * numOfCards;
                     } else if ($jq("#hashRateUnit").val() == "GH/s") {
-                        $jq("#hashrate").val((currentEqupment.HashesPerSecond / Math.pow(10, 9))*numOfCards);
-                    } else if ($jq("#hashRateUnit").val() == "MH/s")  {
-                        $jq("#hashrate").val((currentEqupment.HashesPerSecond / Math.pow(10, 6))*numOfCards);
+                        hashrate += (currentEqupment.HashesPerSecond / Math.pow(10, 9)) * numOfCards;
+                    } else if ($jq("#hashRateUnit").val() == "MH/s") {
+                        hashrate += (currentEqupment.HashesPerSecond / Math.pow(10, 6)) * numOfCards;
                     } else if ($jq("#hashRateUnit").val() == "kH/s" || $jq("#hashRateUnit").val() == "kSols/s") {
-                        $jq("#hashrate").val((currentEqupment.HashesPerSecond / Math.pow(10, 3))*numOfCards);
+                        hashrate += (currentEqupment.HashesPerSecond / Math.pow(10, 3)) * numOfCards;
                     } else if ($jq("#hashRateUnit").val() == "H/s" || $jq("#hashRateUnit").val() == "Sols/s") {
-                        $jq("#hashrate").val(((currentEqupment.HashesPerSecond))*numOfCards);
+                        hashrate += ((currentEqupment.HashesPerSecond)) * numOfCards;
                     }
-                    sendParameters();
                 }
             }
         }
     }
+    $jq("#hashrate").val(hashrate);
+    $jq("input[name=invest]").val(investment);
+    $jq("input[name=power]").val(powerConsumption);
+    sendParameters();
 }
 
 $jq(window).on("load", function () {
@@ -293,27 +289,10 @@ $jq(window).on("load", function () {
     });
 
     $jq.post("/cards").done(function (response) {
-        var data = "";
         cardInfo.cards = response.cards;
         cardInfo.ASIC = response.ASIC;
         cardInfo.rigs = response.rigs;
-        for (var i = 0; i < cardInfo.rigs.length; i++) {
-            data += "<option value='" + cardInfo.rigs[i].Name + "'>" + cardInfo.rigs[i].Name + "</option>";
-        }
-        $jq("#rigs").append(data);
-        data = "";
-        for (var i = 0; i < cardInfo.ASIC.length; i++) {
-            data += "<option value='" + cardInfo.ASIC[i].Name + "'>" + cardInfo.ASIC[i].Name + "</option>";
-        }
-        $jq("#asics").append(data);
-        data = "";
-        for (var i = 0; i < cardInfo.cards.length; i++) {
-            data += "<option value='" + cardInfo.cards[i].Name + "'>" + cardInfo.cards[i].Name + "</option>";
-        }
-        $jq("#gpus").append(data);
-
-        addHW();
-
+        addHW(currentCardID);
     });
 
     drawChart(12, 0, 0);
@@ -396,8 +375,11 @@ $jq(function () {
 });
 
 $jq("#addCards").on("click", function () {
-    $jq("#cards").append(htmlCodeCard);
-    addHW();
+    currentCardID = "#c" + (parseInt(currentCardID.slice(2)) + 1).toString();
+    currentQuantityID = "#q" + (parseInt(currentQuantityID.slice(2)) + 1).toString();
+    var htmlCode = constructHtmlCardCode(currentCardID, currentQuantityID);
+    $jq("#cards").append(htmlCode);
+    addHW(currentCardID);
 })
 
 $jq("select[name=currency]").change(function () {
@@ -455,7 +437,7 @@ $jq("select[name=currency]").change(function () {
     fillFormWithCardInfo(selectizeValue);
 });
 
-$jq(".numCardsHW").keyup(function (){
+$jq(".numCardsHW").keyup(function () {
     console.log("v funkciji");
     fillFormWithCardInfo(selectizeValue);
 })
@@ -518,8 +500,25 @@ $jq("#resetButton").click(function () {
     }
 });
 
-function addHW() {
-    selectHW = $jq('#equipment').selectize({
+function addHW(id) {    
+    var data = "";
+    //construct and append html for dropdown hardware data.
+    for (var i = 0; i < cardInfo.rigs.length; i++) {
+        data += "<option value='" + cardInfo.rigs[i].Name + "'>" + cardInfo.rigs[i].Name + "</option>";
+    }
+    $jq(".rigs").append(data);
+    data = "";
+    for (var i = 0; i < cardInfo.ASIC.length; i++) {
+        data += "<option value='" + cardInfo.ASIC[i].Name + "'>" + cardInfo.ASIC[i].Name + "</option>";
+    }
+    $jq(".asics").append(data);
+    data = "";
+    for (var i = 0; i < cardInfo.cards.length; i++) {
+        data += "<option value='" + cardInfo.cards[i].Name + "'>" + cardInfo.cards[i].Name + "</option>";
+    }
+    $jq(".gpus").append(data);
+    console.log(id);
+    selectHW += $jq(id).selectize({
         sortField: 'text',
         lockOptgroupOrder: 'True',
         onChange: function (value) {
@@ -529,6 +528,26 @@ function addHW() {
     });
 }
 
+function constructHtmlCardCode(idCard, idQuantity) {
+    idCard = idCard.slice(1);
+    idQuantity = idQuantity.slice(1);
+    return htmlCodeCard = '<div class="form-group form-inline  float-right">\n' +
+        '                                    <input id="' + idQuantity + '" name=\'numCards\' type=\'number\' value="1" step="1"\n' +
+        '                                           class="form-control form-control-sm smallerInput numCardsHW"/>\n' +
+        '                                    <i class="fas fa-times"></i>\n' +
+        '                                    <select id="' + idCard + '" class="form-control form-control-sm smallerInput cardsHW"\n' +
+        '                                            >\n' +
+        '                                        <option value="">Mining equipment...</option>\n' +
+        '                                        <optgroup label="GPUs" id="gpus">\n' +
+        '                                        </optgroup>\n' +
+        '                                        <optgroup label="ASICs" id="asics">\n' +
+        '                                        </optgroup>\n' +
+        '                                        <optgroup label="Rigs" id="rigs">\n' +
+        '                                        </optgroup>\n' +
+        '                                    </select>\n' +
+        '                                </div>';
+
+}
 
 function addListeners() {
     $jq("#hashRateUnit").change(sendParameters);
