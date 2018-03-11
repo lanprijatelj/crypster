@@ -6,7 +6,8 @@ var moneroInfo = {};
 var $jq = jQuery.noConflict();
 var cardInfo = {};
 var selectizeValue;
-var selectHW = [];
+var inputsCards = [];
+var selectHW;
 var currentQuantityID = "#q1";
 var currentCardID = "#c1";
 
@@ -209,26 +210,28 @@ function drawChart(timeFrame, dataMined, dataROI) {
 
 function fillFormWithCardInfo(value) {
     var numOfCards = 0;
-    var numberOfAddedCards = parseInt(currentQuantityID.slice(2));
+    var numberOfDistinctHardwere = parseInt(currentQuantityID.slice(2));
     var powerConsumption = 0;
     var hashrate = 0;
     var investment = 0;
     var selectedCardSelector = "#c1";
     var cardQuantitySelector = "#q1";
-    for (var l = 0; l < numberOfAddedCards; l++) {
-        selectedCardSelector = "#c" + l;
-        cardQuantitySelector = "#q" + l;
+    for (var l = 1; l <= numberOfDistinctHardwere; l++) {
+        selectedCardSelector = "#c" + l.toString();
+        cardQuantitySelector = "#q" + l.toString();
         numOfCards = $jq(cardQuantitySelector).val();
+        console.log(selectedCardSelector);
         for (var key in cardInfo) {
             for (var i = 0; i < cardInfo[key].length; i++) {
-                if (cardInfo[key][i].Name == $(selectedCardSelector).getValue()) {
+                if (cardInfo[key][i].Name == $jq(selectedCardSelector).val()) {
                     var currentEqupment = cardInfo[key][i];
+                    console.log(currentEqupment);
                     if (currentEqupment.PowerConsumption.substring(currentEqupment.PowerConsumption.length - 1, currentEqupment.PowerConsumption.length) == "w") {
                         powerConsumption += currentEqupment.PowerConsumption.substring(0, currentEqupment.PowerConsumption.length - 1) * numOfCards;
                     } else {
                         powerConsumption += currentEqupment.PowerConsumption * numOfCards;
                     }
-                    powerConsumption += currentEqupment.Cost * numOfCards;
+                    investment += currentEqupment.Cost * numOfCards;
                     /* console.log()*/
                     if ($jq("#hashRateUnit").val() == "TH/s") {
                         hashrate += (currentEqupment.HashesPerSecond / Math.pow(10, 12)) * numOfCards;
@@ -437,8 +440,7 @@ $jq("select[name=currency]").change(function () {
     fillFormWithCardInfo(selectizeValue);
 });
 
-$jq(".numCardsHW").keyup(function () {
-    console.log("v funkciji");
+$jq(".numCardsHW").keyup(function () {    
     fillFormWithCardInfo(selectizeValue);
 })
 
@@ -453,9 +455,12 @@ $jq("#resetButton").click(function () {
     $jq("input[name=invest]").val("0");
     $jq("input[name=time]").val("12");
     $jq("#equipment-selectized").val("");
-    var control = selectHW[0].selectize;
-    control.clear();
-    $jq(".numCardsHW").val("0");
+    currentQuantityID = "#q1";
+    currentCardID = "#c1";    
+    var htmlCode = constructHtmlCardCode(currentCardID, currentQuantityID);   
+    $jq("#cards").html(htmlCode);
+    addHW(currentCardID);    
+    $jq(".numCardsHW").val("1");
 
     if (userInput.selectedCurrency == "BTC") {
         $jq("#hashrate").val("");
@@ -518,7 +523,7 @@ function addHW(id) {
     }
     $jq(".gpus").append(data);
     console.log(id);
-    selectHW += $jq(id).selectize({
+    selectHW = $jq(id).selectize({
         sortField: 'text',
         lockOptgroupOrder: 'True',
         onChange: function (value) {
@@ -526,6 +531,8 @@ function addHW(id) {
             fillFormWithCardInfo(value);
         }
     });
+    inputsCards.push(selectHW);
+    $jq(".numCardsHW").keyup(sendParameters);
 }
 
 function constructHtmlCardCode(idCard, idQuantity) {
@@ -538,11 +545,11 @@ function constructHtmlCardCode(idCard, idQuantity) {
         '                                    <select id="' + idCard + '" class="form-control form-control-sm smallerInput cardsHW"\n' +
         '                                            >\n' +
         '                                        <option value="">Mining equipment...</option>\n' +
-        '                                        <optgroup label="GPUs" id="gpus">\n' +
+        '                                        <optgroup label="GPUs" class="gpus">\n' +
         '                                        </optgroup>\n' +
-        '                                        <optgroup label="ASICs" id="asics">\n' +
+        '                                        <optgroup label="ASICs" class="asics">\n' +
         '                                        </optgroup>\n' +
-        '                                        <optgroup label="Rigs" id="rigs">\n' +
+        '                                        <optgroup label="Rigs" class="rigs">\n' +
         '                                        </optgroup>\n' +
         '                                    </select>\n' +
         '                                </div>';
@@ -562,7 +569,7 @@ function addListeners() {
     $jq("input[name=powerCost]").keyup(sendParameters);
     $jq("input[name=diffChange]").keyup(sendParameters);
     $jq("input[name=invest]").keyup(sendParameters);
-    $jq("input[name=time]").keyup(sendParameters);
+    $jq("input[name=time]").keyup(sendParameters);    
 }
 
 function sendParameters() {
