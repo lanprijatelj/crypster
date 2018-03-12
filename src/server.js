@@ -87,6 +87,18 @@ app.get('/other/facebook_thumbnail', function (request, response) {
 app.get('/other/MyriadProRegular.ttf', function (request, response) {
     response.sendFile(__dirname + '/public/other/MyriadProRegular.ttf');
 });
+app.get('/other/crypsterProfile.jpg', function (request, response) {
+    response.sendFile(__dirname + '/public/other/crypsterProfile.jpg');
+});
+app.get('/other/thumbnail.png', function (request, response) {
+    response.sendFile(__dirname + '/public/other/thumbnail.png');
+});
+app.get('/other/thumbnailConverter.png', function (request, response) {
+    response.sendFile(__dirname + '/public/other/thumbnailConverter.png');
+});
+
+
+
 
 
 

@@ -74,6 +74,11 @@ h1 {
 
 #resetButton {
     margin-left: 100em;
+    margin-bottom: 1em;
+}
+#addCards{
+    margin-left: 50%;
+    margin-bottom: 0.3em;
 }
 
 .sols {
@@ -89,7 +94,7 @@ h1 {
     color: #41929C;
 }
 .advancedDiv{
-    width: 100%;
+    margin-left: 20%;
 }
 #advancedA{
     margin-right: 0.5em;
@@ -99,12 +104,10 @@ h1 {
 }
 #advancedAwrapper{
     cursor: pointer;
-    margin-left: 70%;
 }
 #advancedOptions{
-
+    width: 100%;
 }
-
 .form-inline{
     margin-bottom: 0.3em;
 }
@@ -243,10 +246,15 @@ tbody, thead{
     max-height: 12em !important;
 
 }
-#equipment-selectized{
+.selectize-input input{
     min-width: 150px;
 
 }
+.celRow{
+   margin-left: 10%;
+}
+
+
 .numCardsHW{
     width: 3em !important;
 }
@@ -354,9 +362,7 @@ tbody, thead{
         margin-bottom: 0;
     }
 
-    #resetButton {
-        margin-top: 0.5em;
-    }
+
 
     .imgIcon {
         margin-bottom: 0.5em;
@@ -447,6 +453,19 @@ tbody, thead{
             height: 20em;
             overflow: scroll;
         }
+    }
+    .cardsHW{
+        width: auto;
+    }
+    .celRow{
+        margin-left: 0;
+        margin-top: 0.7em;
+    }
+    #addCards{
+        margin-left: 0;
+    }
+    .advancedDiv{
+        margin-left: 0;
     }
 
 }

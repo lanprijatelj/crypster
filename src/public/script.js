@@ -538,11 +538,11 @@ function addHW(id) {
 function constructHtmlCardCode(idCard, idQuantity) {
     idCard = idCard.slice(1);
     idQuantity = idQuantity.slice(1);
-    return htmlCodeCard = '<div class="form-group form-inline  float-right">\n' +
+    return htmlCodeCard = '<div class="form-group form-inline  float-right celRow">\n' +
         '                                    <input id="' + idQuantity + '" name=\'numCards\' type=\'number\' value="1" step="1"\n' +
-        '                                           class="form-control form-control-sm smallerInput numCardsHW"/>\n' +
+        '                                           class="form-control form-control-sm  numCardsHW"/>\n' +
         '                                    <i class="fas fa-times"></i>\n' +
-        '                                    <select id="' + idCard + '" class="form-control form-control-sm smallerInput cardsHW"\n' +
+        '                                    <select id="' + idCard + '" class="form-control form-control-sm cardsHW"\n' +
         '                                            >\n' +
         '                                        <option value="">Mining equipment...</option>\n' +
         '                                        <optgroup label="GPUs" class="gpus">\n' +

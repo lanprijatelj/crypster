@@ -53,10 +53,10 @@ h2{
 }
 
 #adHorizontal{
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 10em;
     width: max-content;
-    margin-top: 15em;
+    position: fixed;
+    bottom: 0;
 
 }
 #syncSign{
