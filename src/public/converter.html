@@ -6,12 +6,16 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113183301-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
+
         function gtag() {
             dataLayer.push(arguments);
         }
+
         gtag('js', new Date());
+
         gtag('config', 'UA-113183301-1');
     </script>
+
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -27,8 +31,9 @@
           content="An easy to use cryptocurrency converter used to convert USD, EUR, Bitcoin, Ethereum ,Litecoin, zCash and Monero">
     <meta name="keywords"
           content="Converter,USD,EUR,Cryptocurrency,Bitcoin,Ethereum,Litecoin,zCash,Monero,Crypstercalc">
-    <meta property="og:image" content="/facebook_thumbnail.png"/>
-    <meta name="author" content="Aljaž Klaneček, Lan Prijatelj">    
+    <meta property="og:image" content="https://www.crypstercalc.com/other/thumbnailConverter.png"/>
+    <meta name="author" content="Aljaž Klaneček, Lan Prijatelj">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body class="drawer drawer--left">
@@ -40,8 +45,9 @@
     <nav class="drawer-nav" role="navigation">
 
         <ul class="drawer-menu">
-            <img src="/other/iconmonstr-calculator-1.svg" alt="calcPicture" id="calcImg">
-            <h3 id="menuHeading">CrypsterCalc</h3>
+            <a href="/">
+                <img src="/other/LogoNav.png" alt="calcPicture" id="CrypsterCalcNav">
+            </a>
             <li><a class="drawer-menu-item no_outline" href="/">Calculator</a></li>
             <li id="menuConverter"><a class="drawer-menu-item no_outline" href="#">Converter</a></li>
             <li><a class="drawer-menu-item my_popup_open no_outline" href="#">Wiki</a></li>
@@ -116,8 +122,9 @@
 
 </div>
 
-<!--<img src="/other/LogoPrototype1.png" alt="Logo Crypster" id="logoMain" >-->
-<h1>CrypsterCalc</h1>
+<div id="mainHeading">
+    <img src="/other/LogoSign.png" alt="Logo Crypster" id="logoMain">
+</div>
 <div class="d-none d-sm-block">
     <h3 id="welcomeMessage">The World's most comprehensive mining calculator.</h3>
 </div>
@@ -134,7 +141,7 @@
                 <h2>Converter </h2>
             </div>
             <div class="col-sm-12">
-                <div id="syncSign">
+                <div  id="syncSign">
                     <i class="fas fa-sync fa-3x "></i>
                 </div>
             </div>
@@ -163,7 +170,7 @@
                         <input id="value1" name='value' type='number' step="0.000000001"
                                class="form-control form-control-sm" value="1"/>
                         <div id="equalsSign"><i class="fas fa-exchange-alt"> </i></div>
-                        <select id="currency2" name='currency2' class="form-control form-control-sm">
+                        <select id="currency2" name='currency2'  class="form-control form-control-sm">
                             <option value='USD'>USD</option>
                             <option value='EUR'>EUR</option>
                             <option value='BTC'>BTC</option>
@@ -188,16 +195,16 @@
                 </form>
 
             </div>
-
-
         </div>
         <div id="adHorizontal">
             <span id="ct_caAbB18"></span>
         </div>
     </div>
+
     <div id="ad1">
         <span id="ct_cBhrGqy"></span>
     </div>
+
 </main>
 <footer>
     <div class="row" id="donate">
@@ -218,7 +225,7 @@
         </div>
     </div>
 </footer>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script src="https://unpkg.com/tippy.js@2.1.1/dist/tippy.all.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -236,13 +243,12 @@
 {
   "@type": "Website",
   "name": "Crypster Calc",
-  "url": "https://www.crypstercalc.com/",
+  "url": "https://www.crypstercalc.com/converter",
   "sameAs": [
     "https://www.facebook.com/crypstercalc/"
   ],
-  "logo": "https://www.crypstercalc.com/other/CrypsterLogo_onWhite.jpg"
+  "logo": "https://www.crypstercalc.com/other/crypsterProfile.jpg"
 }
-
 
 
 

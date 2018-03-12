@@ -6,355 +6,381 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113183301-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
+
         function gtag() {
             dataLayer.push(arguments);
         }
+
         gtag('js', new Date());
+
         gtag('config', 'UA-113183301-1');
     </script>
+
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <a hreflang="language_code"></a>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="shortcut icon" href="/favicon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.bootstrap3.min.css">
     <link href="/styles" rel="stylesheet">
 
     <title>Cryptocurrency Mining Calculator - Crypster Calc</title>
-    <meta name="description"
-          content="An easy to use cryptocurrency calculator used to calculate Bitcoin, Ethereum ,Litecoin, zCash and Monero miner's potential profits in USD. The calculator fetches price and network data from the internet and only requires the hash rate (speed of mining) from the user. A chart projecting future profits, coins mined or return of investment is created dynamically and displayed instantly.">
-    <meta name="keywords"
-          content="Mining,Profitability,Calculator,Cryptocurrency,Bitcoin,Ethereum,Litecoin,zCash,Monero,Crypstercalc">
-    <meta property="og:image" content="https://www.crypstercalc.com/other/facebook_thumbnail"/>
+    <meta name="description" content="An easy to use cryptocurrency calculator used to calculate Bitcoin, Ethereum ,Litecoin, zCash and Monero miner's potential profits in USD. The calculator fetches price and network data from the internet and only requires the hash rate (speed of mining) from the user. A chart projecting future profits, coins mined or return of investment is created dynamically and displayed instantly.">
+    <meta name="keywords" content="Mining,Profitability,Calculator,Cryptocurrency,Bitcoin,Ethereum,Litecoin,zCash,Monero,Crypstercalc">
+    <meta property="og:image" content="https://www.crypstercalc.com/other/thumbnail.png" />
     <meta name="author" content="Aljaž Klaneček, Lan Prijatelj">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body class="drawer drawer--left">
-<header role="banner">
-    <button type="button" id="crtice" class="drawer-toggle drawer-hamburger">
-        <span class="sr-only">toggle navigation</span>
-        <span class="drawer-hamburger-icon no_outline"></span>
-    </button>
-    <nav class="drawer-nav" role="navigation">
+    <header role="banner">
+        <button type="button" id="crtice" class="drawer-toggle drawer-hamburger">
+            <span class="sr-only">toggle navigation</span>
+            <span class="drawer-hamburger-icon no_outline"></span>
+        </button>
+        <nav class="drawer-nav" role="navigation">
 
-        <ul class="drawer-menu">
-            <img src="/other/iconmonstr-calculator-1.svg" alt="calcPicture" id="calcImg">
-            <h3 id="menuHeading">CrypsterCalc</h3>
-            <li id="menuCalculator"><a class="drawer-menu-item no_outline" href="#">Calculator</a></li>
-            <li><a class="drawer-menu-item no_outline" href="/converter">Converter</a></li>
-
-            <li><a class="drawer-menu-item my_popup_open no_outline" href="#">Wiki</a></li>
-            <li class="drawer-dropdown">
-                <a class="drawer-menu-item" href="#" data-toggle="dropdown" role="button" aria-expanded="false">
-                    About <span class="drawer-caret"></span>
+            <ul class="drawer-menu">
+                <a href="/">
+                    <img src="/other/LogoNav.png" alt="calcPicture" id="CrypsterCalcNav">
                 </a>
-                <ul class="drawer-dropdown-menu">
-                    <p id="menuText">
-                        Crypster Calc is a comprehensive cryptocurrency calculator. We saw a need to develop a mining
-                        calculator
-                        that could acknowledge
-                        the difficulty increase in time, the volatility of the market and therefore the constant price
-                        change. We
-                        also wanted a calculator that would look cool be enjoyable and easy to use. And so we made
-                        Crypster
-                        Calc.
-                        <br>
-                        <br> Any feedback is appreciated. If you want us to add other currencies please, let us know and
-                        we'll do
-                        our
-                        best.
-                    </p>
-                </ul>
-            </li>
-        </ul>
-        <div id="menuAbout">
-            crypster.calc@gmail.com
-            <br>
-            <a href="https://www.linkedin.com/in/lan-prijatelj-b76483158/" target="_blank"> <i
-                    class="fab fa-linkedin"></i></a>
-            <a href="https://www.linkedin.com/in/alja%C5%BE-klane%C4%8Dek-a18595131/" target="_blank"><i
-                    class="fab fa-linkedin"></i></a>
-            <a href="https://www.facebook.com/crypstercalc/" target="_blank"><i class="fab fa-facebook-square"></i></a>
+                <li id="menuCalculator">
+                    <a class="drawer-menu-item no_outline" href="#">Calculator</a>
+                </li>
+                <li>
+                    <a class="drawer-menu-item no_outline" href="/converter">Converter</a>
+                </li>
+
+                <li>
+                    <a class="drawer-menu-item my_popup_open no_outline" href="#">Wiki</a>
+                </li>
+                <li class="drawer-dropdown">
+                    <a class="drawer-menu-item" href="#" data-toggle="dropdown" role="button" aria-expanded="false">
+                        About
+                        <span class="drawer-caret"></span>
+                    </a>
+                    <ul class="drawer-dropdown-menu">
+                        <p id="menuText">
+                            Crypster Calc is a comprehensive cryptocurrency calculator. We saw a need to develop a mining calculator that could acknowledge
+                            the difficulty increase in time, the volatility of the market and therefore the constant price
+                            change. We also wanted a calculator that would look cool be enjoyable and easy to use. And so
+                            we made Crypster Calc.
+                            <br>
+                            <br> Any feedback is appreciated. If you want us to add other currencies please, let us know and
+                            we'll do our best.
+                        </p>
+                    </ul>
+                </li>
+            </ul>
+            <div id="menuAbout">
+                crypster.calc@gmail.com
+                <br>
+                <a href="https://www.linkedin.com/in/lan-prijatelj-b76483158/" target="_blank" class="fillTurkis">
+                    <i class="fab fa-linkedin "></i>
+                </a>
+                <a href="https://www.linkedin.com/in/alja%C5%BE-klane%C4%8Dek-a18595131/" target="_blank" class="fillTurkis">
+                    <i class="fab fa-linkedin "></i>
+                </a>
+                <a href="https://www.facebook.com/crypstercalc/" target="_blank" class="fillTurkis">
+                    <i class="fab fa-facebook-square "></i>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <div id="my_popup">
+        <div id="closePopup">
+            <i class="far fa-times-circle my_popup_close"></i>
         </div>
-    </nav>
-</header>
+        <b>What are cryptocurrencies?</b>
+        <p> A cryptocurrency is a digital asset designed to work as a medium of exchange that uses cryptography to secure its
+            transactions, to control the creation of additional units, and to verify the transfer of assets. Cryptocurrencies
+            are classified as a subset of digital currencies and are also classified as a subset of alternative currencies
+            and virtual currencies. Cryptocurrencies use decentralized control as opposed to centralized electronic money
+            and central banking systems. The decentralized control of each cryptocurrency works through a blockchain, which
+            is a public transaction database, functioning as a distributed ledger. As of January 2018, there were over 1384
+            and growing digital currencies in existence.
+        </p>
 
-<div id="my_popup">
-    <div id="closePopup">
-        <i class="far fa-times-circle my_popup_close"></i>
+        <b>What is cryptocurrency mining?</b>
+        <p> In cryptocurrency networks, mining is a validation of transactions. For this effort, successful miners obtain new
+            cryptocurrency as a reward. The reward decreases transaction fees by creating a complementary incentive to contribute
+            to the processing power of the network. The rate of generating hashes, which validate any transaction, has been
+            increased by the use of specialized machines such as FPGAs and ASICs running complex hashing algorithms like
+            SHA-256 and Scrypt. This arms race for cheaper-yet-efficient machines has been on since the day the first cryptocurrency,
+            bitcoin, was introduced in 2009.
+        </p>
+        <b>What is Crypster Calc?</b>
+        <p>Crypster Calc is s cryptocurrency mining calculator, for calculating mining profits and the time you'll need to return
+            your investment in hardware. You only need to input your hash rate, investment and costs or fees and it does
+            the rest for you. If you are an advanced user it also allows you to change many other parameters such as difficulty
+            and coin value change % per month. This makes your calculations much more accurate and is essential for good
+            mining profit predictions. Enjoy using Crypster calc the world’s most comprehensive mining calculator.
+        </p>
+        <a href="https://en.wikipedia.org/wiki/Cryptocurrency" target="_blank">
+            <i class="fas fa-link"></i>
+            <span id="wikiSource">&nbsp;Wiki source</span>
+
+
+        </a>
+
     </div>
-    <b>What are cryptocurrencies?</b>
-    <p> A cryptocurrency is a digital asset designed to work as a medium of exchange that uses cryptography to secure
-        its transactions, to control the creation of additional units, and to verify the transfer of assets.
-        Cryptocurrencies are classified as a subset of digital currencies and are also classified as a subset of
-        alternative currencies and virtual currencies. Cryptocurrencies use decentralized control as opposed to
-        centralized electronic money and central banking systems. The decentralized control of each cryptocurrency works
-        through a blockchain, which is a public transaction database, functioning as a distributed ledger. As of January
-        2018, there were over 1384 and growing digital currencies in existence.
-    </p>
+    <div id="mainHeading">
+        <img src="/other/LogoSign.png" alt="Logo Crypster" id="logoMain">
+    </div>
+    <div class="d-none d-sm-block">
+        <h3 id="welcomeMessage">The World's most comprehensive mining calculator.</h3>
+    </div>
 
-    <b>What is cryptocurrency mining?</b>
-    <p> In cryptocurrency networks, mining is a validation of transactions. For this effort, successful miners obtain
-        new cryptocurrency as a reward. The reward decreases transaction fees by creating a complementary incentive to
-        contribute to the processing power of the network. The rate of generating hashes, which validate any
-        transaction, has been increased by the use of specialized machines such as FPGAs and ASICs running complex
-        hashing algorithms like SHA-256 and Scrypt. This arms race for cheaper-yet-efficient machines has been on since
-        the day the first cryptocurrency, bitcoin, was introduced in 2009.
-    </p>
-    <b>What is Crypster Calc?</b>
-    <p>Crypster Calc is s cryptocurrency mining calculator, for calculating mining profits and the time you'll need to
-        return your investment in hardware. You only need to input your hash rate, investment and costs or fees and it
-        does the rest for you. If you are an advanced user it also allows you to change many other parameters such as
-        difficulty and coin value change % per month. This makes your calculations much more accurate and is essential
-        for good mining profit predictions. Enjoy using Crypster calc the world’s most comprehensive mining calculator.
-    </p><a href="https://en.wikipedia.org/wiki/Cryptocurrency" target="_blank">
-    <i class="fas fa-link"></i><span id="wikiSource">&nbsp;Wiki source</span>
+    <main role="main">
+        <div class="container">
+            <div class="row">
+                <div class="row col-md-6">
+                    <div class="col-md-12">
+                        <form id='calcMain' class="form-group">
+                            <div class="form-group  form-inline  float-right">
+                                <span id="coinIcon">
+                                    <img class="imgIcon" id="btcLogo" src="other/BTC.svg" alt="BTC Logo">
+                                    <img class="imgIcon" src="other/LTC.svg" id="ltcLogo" alt="LTC Logo">
+                                    <img class="imgIcon" src="other/ETH.svg" id="ethLogo" alt="ETH Logo">
+                                    <img class="imgIcon" src="other/ZEC-alt.svg" id="zecLogo" alt="ZEC Logo">
+                                    <img class="imgIcon" src="other/XMR.svg" id="xmrLogo" alt="XMR Logo">
+                                </span>
+                                <label class="col-form-label"> Select cryptocurrency:&nbsp; </label>
+                                <select id='currency' name='currency' class="form-control form-control-sm">
+                                    <option value='BTC'>BTC</option>
+                                    <option value='ETH'>ETH</option>
+                                    <option value='LTC'>LTC</option>
+                                    <option value='ZEC'>ZEC</option>
+                                    <option value='XMR'>XMR</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-inline  float-right">
+                                <select id='hashRateUnit' name='hashrateUnit' class="form-control form-control-sm">
+                                    <option value='TH/s' class="hashes">TH/s</option>
+                                    <option value='GH/s' class="hashes">GH/s</option>
+                                    <option value='MH/s' class="hashes">MH/s</option>
+                                    <option value='kH/s' class="hashes slowHashrate">kH/s</option>
+                                    <option value='H/s' class="hashes slowHashrate">H/s</option>
+                                    <option value='Sols/s' class="sols">Sols/s</option>
+                                    <option value='kSols/s' class="sols">kSols/s</option>
+                                </select>
+                                <label class="col-form-label"> &nbsp; Hashrate: &nbsp; </label>
+                                <input id="hashrate" name='hashrate' type='number' placeholder="Enter hashrate" class="form-control form-control-sm" />
+                            </div>
+                            <div class="form-group form-inline  float-right">
+                                <i class="fa fa-info-circle fa-2x info " title="Coin value has a preset value of current coin value as show on Coin market cap."></i>&nbsp;
+                                <label class="col-form-label">Coin value($): &nbsp;</label>
+                                <input id="value" name='value' type='number' step="0.00001" class="form-control form-control-sm" />
+                            </div>
+                            <div class="form-group form-inline  float-right">
+                                <i class="fa fa-info-circle info" title="Difficulty has a preset value of current coin difficulty as show on Blokchain.info Etherchain.org or Explorer.litecoin.net respectively."></i>&nbsp;
+                                <label class="col-form-label">Difficulty: &nbsp;</label>
+                                <input id="diff" name='diff' type='number' step="0.000001" class="form-control form-control-sm" />
+                            </div>
+                            <div class="form-group form-inline  float-right">
+                                <label class="col-form-label">
+                                    Investment($):&nbsp; </label>
+                                <input name='invest' type='number' value="0" step="0.01" class="form-control form-control-sm" />
+
+                            </div>
+                            <div class="form-group form-inline  float-right">
+                                <label id="tFrame" class="col-form-label">
+                                    Time Frame (months):&nbsp; </label>
+                                <input name='time' type='number' value="12" align="right" class="form-control form-control-sm" />
+                            </div>
+
+                            <div class="form-group form-inline float-right  advancedDiv">
+                                <div id="advancedAwrapper">
+                                    <a id="advancedA" href="#">Advanced options</a>
+                                    <i class="fas fa-angle-up" id="advancedArrow"></i>
+                                </div>
+                            </div>
+
+                            <div id="advancedOptions">
+
+                                <div class="form-group form-inline float-right">
+                                    <label class="col-form-label">
+                                        Block reward:&nbsp;</label>
+                                    <input name='reward' type='number' value="12.5" step="0.000001" class="form-control form-control-sm" />
+                                </div>
+                                <div class="form-group form-inline float-right">
+                                    <label class="col-form-label">
+                                        Power consumption (W):&nbsp;</label>
+                                    <input name='power' type='number' value="0" step="0.00001" class="form-control  form-control-sm" />
+                                </div>
+                                <div class="form-group form-inline  float-right">
+                                    <label class="col-form-label">
+                                        Power cost ($/kWh):&nbsp;</label>
+                                    <input name='powerCost' type='number' value="0.1" step="0.00001" class="form-control form-control-sm" />
+                                </div>
+                                <div class="form-group form-inline  float-right">
+                                    <label class="col-form-label">
+                                        Pool fee (%):&nbsp;</label>
+                                    <input name='fee' type='number' value="1" step="0.00001" class="form-control form-control-sm" />
+                                </div>
+                                <div class="form-group form-inline  float-right">
+                                    <label class="col-form-label">
+                                        Reject rate (%):&nbsp; </label>
+                                    <input name='reject' type='number' value="1" step="0.00001" class="form-control form-control-sm" />
+                                </div>
+                                <div class="form-group form-inline  float-right">
+                                    <i class="fa fa-question-circle info" title="The difficulty change is the rate at which the network difficulty is changing every month. Diff change is used for the estimated future profits graph and break even analysis. Typically in crypto, network difficulty tends to increase over time, meaning a miner will generate less crypto with the same hardware. Accounting for this changing difficulty is essential to generate long term profitability predictions. "></i>&nbsp;
+                                    <label class="col-form-label">Difficulty change (%/month):&nbsp;</label>
+                                    <input name='diffChange' type='number' value="0" class="form-control form-control-sm smallerInput" />
+
+                                </div>
+                                <div class="form-group form-inline  float-right">
+                                    <i class="fa fa-question-circle info" title="The Coin value change is your predicted change of price every month. Coin value change is used for the estimated future profits graph and break even analysis. We are used to very volatile markets in crypto space so be careful with your estimates as your calculations may vary drastically. It is essential to account coin price change if we wish to have accurate calculations and generate long term profitability predictions."></i>&nbsp;
+                                    <label class="col-form-label">
+                                        Coin value change (%/month):&nbsp;</label>
+                                    <input name='CoinValueChange' type='number' value="0" step="0.00001" class="form-control form-control-sm smallerInput" />
+                                </div>
+                                <div id="cards">
+                                    <div class="form-group form-inline  float-right celRow">
+                                        <input name='numCards' id="q1" type='number' value="1" step="1" class="form-control form-control-sm  numCardsHW"
+                                        />
+                                        <i class="fas fa-times"></i>
+                                        <select id="c1" class="form-control form-control-sm cardsHW">
+                                            <option value="">Mining equipment...</option>
+                                            <optgroup label="GPUs" class="gpus">
+                                            </optgroup>
+                                            <optgroup label="ASICs" class="asics">
+                                            </optgroup>
+                                            <optgroup label="Rigs" class="rigs">
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div id="addCards" class="form-group form-inline float-right">
+                                    <i class="far fa-plus-square" title="Add hardware"></i>
+                                </div>
+
+                            </div>
+
+                            <div class="col-xs-12">
+                                <button id="resetButton" type="button" class="btn btn-outline-primary btn-sm float-right no_outline">
+                                    Reset Values
+                                </button>
+                            </div>
+                        </form>
 
 
-</a>
+                    </div>
+                </div>
 
-</div>
 
-<!--<img src="/other/LogoPrototype1.png" alt="Logo Crypster" id="logoMain" >-->
-<h1>CrypsterCalc</h1>
-<div class="d-none d-sm-block">
-    <h3 id="welcomeMessage">The World's most comprehensive mining calculator.</h3>
-</div>
+                <div class="row col-md-6">
 
-<main role="main">
-    <div class="container">
-        <div class="row">
-            <div class="row col-md-6">
-                <div class="col-md-12">
-                    <form id='calcMain' class="form-group">
-                        <div class="form-group  form-inline  float-right">
-                            <span id="coinIcon"><img class="imgIcon" id="btcLogo" src="other/BTC.svg" alt="BTC Logo">
-                            <img class="imgIcon" src="other/LTC.svg" id="ltcLogo" alt="LTC Logo">
-                            <img class="imgIcon" src="other/ETH.svg" id="ethLogo" alt="ETH Logo">
-                            <img class="imgIcon" src="other/ZEC-alt.svg" id="zecLogo" alt="ZEC Logo">
-                            <img class="imgIcon" src="other/XMR.svg" id="xmrLogo" alt="XMR Logo">
-                            </span>
-                            <label class="col-form-label"> Select cryptocurrency:&nbsp; </label>
-                            <select id='currency' name='currency' class="form-control form-control-sm">
-                                <option value='BTC'>BTC</option>
-                                <option value='ETH'>ETH</option>
-                                <option value='LTC'>LTC</option>
-                                <option value='ZEC'>ZEC</option>
-                                <option value='XMR'>XMR</option>
-                            </select>
-                        </div>
-                        <div class="form-group form-inline  float-right">
-                            <select id='hashRateUnit' name='hashrateUnit' class="form-control form-control-sm">
-                                <option value='TH/s' class="hashes">TH/s</option>
-                                <option value='GH/s' class="hashes">GH/s</option>
-                                <option value='MH/s' class="hashes">MH/s</option>
-                                <option value='kH/s' class="hashes slowHashrate">kH/s</option>
-                                <option value='H/s' class="hashes slowHashrate">H/s</option>
-                                <option value='Sols/s' class="sols">Sols/s</option>
-                                <option value='kSols/s' class="sols">kSols/s</option>
-                            </select>
-                            <label class="col-form-label"> &nbsp; Hashrate: &nbsp; </label>
-                            <input id="hashrate" name='hashrate' type='number' placeholder="Enter hashrate"
-                                   class="form-control form-control-sm"/>
-                        </div>
-                        <div class="form-group form-inline  float-right">
-                            <i class="fa fa-info-circle fa-2x info "
-                               title="Coin value has a preset value of current coin value as show on Coin market cap."></i>&nbsp;
-                            <label class="col-form-label">Coin value($): &nbsp;</label>
-                            <input id="value" name='value' type='number' step="0.00001"
-                                   class="form-control form-control-sm"/>
-                        </div>
-                        <div class="form-group form-inline  float-right">
-                            <i class="fa fa-info-circle info"
-                               title="Difficulty has a preset value of current coin difficulty as show on Blokchain.info Etherchain.org or Explorer.litecoin.net respectively."></i>&nbsp;
-                            <label class="col-form-label">Difficulty: &nbsp;</label>
-                            <input id="diff" name='diff' type='number' step="0.000001"
-                                   class="form-control form-control-sm"/>
-                        </div>
-                        <div class="form-group form-inline float-right">
-                            <label class="col-form-label">
-                                Block reward:&nbsp;</label>
-                            <input name='reward' type='number' value="12.5" step="0.000001"
-                                   class="form-control form-control-sm"/>
-                        </div>
-                        <div class="form-group form-inline float-right">
-                            <label class="col-form-label">
-                                Power consumption (W):&nbsp;</label>
-                            <input name='power' type='number' value="0" step="0.00001"
-                                   class="form-control  form-control-sm"/>
-                        </div>
-                        <div class="form-group form-inline  float-right">
-                            <label class="col-form-label">
-                                Power cost ($/kWh):&nbsp;</label>
-                            <input name='powerCost' type='number' value="0.1" step="0.00001"
-                                   class="form-control form-control-sm"/>
-                        </div>
-                        <div class="form-group form-inline  float-right">
-                            <label class="col-form-label">
-                                Pool fee (%):&nbsp;</label>
-                            <input name='fee' type='number' value="1" step="0.00001"
-                                   class="form-control form-control-sm"/>
-                        </div>
-                        <div class="form-group form-inline  float-right">
-                            <label class="col-form-label">
-                                Reject rate (%):&nbsp; </label>
-                            <input name='reject' type='number' value="1" step="0.00001"
-                                   class="form-control form-control-sm"/>
-                        </div>
-                        <div class="form-group form-inline  float-right">
-                            <i class="fa fa-question-circle info"
-                               title="The difficulty change is the rate at which the network difficulty is changing every month. Diff change is used for the estimated future profits graph and break even analysis. Typically in crypto, network difficulty tends to increase over time, meaning a miner will generate less crypto with the same hardware. Accounting for this changing difficulty is essential to generate long term profitability predictions. "></i>&nbsp;
-                            <label class="col-form-label">Difficulty change (%/month):&nbsp;</label>
-                            <input name='diffChange' type='number' value="15"
-                                   class="form-control form-control-sm smallerInput"/>
+                    <div id="chartBox" class="col-md-12">
+                        <canvas id="chart" aria-hidden="true"></canvas>
+                    </div>
 
-                        </div>
-                        <div class="form-group form-inline  float-right">
-                            <i class="fa fa-question-circle info"
-                               title="The Coin value change is your predicted change of price every month. Coin value change is used for the estimated future profits graph and break even analysis. We are used to very volatile markets in crypto space so be careful with your estimates as your calculations may vary drastically. It is essential to account coin price change if we wish to have accurate calculations and generate long term profitability predictions."></i>&nbsp;
-                            <label class="col-form-label">
-                                Coin value change (%/month):&nbsp;</label>
-                            <input name='CoinValueChange' type='number' value="0" step="0.00001"
-                                   class="form-control form-control-sm smallerInput"/>
-
-                        </div>
-                        <div class="form-group form-inline  float-right">
-                            <label class="col-form-label">
-                                Investment($):&nbsp; </label>
-                            <input name='invest' type='number' value="0" step="0.01"
-                                   class="form-control form-control-sm"/>
-
-                        </div>
-                        <div class="form-group form-inline  float-right">
-                            <label id="tFrame" class="col-form-label">
-                                Time Frame (months):&nbsp; </label>
-                            <input name='time' type='number' value="12" align="right"
-                                   class="form-control form-control-sm"/>
-                        </div>
-                        <div class="col-xs-12">
-                            <button id="resetButton" type="button"
-                                    class="btn btn-outline-primary btn-sm float-right no_outline">
-                                Reset Values
-                            </button>
-                        </div>
-                    </form>
-
+                    <div class="col-md-12">
+                        <table id="tableResults" class="table table-striped table-responsive">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Period</th>
+                                    <th>
+                                        <span id="valuta">BTC</span> Mined
+                                    </th>
+                                    <th>USD</th>
+                                    <th>Costs (USD)</th>
+                                    <th>Profit (USD)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="h">
+                                    <td>Hourly</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="d">
+                                    <td>Daily</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="w">
+                                    <td>Weekly</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="m">
+                                    <td>Monthly</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="y">
+                                    <td>Yearly</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                            </tr>
+                        </table>
+                    </div>
+                    <br/>
+                    <div id="breakEven" class="col-md-12">
+                        <p>Days to break even:
+                            <b>
+                                <span id="BE">0</span>
+                            </b>
+                        </p>
+                    </div>
                 </div>
             </div>
+        </div>
 
-
-            <div class="row col-md-6">
-
-                <div id="chartBox" class="col-md-12">
-                    <canvas id="chart" aria-hidden="true"></canvas>
-                </div>
-
-                <div class="col-md-12">
-                    <table id="tableResults" class="table table-striped table-responsive">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th>Period</th>
-                            <th>
-                                <span id="valuta">BTC</span> Mined
-                            </th>
-                            <th>USD</th>
-                            <th>Costs (USD)</th>
-                            <th>Profit (USD)</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="h">
-                            <td>Hourly</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr class="d">
-                            <td>Daily</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr class="w">
-                            <td>Weekly</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr class="m">
-                            <td>Monthly</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr class="y">
-                            <td>Yearly</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        </tbody>
-                        </tr>
-                    </table>
-                </div>
-                <br/>
-                <div id="breakEven" class="col-md-12">
-                    <p>Days to break even:
-                        <b>
-                            <span id="BE">0</span>
-                        </b>
-                    </p>
-                </div>
+        <div id="ad1">
+            <span id="ct_cBhrGqy"></span>
+        </div>
+    </main>
+    <footer>
+        <div class="row" id="donate">
+            <div>
+                Donations appreciated:
+                <br>
+                <script>function shapeshift_click(a, e) {
+                        e.preventDefault();
+                        var link = a.href;
+                        window.open(link, '1418115287605', 'width=700,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=0,left=50,top=50');
+                        return false;
+                    }</script>
+                <a onclick="shapeshift_click(this, event);" href="https://shapeshift.io/shifty.html?destination=0x92734e2523ac2Bf66EC3e49E1bd679a8F1f31E5E&amp;output=ETH&amp;amount=1">
+                    <img id="donateButton" alt="donateButton" src="https://shapeshift.io/images/shifty/small_light_ss.png" class="ss-button">
+                </a>
             </div>
         </div>
-    </div>
-    <div id="ad1">
-        <span id="ct_cBhrGqy"></span>
-    </div>
-</main>
-<footer>
-    <div class="row" id="donate">
-        <div>
-            Donations appreciated:
-            <br>
-            <script>function shapeshift_click(a, e) {
-                e.preventDefault();
-                var link = a.href;
-                window.open(link, '1418115287605', 'width=700,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=0,left=50,top=50');
-                return false;
-            }</script>
-            <a onclick="shapeshift_click(this, event);"
-               href="https://shapeshift.io/shifty.html?destination=0x92734e2523ac2Bf66EC3e49E1bd679a8F1f31E5E&amp;output=ETH&amp;amount=1">
-                <img id="donateButton" alt="donateButton" src="https://shapeshift.io/images/shifty/small_light_ss.png"
-                     class="ss-button">
-            </a>
-        </div>
-    </div>
-</footer>
+    </footer>
 
-<script src="https://unpkg.com/tippy.js@2.1.1/dist/tippy.all.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    <script src="https://unpkg.com/tippy.js@2.1.1/dist/tippy.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- jquery & iScroll -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
-<!-- drawer.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
-<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-<script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.13/jquery.popupoverlay.js"></script>
-<script src="/script"></script>
-<script type="application/ld+json">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- jquery & iScroll -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
+    <!-- drawer.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.13/jquery.popupoverlay.js"></script>
+    <script src="/script"></script>
+    <script type="application/ld+json">
 {
   "@type": "Website",
   "name": "Crypster Calc",
@@ -362,12 +388,14 @@
   "sameAs": [
     "https://www.facebook.com/crypstercalc/"
   ],
-  "logo": "https://www.crypstercalc.com/other/CrypsterLogo_onWhite.jpg"
+  "logo": "https://www.crypstercalc.com/other/crypsterProfile.jpg"
 }
 
 
 
+
 </script>
-<script async src="//appsha1.cointraffic.io/js/?wkey=Fk3pYX"></script>
+    <script async src="//appsha1.cointraffic.io/js/?wkey=Fk3pYX"></script>
 </body>
+
 </html>

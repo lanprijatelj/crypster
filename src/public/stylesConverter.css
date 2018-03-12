@@ -1,33 +1,32 @@
 @import url('https://fonts.googleapis.com/css?family=Slabo+27px');
 
-h2 {
+h2{
     text-align: center;
 }
 
-#converterHeading {
-    font-family: 'Slabo 27px', serif;
+#converterHeading{
+    font-family: 'Slabo 27px', serif;    
 }
 
-.form-control, #equalsSign {
+.form-control, #equalsSign{
     margin: 0.2em;
 }
 
-#donate {
+#donate{
     position: fixed;
     bottom: 1rem;
 }
 
-#converter {
+#converter{
     float: none;
     margin-left: auto;
     margin-right: auto;
 }
 
-#menuConverter {
-    background-color: black;
+#menuConverter{
+    background-color: #41929C;
 }
-
-#menuConverter a {
+#menuConverter a{
     color: whitesmoke;
     text-decoration: none;
     cursor: default;
@@ -37,92 +36,80 @@ h2 {
     display: none;
 }
 
-#usdLogo2, #eurLogo2, #usdLogo, #eurLogo {
+#usdLogo2, #eurLogo2, #usdLogo, #eurLogo{
     width: min-content;
 }
-
-#usdLogo2, #eurLogo2 {
+#usdLogo2, #eurLogo2{
     margin-left: 16px;
 }
-
-#usdLogo, #eurLogo {
+#usdLogo, #eurLogo{
     margin-right: 16px;
 }
-
-#usdI, #usdI2, #eurI, #eurI2 {
+#usdI, #usdI2, #eurI, #eurI2{
     height: inherit;
 }
-
-#infoConverter {
+#infoConverter{
     margin-left: 95%;
 }
 
-#adHorizontal {
-    margin-left: auto;
-    margin-right: auto;
+#adHorizontal{
+    margin-left: 10em;
     width: max-content;
-    margin-top: 15em;
+    position: fixed;
+    bottom: 0;
 
 }
-
-#syncSign {
+#syncSign{
     margin-left: auto;
     margin-right: auto;
     width: min-content;
     margin-bottom: 0.5em;
 }
 
-@media screen and (min-width: 766px) and (min-height: 500px) {
-    #converterMain {
+
+@media screen and (min-width: 766px) and (min-height: 500px)  {
+    #converterMain{
         margin-top: 5em;
     }
 }
-
 /*-----------MOBILE VIEW -----------------------------------------*/
 @media screen and (max-width: 480px) {
-    .form-control {
+    .form-control{
         width: 30%;
     }
-
-    #equalsSign {
+    #equalsSign{
         margin-left: 45%;
         margin-right: 45%;
         width: 10%;
     }
-
-    #value2 {
-
-    }
-
-    #coinIcon2 {
+    #value2{
 
     }
+    #coinIcon2{
 
-    #currency2 {
+    }
+    #currency2{
         margin-left: 4.4em;
 
     }
 
-    #coinIcon {
+    #coinIcon{
         margin-left: 1em;
     }
 }
 
 /*-----------MOBILE LANDSCAPE-------------------------------------------*/
-@media screen and (min-width: 480px) and (max-width: 767px) {
-    #value1, #value2 {
-        width: 20%;
-    }
-
-    #currency1 {
+@media screen and (min-width:480px) and (max-width:767px) {
+   #value1, #value2{
+       width:20%;
+   }
+    #currency1{
         width: 15%;
     }
-
-    #currency2 {
+    #currency2{
         width: 15%;
     }
-
-    #donate {
-        display: none;
+    #donate{
+       display: none;
     }
 }
