@@ -1,10 +1,14 @@
+
 const path = require('path');
 const express = require('express');
 const app = express();
 const request = require('request');
 const sslRedirect = require('heroku-ssl-redirect');
+var compression = require('compression');
+
 var PORT = process.env.PORT || 8080;
 
+app.use(compression());
 app.use(sslRedirect(['production'], 301));
 
 
@@ -97,13 +101,6 @@ app.get('/other/thumbnail.png', function (request, response) {
 app.get('/other/thumbnailConverter.png', function (request, response) {
     response.sendFile(__dirname + '/public/other/thumbnailConverter.png');
 });
-
-
-
-
-
-
-
 
 
 app.listen(PORT, error => (
