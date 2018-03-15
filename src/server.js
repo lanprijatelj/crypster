@@ -12,7 +12,7 @@ app.use(compression());
 app.use(sslRedirect(['production'], 301));
 
 
-app.get('/', function (request, response) {
+app.get('/', function (request, response) {  
   response.sendFile(__dirname + '/public/index.html');
 });
 app.get('/converter', function (request, response) {
@@ -20,12 +20,14 @@ app.get('/converter', function (request, response) {
 });
 
 app.get('/styles', function (request, response) {
+  response.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
   response.sendFile(__dirname + '/public/styles.css');
 });
 app.get('/stylesConverter', function (request, response) {
     response.sendFile(__dirname + '/public/stylesConverter.css');
 });
 app.get('/script', function (request, response) {
+  response.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
   response.sendFile(__dirname + '/public/script.js');
 });
 
@@ -38,16 +40,18 @@ app.get('/favicon', function (request, response) {
   response.sendFile(__dirname + '/public/favicon.ico');
 });
 app.get('/other/dust_scratches.png', function (request, response) {
+  response.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
   response.sendFile(__dirname + '/public/other/dust_scratches.png');
 });
 
-
 app.get('/other/LogoShort.png', function (request, response) {
-    response.sendFile(__dirname + '/public/other/LogoShort.png');
+  response.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
+  response.sendFile(__dirname + '/public/other/LogoShort.png');
 });
 
 app.get('/other/LogoNav.png', function (request, response) {
-    response.sendFile(__dirname + '/public/other/LogoNav.png');
+  response.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
+  response.sendFile(__dirname + '/public/other/LogoNav.png');
 });
 
 app.get('/other/CrypsterLogo_onWhite.jpg', function (request, response) {
