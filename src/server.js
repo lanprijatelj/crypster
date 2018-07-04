@@ -320,7 +320,7 @@ app.post('/price', function (req, res) {
 });
 
 app.post('/exchRate', function (req, res) {
-  var querry = "https://api.fixer.io/latest";
+  var querry = "http://data.fixer.io/api/latest?access_key=9d74cb2511698f3b9e01cf98a7658ee6";
   var podatki = "";
   var odg = {};
   request({
