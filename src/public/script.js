@@ -557,7 +557,7 @@ function constructHtmlCardCode(idCard, idQuantity) {
 }
 
 function addListeners() {
-    $jq("#hashRateUnit").change(sendParameters);
+    $jq("select[name=hashrateUnit]").change(sendParameters);
     $jq("input[name=hashrate]").keyup(sendParameters);
     $jq("input[name=fee]").keyup(sendParameters);
     $jq("input[name=reject]").keyup(sendParameters);
