@@ -318,25 +318,25 @@ app.post('/price', function (req, res) {
 });
 
 app.post('/exchRate', function (req, res) {
-  var querry = "https://api.fixer.io/latest";
-  var podatki = "";
-  var odg = {};
-  request({
-    method: 'GET',
-    uri: querry,
-    encoding: null
-  }, function (error, response, body) {
-  }).on('data', function (data) {
-    podatki += data;
-  }).on('error', function (error) {
-    console.log(error);
-    odg.rate = -1;    
-    res.send(odg);
-  }).on('end', function () {
-    if (podatki[0] != "<") {
-      var odgovor = JSON.parse(podatki);   
-      odg.rate = odgovor.rates.USD;
-      res.send(odg);
-    }
-  });
+    var querry = "http://data.fixer.io/api/latest?access_key=9d74cb2511698f3b9e01cf98a7658ee6";
+    var podatki = "";
+    var odg = {};
+    request({
+        method: 'GET',
+        uri: querry,
+        encoding: null
+    }, function (error, response, body) {
+    }).on('data', function (data) {
+        podatki += data;
+    }).on('error', function (error) {
+        console.log(error);
+        odg.rate = -1;
+        res.send(odg);
+    }).on('end', function () {
+        if (podatki[0] != "<") {
+            var odgovor = JSON.parse(podatki);
+            odg.rate = odgovor.rates.USD;
+            res.send(odg);
+        }
+    });
 });
